@@ -1,0 +1,10 @@
+/*
+@author koala
+@date Tue Mar 20 22:59:29 CET 2018
+*/
+
+
+@@view uci-uciugSurvey
+@instance Use-Case usecases.uciugSurvey.uciugSurvey 
+@description "Initialization of the Quality Survey, after a crisis is Solved"
+@caption ""

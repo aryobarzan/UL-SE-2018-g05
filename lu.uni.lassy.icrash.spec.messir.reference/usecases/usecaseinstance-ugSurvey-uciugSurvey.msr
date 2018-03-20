@@ -1,0 +1,34 @@
+package usecases.uciugSurvey {
+	import icrash.usecases.ugMonitor
+
+	Use Case Model {
+
+		use case instance uciugSurvey : ugSurvey{
+			actors {
+				Tango:icrash.environment.actComCompany
+				steve:icrash.environment.actCoordinator
+			}
+			use case steps {
+				steve executed instanceof subfunction icrash.usecases.subfunctions.oeSetCrisisStatus(AdtCrisisID="1", AetCrisisStatus="solved") {
+					ieMessage('The crisis status has been updated !')
+                	returned to steve
+			    	ieSmsSend("+3524666445252", "Do you want to take part to our quality survey? 1) Yes 2) No 3) Not Yet 4) Never") 
+			    	returned to Tango
+				} 
+				Tango executed instanceof subfunction icrash.usecases.subfunctions.oeAnswer("witness", "2017:11:26", "11:10:25", "+3524666445252", "1", "1", "1") {
+			    	ieSmsSend("+3524666445252", 
+			    	"Was the service quick to handle your crisis? 1) Very Slow 2) Slow 3) Quick 4) Very Quick ") 
+			    	returned to Tango
+					}
+					
+					
+				Tango executed instanceof subfunction icrash.usecases.subfunctions.oeAnswer("witness", "2017:11:26", "11:14:32", "+3524666445252", "1", "2", "4") {
+			    	ieSmsSend("+3524666445252", 
+			    	"Thank you for answering our Survey") 
+			    	returned to Tango
+					}
+
+			}
+		}
+	}
+}

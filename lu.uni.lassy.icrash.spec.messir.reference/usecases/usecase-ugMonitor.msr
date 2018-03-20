@@ -13,5 +13,18 @@ package icrash.usecases.ugMonitor {
       step a: icrash.environment.actCoordinator executes oeGetAlertsSet
       step b: icrash.environment.actCoordinator executes oeGetCrisisSet
     }
+    
+	use case system usergoal ugSurvey() {
+	  actor icrash.environment.actCoordinator[primary,active]
+	  actor icrash.environment.actComCompany[primary, active]
+		
+	  step a: icrash.environment.actCoordinator executes oeSetCrisisStatus
+	  step b: icrash.environment.actComCompany executes oeAnswer
+		
+	  ordering constraint 
+			"step (a) must be first and AdtCrisisID must be 'solved'"
+	  ordering constraint 
+	  		"step (b) can be executed a multiple time (until the survey finish)"
+		}
 	}
 }

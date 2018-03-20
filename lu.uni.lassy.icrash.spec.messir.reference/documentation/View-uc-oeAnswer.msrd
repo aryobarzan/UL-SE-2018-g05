@@ -1,0 +1,10 @@
+/*
+@author koala
+@date Tue Mar 20 22:30:00 CET 2018
+*/
+
+
+@@view uc-oeAnswer
+@model Use-Case icrash.usecases.subfunctions.oeAnswer 
+@description "Return the answer of the survey"
+@caption ""

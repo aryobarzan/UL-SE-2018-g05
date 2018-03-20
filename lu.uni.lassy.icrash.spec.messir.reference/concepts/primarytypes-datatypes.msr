@@ -42,7 +42,17 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation is():ptBoolean			
 				operation isNearTo(AGPSLocation:dtGPSLocation ):ptBoolean
 			}
-			
+			datatype dtQuestionId {
+				attribute questionId:ptInteger
+				attribute questionText:ptString
+				operation is():ptBoolean
+			}
+			datatype dtAnswerId {
+				attribute answerId:ptInteger
+				attribute AQuestionId:dtQuestionId
+				attribute answerText:ptString
+				operation is():ptBoolean
+			}
 			enum etCrisisStatus {
 				constants["pending", "handled", "solved","closed"]
 				operation is():ptBoolean

@@ -92,6 +92,14 @@ import lu.uni.lassy.messir.libraries.calendar
 										AdtGPSLocation:dtGPSLocation , 
 										AdtComment:dtComment 
 										):ptBoolean
+				operation oeAnswer(
+										AetHumanKind:etHumanKind,
+										AdtDate:dtDate ,
+										AdtTime:dtTime ,
+										AdtPhoneNumber:dtPhoneNumber ,
+										AdtQuestionId:dtQuestionId,
+										AdtAnswerId:dtAnswerId
+			 							):ptBoolean
 			}
 			
 			input interface inactComCompany{

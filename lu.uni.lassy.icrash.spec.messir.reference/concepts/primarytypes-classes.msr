@@ -13,6 +13,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			state class ctState {
 				attribute nextValueForAlertID:dtInteger
 				attribute nextValueForCrisisID:dtInteger
+				attribute nextValueForPersonID:dtInteger
 				attribute clock:dtDateAndTime
 				attribute crisisReminderPeriod:dtSecond
 				attribute maxCrisisReminderPeriod:dtSecond
@@ -21,6 +22,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				
 				operation init(	AnextValueForAlertID:dtInteger,
 												AnextValueForCrisisID:dtInteger,
+												AnextValueForPersonID:dtInteger,
 				 								Aclock:dtDateAndTime,
 												AcrisisReminderPeriod:dtSecond ,
 												AmaxCrisisReminderPeriod:dtSecond ,
@@ -119,8 +121,25 @@ import lu.uni.lassy.messir.libraries.calendar
 					role rnctQuestion
 					cardinality [0..*] {
 						attribute id:dtQuestionId
+						attribute text:dtQuestionText
 
-				operation init(AQuestionId:dtQuestionId):ptBoolean
+				operation init(AQuestionId:dtQuestionId, AQuestionText:dtQuestionText):ptBoolean
+			}
+			
+			class ctAnswer role rnctAnswer cardinality [0..*] {
+						attribute id:dtAnswerId
+						attribute questionId:dtQuestionId
+						attribute crisisId:dtCrisisID
+						attribute datetime:dtDateAndTime
+						attribute personId:dtInteger
+						
+				operation init(AnAnswerId:dtAnswerId,
+								AQuestionId:dtQuestionId,
+								ACrisisId:dtCrisisID,
+								AdateTime:dtDateAndTime,
+								ApersonId:dtInteger
+				) : ptBoolean
+						
 			}
 		}
 	}

@@ -150,6 +150,24 @@ import icrash.environment
        ieSmsSend(AdtPhoneNumber,AdtSMS) returned to actComCompany
  	}
   }
-  }
+  use case system subfunction oeComputeKeySendAndGetRandomNumber(AdtRandomX:dtInteger) {
+			actor actAuthenticated[primary, active]
+			returned messages{
+				ieComputeKeyGetRandomNumber(AdtRandomY) returned to actAuthenticated
+			}
+		}
+	use case system subfunction oeSendNonceAndName(AdtNonceA:dtInteger, AdtName:ptString) {
+			actor actAuthenticated[primary, active]
+			returned messages{
+				ieGenerateNewNonceAndSendEncryptedNonceAndSystemNameWithNewNonceInPlaintext(AdtNonceA, AdtSystemName, AdtKey, AdtNonceB) returned to actAuthenticated
+			}
+		}
+	use case system subfunction oeDecryptSystemMessageAndSendEncryptedNonceBAndName(AdtNonceB:dtInteger, AdtName:ptString, AdtKey:ptString) {
+			actor actAuthenticated[primary, active]
+			returned messages{
+				ieGetAuthenticationCompleteMessage(AdtMessage) returned to actAuthenticated
+			}
+		}
+	}
 
 }

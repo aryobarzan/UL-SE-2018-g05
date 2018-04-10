@@ -114,6 +114,14 @@ import lu.uni.lassy.messir.libraries.calendar
 										Alogin:dtLogin ,
 										Apwd:dtPassword ):ptBoolean
 			}
+						
+			class ctQuestion 
+					role rnctQuestion
+					cardinality [0..*] {
+						attribute id:dtQuestionId
+
+				operation init(AQuestionId:dtQuestionId):ptBoolean
+			}
 		}
 	}
 }

@@ -23,8 +23,11 @@ package icrash.usecases.ugMonitor {
 		
 	  ordering constraint 
 			"step (a) must be first and AdtCrisisID must be 'solved'"
+	  ordering constraint
+	  		"step (b) cannot be executed if AdtPhoneNumber is involved in an other crisis that is not 'solved"
 	  ordering constraint 
 	  		"step (b) can be executed a multiple time (until the survey finish)"
+	  
 		}
 	}
 }

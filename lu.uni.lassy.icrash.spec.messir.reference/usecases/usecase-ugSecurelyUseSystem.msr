@@ -21,5 +21,25 @@ use case system usergoal
 	ordering constraint 
 	 "step (a) must always precede step (b)."
 		}
+	use case system usergoal ugSecurelyUseSystemWithSymmetricKey() {
+		actor actAuthenticated[primary,active]
+		
+		reuse oeComputeKeySendAndGetRandomNumber[1..1]
+		reuse oeSendNonceAndName[1..1]
+		reuse oeDecryptSystemMessageAndSendEncryptedNonceBAndName[1..1]
+		
+		step a: actAuthenticated
+			 executes oeComputeKeySendAndGetRandomNumber
+	    step b: actAuthenticated
+	         executes oeSendNonceAndName
+	    step c: actAuthenticated
+	         executes oeDecryptSystemMessageAndSendEncryptedNonceBAndName
+	         
+	    ordering constraint
+	     "step (a) must always precede step (b)."
+	    ordering constraint
+	     "step (b) must always precede step (c)."
+		
+		}
 	}
 }

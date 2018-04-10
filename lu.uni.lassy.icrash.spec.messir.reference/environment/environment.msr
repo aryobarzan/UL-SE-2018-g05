@@ -134,9 +134,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation ieMessage(AMessage:ptString):ptBoolean
 				operation ieComputeKeyGetRandomNumber(AdtRandomY:dtInteger):ptBoolean
 				operation ieGenerateNewNonceAndSendEncryptedNonceAndSystemNameWithNewNonceInPlaintext(AdtNonceA:dtInteger, AdtSystemName:ptString, AdtKey:ptString, AdtNonceB:dtInteger):ptBoolean
-				operation ieGetAuthenticationCompleteMessage(AdtMessage:ptString):ptBoolean
-				operation ieTest():ptBoolean
-				
+				operation ieGetAuthenticationCompleteMessage(AdtMessage:ptString):ptBoolean			
 	 		}
 		}
 

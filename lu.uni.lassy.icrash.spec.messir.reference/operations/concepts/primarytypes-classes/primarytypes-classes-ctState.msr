@@ -10,7 +10,8 @@ Operation Model {
 	
 	operation: icrash.concepts.primarytypes.classes.ctState.init(
 		AnextValueForAlertID: dtInteger, 
-		AnextValueForCrisisID: dtInteger , 
+		AnextValueForCrisisID: dtInteger ,
+		AnextValueForPersonID: dtInteger, 
 		dtAclock:dtDateAndTime,
 		AcrisisReminderPeriod: dtSecond, 
 		AmaxCrisisReminderPeriod: dtSecond ,
@@ -24,6 +25,7 @@ let Self:ctState in
 
 Self.nextValueForAlertID = AnextValueForAlertID
 and Self.nextValueForCrisisID = AnextValueForCrisisID
+and Self.nextValueForPersonID = AnextValueForPersonID
 and Self.clock = Aclock
 and Self.crisisReminderPeriod = AcrisisReminderPeriod
 and Self.maxCrisisReminderPeriod = AmaxCrisisReminderPeriod

@@ -1,0 +1,38 @@
+required_plugins = %w( vagrant-vbguest )
+required_plugins.each do |plugin|
+	puts "*******************************************MISSING PLUGIN*************************************************************************" unless Vagrant.has_plugin? plugin
+	puts "It is recommend to install the plugin vagrant-vbguest. Please install it using the command: vagrant plugin install vagrant-vbguest" unless Vagrant.has_plugin? plugin
+	puts "**********************************************************************************************************************************" unless Vagrant.has_plugin? plugin
+end
+Vagrant.configure(2) do |config|
+	config.vm.provision :shell, path: "scriptAll.sh"
+	config.vm.define "server" do |server|
+		server.vm.box = "server"
+		server.vm.box = "ubuntu/trusty64"
+		server.vm.provision :shell, path: "scriptClientAndServer.sh"
+		server.vm.provision :shell, path: "scriptServer.sh", run: "always"
+		server.vm.network "private_network", ip: "192.168.1.2", virtualbox__intnet: true
+	end
+	config.vm.define "db" do |db|
+		db.vm.box = "db"
+		db.vm.box = "ubuntu/trusty64"
+		db.vm.provision :shell, path: "scriptSQL.sh"	
+		db.vm.network "private_network", ip: "192.168.1.3", virtualbox__intnet: true
+	end
+	config.vm.define "client" do |client|
+		client.vm.box = "client"
+		client.vm.box = "draken/clientwithjubula"
+		client.vm.provision :shell, path: "scriptClientAndServer.sh"
+		client.vm.provision :shell, path: "scriptClient.sh"
+		client.vm.network "private_network", ip: "192.168.1.4", virtualbox__intnet: true
+		client.vm.provider "virtualbox" do |vb|
+			vb.customize ["modifyvm", :id, "--vram", "32"]
+			vb.memory = 4096
+			vb.cpus = 2
+		end
+	end
+	config.vm.provider "virtualbox" do |vb|
+		vb.gui = true
+	end
+	
+end

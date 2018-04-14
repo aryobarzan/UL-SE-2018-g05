@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
@@ -88,6 +89,14 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 			log.info("operation oeLogin successfully executed by the system");
 
 		return res;
+	}
+	
+	public PtBoolean oeChoseBiometricLogin() throws RemoteException, NotBoundException {
+		return new PtBoolean(true);
+	}
+	
+	synchronized public PtBoolean oeLoginUsingBiometric(DtBiometricData AdtBiometricData) {
+		return new PtBoolean(true);
 	}
 	
 	/* (non-Javadoc)

@@ -17,6 +17,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
@@ -54,6 +55,25 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 	 * @throws NotBoundException Thrown if the server has not been bound in the RMI settings
 	 */
 	public PtBoolean oeLogout() throws RemoteException, NotBoundException;
+	
+	/**
+	 * Allows a user to chose the BiometricLogin GUI.
+	 * 
+	 * @return The success of the method
+	 * @throws RemoteException Thrown if the server isn't online
+	 * @throws NotBoundException Thrown if the server has not been bound in the EMI settings
+	 */
+	public PtBoolean oeChoseBiometricLogin() throws RemoteException, NotBoundException;
+	
+	/**
+	 * Allow a user to logon to the system using his biometricData.
+	 * 
+	 * @param aDtBiometricData
+	 * @return The success of the method
+	 * @throws RemoteException Thrown if the server isn't online
+	 * @throws NotBoundException Thrown if the server has not been bound in the RMI settings
+	 */
+	public PtBoolean oeLoginUsingBiometrics(DtBiometricData aDtBiometricData) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Adds the proxy actor as a listener to this class.

@@ -131,6 +131,7 @@ UNLOCK TABLES;
 
 --
 -- Table structure for table `humans`
+-- adding the alwaysSurvey
 --
 
 DROP TABLE IF EXISTS `humans`;
@@ -140,6 +141,7 @@ CREATE TABLE `humans` (
  `phone` varchar(80) NOT NULL,
   `kind` varchar(80) DEFAULT NULL,
   `comcompany` varchar(80) DEFAULT NULL,
+  `alwaysSurvey` boolean DEFAULT TRUE,
  PRIMARY KEY (`phone`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -181,6 +183,33 @@ LOCK TABLES `reports` WRITE;
 /*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+/* Create the table question and answer
+ * The question is a 4 scale Multiple Choice Question 
+ * The answer is a composition of the human responding and the question id with the answer per crisis.
+ */
+DROP TABLE IF EXISTS `question`;
+
+CREATE TABLE `question` (
+	`id` INTEGER NOT NULL AUTO_INCREMENT,
+	`question` varchar(80) NOT NULL,
+	`answer1` varchar(80) DEFAULT 'very bad',
+	`answer2` varchar(80) DEFAULT 'bad',
+	`answer3` varchar(80) DEFAULT 'good',
+	`answer4` varchar(80) DEFAULT 'very good',
+	PRIMARY KEY(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `answer`;
+
+CREATE TABLE `answer` (
+	`id` INTEGER NOT NULL AUTO_INCREMENT,
+	`idQuestion` INTEGER NOT NULL,
+	`idHuman` varchar(80) NOT NULL,
+	`idCrises` varchar(80) NOT NULL,
+	`answer` INTEGER NOT NULL,
+	PRIMARY KEY(`id`, `idQuestion`, `idHuman`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

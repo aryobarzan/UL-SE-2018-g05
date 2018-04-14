@@ -38,11 +38,11 @@ import lu.uni.lassy.messir.libraries.calendar
 											AdtCoordinatorID:dtCoordinatorID ):ptBoolean
 				operation oeGetAnswerU(
 											AdtAlertID:dtAlertID,
-											AdtQuestionId:dtQuestionId):ptBoolean
+											AdtQuestionId:dtQuestionID):ptBoolean
 				operation oeGetAnswerAlert(
 											AdtAlertID:dtAlertID):ptBoolean
 				operation oeGetAnswerQuestion(
-											AdtQuestionId:dtQuestionId):ptBoolean
+											AdtQuestionId:dtQuestionID):ptBoolean
 			}
 			
 			input interface inactAdministrator{
@@ -106,8 +106,8 @@ import lu.uni.lassy.messir.libraries.calendar
 										AdtTime:dtTime ,
 										AdtPhoneNumber:dtPhoneNumber ,
 										AdtAlertID:dtAlertID,
-										AdtQuestionId:dtQuestionId,
-										AdtAnswerId:dtAnswerId
+										AdtQuestionId:dtQuestionID,
+										AdtAnswerId:dtAnswerID
 			 							):ptBoolean
 			}
 			

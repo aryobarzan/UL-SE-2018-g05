@@ -15,9 +15,11 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 
 /**
@@ -50,6 +52,34 @@ public interface ActAdministrator extends ActAuthenticated {
 	public PtBoolean oeDeleteCoordinator(DtCoordinatorID aDtCoordinatorID)
 			throws RemoteException, NotBoundException;
 	
+	/**
+	 * Ask the system to get the statistic of a specific question of a specific Alert
+	 * 
+	 * @param aDtAlertID
+	 * @param aDtQuestionID
+	 * @return The sucess of the method
+	 * @throws RemoteException
+	 */
+	public PtBoolean oeGetAnswerU(DtAlertID aDtAlertID, DtQuestionID aDtQuestionID) throws RemoteException;
+	
+	/**
+	 * Ask the system to get the statistic for all the question of a specific Alert
+	 * 
+	 * @param aDtAlertID
+	 * @return
+	 * @throws RemoteException
+	 */
+	public PtBoolean oeGetAnswerAlert(DtAlertID aDtAlertID) throws RemoteException;
+
+	/**
+	 * Ask the system to get the statistic for a specific question for all the alerts
+	 * 
+	 * @param aDtQuestionID
+	 * @return
+	 * @throws RemoteException
+	 */
+	public PtBoolean oeGetAnswerQuestion(DtQuestionID aDtQuestionID) throws RemoteException;
+
 	/**
 	 * A message sent to the listening actor saying the coordinator was created .
 	 *

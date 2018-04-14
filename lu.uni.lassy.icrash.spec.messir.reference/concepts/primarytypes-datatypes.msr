@@ -45,10 +45,10 @@ import lu.uni.lassy.messir.libraries.calendar
 			datatype dtQuestionText extends dtString {
 				operation is():ptBoolean
 			}
-			datatype dtQuestionId extends dtInteger {
+			datatype dtQuestionID extends dtInteger {
 				operation is():ptBoolean
 			}
-			datatype dtAnswerId extends dtInteger {
+			datatype dtAnswerID extends dtInteger {
 				operation is():ptBoolean
 			}
 			datatype dtAnswerText extends dtString {

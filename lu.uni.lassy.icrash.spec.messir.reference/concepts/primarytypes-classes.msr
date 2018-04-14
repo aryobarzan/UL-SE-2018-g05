@@ -120,21 +120,21 @@ import lu.uni.lassy.messir.libraries.calendar
 			class ctQuestion 
 					role rnctQuestion
 					cardinality [0..*] {
-						attribute id:dtQuestionId
+						attribute id:dtQuestionID
 						attribute text:dtQuestionText
 
-				operation init(AQuestionId:dtQuestionId, AQuestionText:dtQuestionText):ptBoolean
+				operation init(AQuestionId:dtQuestionID, AQuestionText:dtQuestionText):ptBoolean
 			}
 			
 			class ctAnswer role rnctAnswer cardinality [0..*] {
-						attribute id:dtAnswerId
-						attribute questionId:dtQuestionId
+						attribute id:dtAnswerID
+						attribute questionId:dtQuestionID
 						attribute crisisId:dtCrisisID
 						attribute datetime:dtDateAndTime
 						attribute personId:dtInteger
 						
-				operation init(AnAnswerId:dtAnswerId,
-								AQuestionId:dtQuestionId,
+				operation init(AnAnswerId:dtAnswerID,
+								AQuestionId:dtQuestionID,
 								ACrisisId:dtCrisisID,
 								AdateTime:dtDateAndTime,
 								ApersonId:dtInteger

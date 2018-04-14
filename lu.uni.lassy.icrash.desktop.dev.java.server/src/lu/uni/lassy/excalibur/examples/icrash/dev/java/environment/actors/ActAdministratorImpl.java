@@ -18,15 +18,17 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.RmiUtils;
-
-import org.apache.log4j.Logger;
 /**
  * The Class ActAdministratorImpl, which is a server side actor for the user Administrator.
  */
@@ -104,6 +106,27 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 
 		return res;
 		
+	}
+	
+	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator#oeGetAnswerU(DtAlertID, DtQuestionID)
+	 */
+	public PtBoolean oeGetAnswerU(DtAlertID aDtAlertID, DtQuestionID aDtQuestionID) throws RemoteException {
+		return new PtBoolean(true);
+	}
+
+	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator#oeGetAnswerAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
+	 */
+	public PtBoolean oeGetAnswerAlert(DtAlertID aDtAlertID) throws RemoteException {
+		return new PtBoolean(true);
+	}
+	
+	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator#oeGetAnswerQuestion(DtQuestionID)
+	 */
+	public PtBoolean oeGetAnswerQuestion(DtQuestionID aDtQuestionID) throws RemoteException {
+		return new PtBoolean(true);
 	}
 
 	/* (non-Javadoc)

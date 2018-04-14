@@ -143,8 +143,8 @@ import icrash.environment
 										AdtTime:dtTime ,
 										AdtPhoneNumber:dtPhoneNumber ,
 										AdtAlertID:dtAlertID,
-										AdtQuestionId:dtQuestionId,
-										AdtAnswerId:dtAnswerId){
+										AdtQuestionId:dtQuestionID,
+										AdtAnswerId:dtAnswerID){
 	actor actComCompany[primary,active]
     returned messages {
        ieSmsSend(AdtPhoneNumber,AdtSMS) returned to actComCompany

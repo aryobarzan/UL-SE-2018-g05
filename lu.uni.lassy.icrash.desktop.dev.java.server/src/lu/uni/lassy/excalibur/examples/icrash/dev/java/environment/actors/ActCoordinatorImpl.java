@@ -21,6 +21,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtAlert;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCrisis;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
@@ -331,5 +332,12 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 		if(res.getValue() == true)
 			log.info("operation oeGetAlertsSet successfully executed by the system");
 		return res;
+	}
+
+	@Override
+	public PtBoolean oeLoginUsingBiometrics(DtBiometricData aDtBiometricData)
+			throws RemoteException, NotBoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

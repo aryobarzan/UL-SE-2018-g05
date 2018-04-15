@@ -174,7 +174,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     }
 
 	/**
-	 * The button event that reveal the symmetric login view elements
+	 * The button event that reveals the symmetric login view elements
 	 *
 	 * @param event The event type thrown, we do not need this, but it must be specified
 	 */
@@ -197,7 +197,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	}
 
 	/**
-	 * The button event that reveal the biometric login view elements
+	 * The button event that reveals the biometric login view elements
 	 *
 	 * @param event The event type thrown, we do not need this, but it must be specified
 	 */
@@ -220,7 +220,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	}
 
 	/**
-	 * The button event that reveal the standard login view elements
+	 * The button event that reveals the standard login view elements
 	 *
 	 * @param event The event type thrown, we do not need this, but it must be specified
 	 */
@@ -242,7 +242,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	}
 
 	/**
-	 * The button event that reveal the standard login view elements
+	 * The button event that reveal submit user input for symmetric login
 	 *
 	 * @param event The event type thrown, we do not need this, but it must be specified
 	 */

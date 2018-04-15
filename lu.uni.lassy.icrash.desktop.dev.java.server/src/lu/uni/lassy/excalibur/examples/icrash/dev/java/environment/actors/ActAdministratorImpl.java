@@ -184,12 +184,4 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		}
 		return new PtBoolean(true);
 	}
-
-	@Override
-	public PtBoolean oeLoginUsingBiometrics(DtBiometricData aDtBiometricData)
-			throws RemoteException, NotBoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

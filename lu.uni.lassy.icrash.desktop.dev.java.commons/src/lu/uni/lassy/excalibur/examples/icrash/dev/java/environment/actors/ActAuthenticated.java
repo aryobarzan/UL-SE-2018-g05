@@ -57,13 +57,13 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 	public PtBoolean oeLogout() throws RemoteException, NotBoundException;
 	
 	/**
-	 * Allows a user to chose the BiometricLogin GUI.
+	 * Allows a user to choose the BiometricLogin GUI.
 	 * 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server isn't online
 	 * @throws NotBoundException Thrown if the server has not been bound in the EMI settings
 	 */
-	public PtBoolean oeChoseBiometricLogin() throws RemoteException, NotBoundException;
+	public PtBoolean oeChooseBiometricLogin() throws RemoteException, NotBoundException;
 	
 	/**
 	 * Allow a user to logon to the system using his biometricData.
@@ -73,7 +73,7 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 	 * @throws RemoteException Thrown if the server isn't online
 	 * @throws NotBoundException Thrown if the server has not been bound in the RMI settings
 	 */
-	public PtBoolean oeLoginUsingBiometrics(DtBiometricData aDtBiometricData) throws RemoteException, NotBoundException;
+	public PtBoolean oeLoginUsingBiometric(DtBiometricData aDtBiometricData) throws RemoteException, NotBoundException;
 	
 	/**
 	 * Adds the proxy actor as a listener to this class.

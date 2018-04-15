@@ -100,6 +100,30 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     @FXML
     private Button bttnAdminLogoff;
 
+	/** The textfield that allows input of a name for symmetric login. */
+	@FXML
+	private TextField txtfldAdminSymmetricField1;
+
+	/** The textfield that allows input of a nonce for symmetric login. */
+	@FXML
+	private TextField txtfldAdminSymmetricField2;
+
+	/** The button that switches to the symmetric login. */
+	@FXML
+	private Button bttnAdminSwitchToSymmetricLogin;
+
+	/** The button that switches to the biometric login. */
+	@FXML
+	private Button bttnAdminSwitchToBiometricLogin;
+
+	/** The button that switches to the standard login. */
+	@FXML
+	private Button bttnAdminSwitchToStandardLogin;
+
+	/** The button that is utilized for sending symmetric login data to the icrash System. */
+	@FXML
+	private Button bttnAdminSymmetricLogin;
+
     /**
      * The button event that will show the controls for adding a coordinator
      *
@@ -139,6 +163,80 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     void bttnTopLogoff_OnClick(ActionEvent event) {
     	logoff();
     }
+
+	/**
+	 * The button event that reveal the symmetric login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnBottomLoginPaneSwitchToSymmetricLogin_OnClick(ActionEvent event) {
+		txtfldAdminSymmetricField1.setVisible(true);
+		txtfldAdminSymmetricField2.setVisible(true);
+		bttnAdminSymmetricLogin.setVisible(true);
+
+		txtfldAdminUserName.setVisible(false);
+		psswrdfldAdminPassword.setVisible(false);
+		bttnAdminLogin.setVisible(false);
+
+		bttnAdminSwitchToSymmetricLogin.setDisable(true);
+		bttnAdminSwitchToBiometricLogin.setDisable(false);
+		bttnAdminSwitchToStandardLogin.setDisable(false);
+
+	}
+
+	/**
+	 * The button event that reveal the biometric login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnBottomLoginPaneSwitchToBiometricLogin_OnClick(ActionEvent event) {
+		// Fields and buttons that should be made visible to be inserted here
+
+		txtfldAdminUserName.setVisible(false);
+		psswrdfldAdminPassword.setVisible(false);
+		bttnAdminLogin.setVisible(false);
+		txtfldAdminSymmetricField1.setVisible(false);
+		txtfldAdminSymmetricField2.setVisible(false);
+		bttnAdminSymmetricLogin.setVisible(false);
+
+		bttnAdminSwitchToSymmetricLogin.setDisable(false);
+		bttnAdminSwitchToBiometricLogin.setDisable(true);
+		bttnAdminSwitchToStandardLogin.setDisable(false);
+
+	}
+
+	/**
+	 * The button event that reveal the standard login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnBottomLoginPaneSwitchToStandardLogin_OnClick(ActionEvent event) {
+		txtfldAdminUserName.setVisible(true);
+		psswrdfldAdminPassword.setVisible(true);
+		bttnAdminLogin.setVisible(true);
+		txtfldAdminSymmetricField1.setVisible(false);
+		txtfldAdminSymmetricField2.setVisible(false);
+		bttnAdminSymmetricLogin.setVisible(false);
+
+		bttnAdminSwitchToSymmetricLogin.setDisable(false);
+		bttnAdminSwitchToBiometricLogin.setDisable(false);
+		bttnAdminSwitchToStandardLogin.setDisable(true);
+
+	}
+
+	/**
+	 * The button event that reveal the standard login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnBottomLoginPaneSymmetricLogin_OnClick(ActionEvent event) {
+		// Handle symmetric submit button here
+
+	}
 
     /*
      * These are other classes accessed by this controller

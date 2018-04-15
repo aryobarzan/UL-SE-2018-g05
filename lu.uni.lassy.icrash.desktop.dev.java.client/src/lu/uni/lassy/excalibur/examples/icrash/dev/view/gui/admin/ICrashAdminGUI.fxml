@@ -76,7 +76,10 @@
                   </Pane>
                   <BorderPane id="brdpnAdmin" fx:id="brdpnAdmin" prefHeight="232.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <center>
-                        <AnchorPane id="anchrpnCoordinatorDetails" fx:id="anchrpnCoordinatorDetails" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                        <AnchorPane id="anchrpnCoordinatorDetails" fx:id="anchrpnCoordinatorDetails" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets />
+                           </BorderPane.margin></AnchorPane>
                      </center>
                      <top>
                         <HBox prefHeight="53.0" prefWidth="240.0" BorderPane.alignment="CENTER">

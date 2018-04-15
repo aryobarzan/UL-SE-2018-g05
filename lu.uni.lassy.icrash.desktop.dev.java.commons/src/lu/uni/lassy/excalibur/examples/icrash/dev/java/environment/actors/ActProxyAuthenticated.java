@@ -19,6 +19,7 @@ import java.rmi.RemoteException;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntHasServerSideActor;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
@@ -57,7 +58,17 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
 	public PtBoolean oeLogout() throws RemoteException, NotBoundException;
-
+	
+	/**
+	 * Performs the oeLoginUsingBiometric function with the biometric data provided.
+	 * 
+	 * @param aDtBiometricData
+	 * @return The success of the operation
+	 * @throws RemoteException Thrown if the server is offline
+	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
+	 */
+	public PtBoolean oeLoginUsingBiometric(DtBiometricData aDtBiometricData) throws RemoteException, NotBoundException;
+	
 	/**
 	 * Recieves a message to the actor, this must be displayed on the user's GUI screen as well.
 	 *

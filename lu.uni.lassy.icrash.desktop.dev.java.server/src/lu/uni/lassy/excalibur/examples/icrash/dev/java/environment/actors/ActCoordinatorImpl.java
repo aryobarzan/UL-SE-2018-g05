@@ -333,11 +333,4 @@ public class ActCoordinatorImpl extends ActAuthenticatedImpl implements ActCoord
 			log.info("operation oeGetAlertsSet successfully executed by the system");
 		return res;
 	}
-
-	@Override
-	public PtBoolean oeLoginUsingBiometrics(DtBiometricData aDtBiometricData)
-			throws RemoteException, NotBoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -86,11 +86,11 @@ public abstract class ActProxyAuthenticatedImpl extends UnicastRemoteObject impl
 		return this._serverSideActor.oeLogout();
 	}
 	
-	public PtBoolean oeChoseBiometricLogin() throws RemoteException, NotBoundException{
-		return this._serverSideActor.oeChoseBiometricLogin();
+	public PtBoolean oeChooseBiometricLogin() throws RemoteException, NotBoundException{
+		return this._serverSideActor.oeChooseBiometricLogin();
 	}
 	public PtBoolean oeLoginUsingBiometric(DtBiometricData aDtBiometricData) throws RemoteException, NotBoundException{
-		return this._serverSideActor.oeLoginUsingBiometrics(aDtBiometricData);
+		return this._serverSideActor.oeLoginUsingBiometric(aDtBiometricData);
 	}
 	
 	/* (non-Javadoc)

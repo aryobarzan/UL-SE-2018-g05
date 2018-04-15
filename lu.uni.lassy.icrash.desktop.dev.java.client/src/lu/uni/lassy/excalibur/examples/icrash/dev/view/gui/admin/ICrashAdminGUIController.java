@@ -42,6 +42,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -123,6 +124,14 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	/** The button that is utilized for sending symmetric login data to the icrash System. */
 	@FXML
 	private Button bttnAdminSymmetricLogin;
+	
+	/** The button that scans the biometric data. */
+	@FXML
+	private Button bttnAdminScan;
+	
+	/** The progress indicator that shows the progress of the biometric scan. */
+	@FXML
+	private ProgressIndicator progressIndicatorAdminBiometricScan;
 
     /**
      * The button event that will show the controls for adding a coordinator
@@ -178,6 +187,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		txtfldAdminUserName.setVisible(false);
 		psswrdfldAdminPassword.setVisible(false);
 		bttnAdminLogin.setVisible(false);
+		bttnAdminScan.setVisible(false);
+		progressIndicatorAdminBiometricScan.setVisible(false);
 
 		bttnAdminSwitchToSymmetricLogin.setDisable(true);
 		bttnAdminSwitchToBiometricLogin.setDisable(false);
@@ -192,7 +203,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnBottomLoginPaneSwitchToBiometricLogin_OnClick(ActionEvent event) {
-		// Fields and buttons that should be made visible to be inserted here
+		bttnAdminScan.setVisible(true);
+		progressIndicatorAdminBiometricScan.setVisible(true);
 
 		txtfldAdminUserName.setVisible(false);
 		psswrdfldAdminPassword.setVisible(false);
@@ -220,6 +232,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		txtfldAdminSymmetricField1.setVisible(false);
 		txtfldAdminSymmetricField2.setVisible(false);
 		bttnAdminSymmetricLogin.setVisible(false);
+		bttnAdminScan.setVisible(false);
+		progressIndicatorAdminBiometricScan.setVisible(false);
 
 		bttnAdminSwitchToSymmetricLogin.setDisable(false);
 		bttnAdminSwitchToBiometricLogin.setDisable(false);
@@ -236,6 +250,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	void bttnBottomLoginPaneSymmetricLogin_OnClick(ActionEvent event) {
 		// Handle symmetric submit button here
 
+	}
+	
+	@FXML
+	void bttnAdminScan_OnClick(ActionEvent event) {
+		// Handle scan of the biometric data here
 	}
 
     /*

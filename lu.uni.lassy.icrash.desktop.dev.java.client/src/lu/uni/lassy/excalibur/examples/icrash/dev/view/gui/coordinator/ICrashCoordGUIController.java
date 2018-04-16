@@ -588,4 +588,13 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		}
 		return new PtBoolean(true);
 	}
+	
+	@Override
+	public void submitLoginAndNonceForSymmetricLogin() {
+		// to be implemented
+	} 
+	@Override
+	public void submitEncryptedLoginAndSystemsNonceForSymmetricLogin() {
+		// to be implemented
+	}
 }

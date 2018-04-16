@@ -481,4 +481,13 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		}
 		return new PtBoolean(false);
 	}	
+	
+	@Override
+	public void submitLoginAndNonceForSymmetricLogin() {
+		// to be implemented
+	} 
+	@Override
+	public void submitEncryptedLoginAndSystemsNonceForSymmetricLogin() {
+		// to be implemented
+	}
 }

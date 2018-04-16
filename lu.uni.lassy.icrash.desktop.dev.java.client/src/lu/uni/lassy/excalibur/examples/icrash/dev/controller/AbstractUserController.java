@@ -19,8 +19,10 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOf
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtInteger;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.actors.ActProxyAuthenticatedImpl;
@@ -124,5 +126,19 @@ public abstract class AbstractUserController implements HasListeners {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerNotBoundException();
 		}
+	}
+	/**
+	 * The method that allows the user to logon.
+	 *
+	 * @param login The username to logon with
+	 * @param password The password to use
+	 * @return The success of the method
+	 * @throws ServerOfflineException Thrown if the server is currently offline
+	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings
+	 */
+	public PtBoolean oeSendNameAndNonceForSymmetricLogin(String login, int nonce) throws ServerOfflineException, ServerNotBoundException{
+		DtLogin aDtLogin = new DtLogin(new PtString(login));
+		DtNonce aDtNonce = new DtNonce(new PtInteger(nonce));
+		return null;
 	}
 }

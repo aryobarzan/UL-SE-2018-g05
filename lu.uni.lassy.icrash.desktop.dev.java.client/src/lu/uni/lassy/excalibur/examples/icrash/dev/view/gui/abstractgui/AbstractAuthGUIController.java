@@ -35,4 +35,11 @@ public abstract class AbstractAuthGUIController extends AbstractGUIController im
 	 */
 	protected abstract void logonShowPanes(boolean loggedOn);
 	
+	/**
+	 * A method that allows the user to logoff the sever. Will often call a function from inside the user's specific controller class.
+	 */
+	public abstract void submitLoginAndNonceForSymmetricLogin();
+	
+	public abstract void submitEncryptedLoginAndSystemsNonceForSymmetricLogin();
+	
 }

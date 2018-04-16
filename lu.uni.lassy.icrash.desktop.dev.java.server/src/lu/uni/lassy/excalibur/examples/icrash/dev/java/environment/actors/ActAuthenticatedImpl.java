@@ -91,10 +91,6 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 		return res;
 	}
 	
-	public PtBoolean oeChooseBiometricLogin() throws RemoteException, NotBoundException {
-		return new PtBoolean(true);
-	}
-	
 	synchronized public PtBoolean oeLoginUsingBiometric(DtBiometricData AdtBiometricData) throws RemoteException, NotBoundException {
 		return new PtBoolean(true);
 	}

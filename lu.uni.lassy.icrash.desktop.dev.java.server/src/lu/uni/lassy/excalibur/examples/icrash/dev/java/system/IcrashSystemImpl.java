@@ -1364,7 +1364,54 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	
 	public PtBoolean oeSendLoginAndNonceForSymmetricLogin(DtLogin aDtLogin, DtNonce aDtNonce)
 			throws RemoteException {	
-		// to be implemented
-		return null;
+		try {
+			log.debug("The current requesting authenticating actor is " + currentRequestingAuthenticatedActor.getLogin().value.getValue());
+			//PreP1
+			isSystemStarted();
+			/**
+			 * check whether the credentials corresponds to an existing user
+			 *this is done by checking if there exists an instance with
+			 *such credential in the ctAuthenticatedInstances data structure
+			 */
+			CtAuthenticated ctAuthenticatedInstance = cmpSystemCtAuthenticated
+					.get(aDtLogin.value.getValue());
+			if (ctAuthenticatedInstance != null){
+				//PreP2
+				if(ctAuthenticatedInstance.vpIsLogged.getValue())
+					throw new Exception("User " + aDtLogin.value.getValue() + " is already logged in");
+				// generate new nonce B and encrypt the received name along with system name with the authenticating actor's associated symmetric key and send this to the actor
+				
+					//PostP1
+					/**
+					 * Make sure that the user logging in is the current requesting user
+					 * We do this as each window is a dumb terminal and only one use can logon at each individual window
+					 * So user 1 can only logon at the window for user 1, if user 2 tries, it should fail
+					 */
+					ActAuthenticated authActorCheck = assCtAuthenticatedActAuthenticated.get(ctAuthenticatedInstance);
+					log.debug("The logging in actor is " + authActorCheck.getLogin().value.getValue());
+					if (authActorCheck != null && authActorCheck.getLogin().value.getValue().equals(currentRequestingAuthenticatedActor.getLogin().value.getValue())){
+						//PostF1
+						PtString aMessage = new PtString("ENCRYPTED MESSAGE CONTAINING SYSTEM NAME AND RECEIVED NONCE + NEW NONCE IN PLAINTEXT");
+						currentRequestingAuthenticatedActor.ieMessage(aMessage);
+						return new PtBoolean(true);
+					}
+			}
+			//PostF1
+			PtString aMessage = new PtString(
+					"Wrong identification information! Please try again ...");
+			currentRequestingAuthenticatedActor.ieMessage(aMessage);
+			Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(), RmiUtils.getInstance().getPort());
+			IcrashEnvironment env = (IcrashEnvironment) registry
+					.lookup("iCrashEnvironment");
+			//notify to all administrators that exist in the environment
+			for (String adminKey : env.getAdministrators().keySet()) {
+				ActAdministrator admin = env.getActAdministrator(adminKey);
+				aMessage = new PtString("Intrusion tentative !");
+				admin.ieMessage(aMessage);
+			}
+		} catch (Exception ex) {
+			log.error("Exception in oeSendLoginAndNonceForSymmetricLogin..." + ex);
+		}
+		return new PtBoolean(false);
 	}
 }

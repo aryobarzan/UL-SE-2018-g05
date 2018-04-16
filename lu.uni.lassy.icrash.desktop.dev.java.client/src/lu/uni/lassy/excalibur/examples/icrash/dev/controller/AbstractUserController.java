@@ -131,7 +131,7 @@ public abstract class AbstractUserController implements HasListeners {
 	 * The method that allows the user to logon.
 	 *
 	 * @param login The username to logon with
-	 * @param password The password to use
+	 * @param nonce The nonce sent to the system
 	 * @return The success of the method
 	 * @throws ServerOfflineException Thrown if the server is currently offline
 	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings
@@ -139,6 +139,14 @@ public abstract class AbstractUserController implements HasListeners {
 	public PtBoolean oeSendNameAndNonceForSymmetricLogin(String login, int nonce) throws ServerOfflineException, ServerNotBoundException{
 		DtLogin aDtLogin = new DtLogin(new PtString(login));
 		DtNonce aDtNonce = new DtNonce(new PtInteger(nonce));
-		return null;
+		try {
+			return this.getAuth().oeSendNameAndNonceForSymmetricLogin(aDtLogin, aDtNonce);
+		} catch (RemoteException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerOfflineException();
+		} catch (NotBoundException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerNotBoundException();
+		}
 	}
 }

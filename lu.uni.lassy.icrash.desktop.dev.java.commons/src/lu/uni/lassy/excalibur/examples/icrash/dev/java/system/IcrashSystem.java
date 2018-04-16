@@ -385,6 +385,6 @@ public interface IcrashSystem extends Remote {
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean oeSendLoginAndNonceForSymmetricLogin(DtLogin aDtLogin, DtNonce aDtNonce)
+	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin, DtNonce aDtNonce)
 			throws RemoteException;
 }

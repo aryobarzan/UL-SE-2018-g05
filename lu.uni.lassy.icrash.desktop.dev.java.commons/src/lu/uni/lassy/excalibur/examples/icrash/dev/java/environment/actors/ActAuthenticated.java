@@ -103,5 +103,5 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 	 * @throws RemoteException Thrown if the server isn't online
 	 * @throws NotBoundException Thrown if the server has not been bound in the RMI settings
 	 */
-	public PtBoolean oeSendLoginAndNonceForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException;
+	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException;
 }

@@ -128,7 +128,7 @@ public abstract class AbstractUserController implements HasListeners {
 		}
 	}
 	/**
-	 * The method that allows the user to logon.
+	 * The method that allows the user to logon with symmetric method.
 	 *
 	 * @param login The username to logon with
 	 * @param nonce The nonce sent to the system
@@ -136,11 +136,11 @@ public abstract class AbstractUserController implements HasListeners {
 	 * @throws ServerOfflineException Thrown if the server is currently offline
 	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings
 	 */
-	public PtBoolean oeSendNameAndNonceForSymmetricLogin(String login, int nonce) throws ServerOfflineException, ServerNotBoundException{
+	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(String login, int nonce) throws ServerOfflineException, ServerNotBoundException{
 		DtLogin aDtLogin = new DtLogin(new PtString(login));
 		DtNonce aDtNonce = new DtNonce(new PtInteger(nonce));
 		try {
-			return this.getAuth().oeSendNameAndNonceForSymmetricLogin(aDtLogin, aDtNonce);
+			return this.getAuth().oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(aDtLogin, aDtNonce);
 		} catch (RemoteException e) {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerOfflineException();

@@ -249,7 +249,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	@FXML
 	void bttnBottomLoginPaneSymmetricLogin_OnClick(ActionEvent event) {
 		// Handle symmetric submit button here
-		submitLoginAndNonceForSymmetricLogin();
+		sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin();
 
 	}
 	
@@ -484,11 +484,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	}	
 	
 	@Override
-	public void submitLoginAndNonceForSymmetricLogin() {
+	public void sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin() {
 		if(txtfldAdminSymmetricField1.getText().length() > 0 && txtfldAdminSymmetricField2.getText().length() > 0){
 			try {
 				int nonce = Integer.parseInt((txtfldAdminSymmetricField2.getText()));
-				if (userController.oeSendNameAndNonceForSymmetricLogin(txtfldAdminSymmetricField1.getText(), nonce).getValue())
+				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldAdminSymmetricField1.getText(), nonce).getValue())
 					// do next step
 					System.out.println("First step of symmetric login successful");
 			}

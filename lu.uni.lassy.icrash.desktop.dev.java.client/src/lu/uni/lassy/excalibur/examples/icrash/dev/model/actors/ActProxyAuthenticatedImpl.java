@@ -159,7 +159,7 @@ public abstract class ActProxyAuthenticatedImpl extends UnicastRemoteObject impl
 		return UserType.Unknown;
 	}
 	
-	public PtBoolean oeSendNameAndNonceForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException{
-		return this._serverSideActor.oeSendLoginAndNonceForSymmetricLogin(aDtLogin, aDtNonce);
+	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException{
+		return this._serverSideActor.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(aDtLogin, aDtNonce);
 	}
 }

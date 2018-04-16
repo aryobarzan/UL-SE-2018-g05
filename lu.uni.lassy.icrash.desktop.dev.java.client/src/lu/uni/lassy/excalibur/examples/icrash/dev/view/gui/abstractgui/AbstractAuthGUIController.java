@@ -38,7 +38,7 @@ public abstract class AbstractAuthGUIController extends AbstractGUIController im
 	/**
 	 * A method that allows the user to logoff the sever. Will often call a function from inside the user's specific controller class.
 	 */
-	public abstract void submitLoginAndNonceForSymmetricLogin();
+	public abstract void sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin();
 	
 	public abstract void submitEncryptedLoginAndSystemsNonceForSymmetricLogin();
 	

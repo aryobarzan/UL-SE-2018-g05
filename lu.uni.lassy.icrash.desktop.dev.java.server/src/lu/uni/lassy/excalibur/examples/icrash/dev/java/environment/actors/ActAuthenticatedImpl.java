@@ -163,7 +163,7 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 		return new PtBoolean(true);
 	}
 	
-	public PtBoolean oeSendLoginAndNonceForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException{
+	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException{
 		Logger log = Log4JUtils.getInstance().getLogger();
 
 		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
@@ -176,7 +176,7 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 
 		log.info("message ActAuthenticated.oeSendLoginAndNonceForSymmetricLogin sent to system");
-		PtBoolean res = iCrashSys_Server.oeSendLoginAndNonceForSymmetricLogin(aDtLogin, aDtNonce);
+		PtBoolean res = iCrashSys_Server.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(aDtLogin, aDtNonce);
 
 		if (res.getValue() == true)
 			log.info("operation oeSendLoginAndNonceForSymmetricLogin successfully executed by the system");

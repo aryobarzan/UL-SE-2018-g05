@@ -1362,7 +1362,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 		}
 	}
 	
-	public PtBoolean oeSendLoginAndNonceForSymmetricLogin(DtLogin aDtLogin, DtNonce aDtNonce)
+	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin, DtNonce aDtNonce)
 			throws RemoteException {	
 		try {
 			log.debug("The current requesting authenticating actor is " + currentRequestingAuthenticatedActor.getLogin().value.getValue());

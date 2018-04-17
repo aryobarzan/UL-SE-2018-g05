@@ -500,7 +500,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     		showWarningNoDataEntered();
 	} 
 	@Override
-	public void submitEncryptedLoginAndSystemsNonceForSymmetricLogin() {
+	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
 		// to be implemented
 	}
 }

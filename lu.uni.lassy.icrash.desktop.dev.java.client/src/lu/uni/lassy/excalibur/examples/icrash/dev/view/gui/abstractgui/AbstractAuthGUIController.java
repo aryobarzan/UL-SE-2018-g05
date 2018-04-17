@@ -40,6 +40,6 @@ public abstract class AbstractAuthGUIController extends AbstractGUIController im
 	 */
 	public abstract void sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin();
 	
-	public abstract void submitEncryptedLoginAndSystemsNonceForSymmetricLogin();
+	public abstract void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin();
 	
 }

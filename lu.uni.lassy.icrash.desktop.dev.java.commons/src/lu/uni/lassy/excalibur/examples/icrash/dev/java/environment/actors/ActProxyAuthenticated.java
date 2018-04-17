@@ -20,6 +20,7 @@ import java.rmi.RemoteException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntHasServerSideActor;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtEncryptedMessage;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -118,5 +119,5 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
 	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException;
-	
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage encryptedLoginAndNonce)throws RemoteException, NotBoundException;
 }

@@ -594,7 +594,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		// to be implemented
 	} 
 	@Override
-	public void submitEncryptedLoginAndSystemsNonceForSymmetricLogin() {
+	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
 		// to be implemented
 	}
 }

@@ -12,6 +12,7 @@
  ******************************************************************************/
 package lu.uni.lassy.excalibur.examples.icrash.dev.java.system;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -50,6 +51,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAl
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtEncryptedMessage;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtGPSLocation;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
@@ -1413,5 +1415,9 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			log.error("Exception in oeSendLoginAndNonceForSymmetricLogin..." + ex);
 		}
 		return new PtBoolean(false);
+	}
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage aDtencryptedLoginAndNonce)throws RemoteException{
+		return null;
+		// to be implemented
 	}
 }

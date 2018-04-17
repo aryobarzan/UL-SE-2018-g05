@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.*;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtEncryptedMessage;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -162,4 +163,8 @@ public abstract class ActProxyAuthenticatedImpl extends UnicastRemoteObject impl
 	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException{
 		return this._serverSideActor.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(aDtLogin, aDtNonce);
 	}
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage aDtencryptedLoginAndNonce)throws RemoteException, NotBoundException{
+		return null;
+	}
+
 }

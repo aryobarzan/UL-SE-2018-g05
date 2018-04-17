@@ -149,4 +149,8 @@ public abstract class AbstractUserController implements HasListeners {
 			throw new ServerNotBoundException();
 		}
 	}
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(String encryptedLoginAndNonce)throws ServerOfflineException, ServerNotBoundException{
+		// to be implemented
+		return null;
+	}
 }

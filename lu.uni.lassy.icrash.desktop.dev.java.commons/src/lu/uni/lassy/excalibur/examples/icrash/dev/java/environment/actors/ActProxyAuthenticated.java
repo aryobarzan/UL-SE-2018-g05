@@ -119,5 +119,5 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
 	public PtBoolean oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(DtLogin aDtLogin,DtNonce aDtNonce)  throws RemoteException, NotBoundException;
-	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage encryptedLoginAndNonce)throws RemoteException, NotBoundException;
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage aDtencryptedLoginAndNonce)throws RemoteException, NotBoundException;
 }

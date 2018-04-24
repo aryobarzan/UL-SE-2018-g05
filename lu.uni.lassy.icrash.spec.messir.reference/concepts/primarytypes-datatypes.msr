@@ -70,6 +70,9 @@ import lu.uni.lassy.messir.libraries.calendar
 				constants["witness", "victim", "anonymous"]
 				operation is():ptBoolean
 			}
+		datatype dtBiometricData extends dtString {
+				operation is():ptBoolean
+			}
 		}
 	}
 }

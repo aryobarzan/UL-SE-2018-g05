@@ -1380,8 +1380,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				//PreP2
 				if(ctAuthenticatedInstance.vpIsLogged.getValue())
 					throw new Exception("User " + aDtLogin.value.getValue() + " is already logged in");
-				// generate new nonce B and encrypt the received name along with system name with the authenticating actor's associated symmetric key and send this to the actor
-				
+				// also check if symmetric key is initialized for this actor
 					//PostP1
 					/**
 					 * Make sure that the user logging in is the current requesting user
@@ -1392,7 +1391,31 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 					log.debug("The logging in actor is " + authActorCheck.getLogin().value.getValue());
 					if (authActorCheck != null && authActorCheck.getLogin().value.getValue().equals(currentRequestingAuthenticatedActor.getLogin().value.getValue())){
 						//PostF1
-						PtString aMessage = new PtString("ENCRYPTED MESSAGE CONTAINING SYSTEM NAME AND RECEIVED NONCE + NEW NONCE IN PLAINTEXT");
+						// generate new nonce B != nonce A
+						Random random = new Random(System.currentTimeMillis());
+						DtNonce aDtNonceB = new DtNonce(new PtInteger(random.nextInt()));
+						while(aDtNonceB.value.getValue() == aDtNonce.value.getValue()) {
+							aDtNonceB = new DtNonce(new PtInteger(random.nextInt()));
+						}
+						// encrypt received nonce A with system name
+						String symmetricKey = "ABC"; // change this to currentRequestingAuthenticatedActor.getSymmetricKey()
+						String systemName = "icrash";
+						String textToEncrypt = systemName.toUpperCase() + aDtNonce.value.getValue();
+						String encryptedText = "";
+						for(int i = 0, j = 0; i < textToEncrypt.length(); i++) {
+							char character = textToEncrypt.charAt(i);
+							if(!(character < 'A' || character > 'Z')) {
+								char newCharacter = (char) (((character + symmetricKey.charAt(j)) % 26) + 'A');
+								j++;
+								j = j % symmetricKey.length();
+								encryptedText += newCharacter;
+							}
+							else {
+								encryptedText += character;
+							}
+						}
+						DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new PtString(encryptedText));
+						PtString aMessage = new PtString("Encrypted: " + aDtEncryptedMessage.value.getValue() + " | New Nonce: " + aDtNonceB.value.getValue());
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);
 						return new PtBoolean(true);
 					}

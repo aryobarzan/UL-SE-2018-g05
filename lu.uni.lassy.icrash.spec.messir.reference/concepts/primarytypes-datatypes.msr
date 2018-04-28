@@ -71,8 +71,13 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation is():ptBoolean
 			}
 		datatype dtBiometricData extends dtString {
+<<<<<<< HEAD
 				operation is():ptBoolean
 			}
+=======
+				operation is():ptBoolean
+			}
+>>>>>>> refs/remotes/origin/master
 		}
 	}
 }

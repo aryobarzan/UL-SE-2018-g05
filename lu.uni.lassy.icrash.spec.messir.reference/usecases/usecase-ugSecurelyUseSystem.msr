@@ -53,7 +53,12 @@ Use Case Model {
 			executes oeLogout()
 			
 		ordering constraint
+<<<<<<< HEAD
 		"step (a) must always precede step (b)."
 		}
+=======
+		"step (a) must always precede step (b)."
+		}
+>>>>>>> refs/remotes/origin/master
 	}
 }

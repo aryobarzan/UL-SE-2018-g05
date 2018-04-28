@@ -128,6 +128,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation oeComputeKeySendAndGetRandomNumber(AdtRandomX:dtInteger):ptBoolean
 				operation oeSendNonceAndName(AdtNonceA:dtInteger, AdtName:ptString):ptBoolean
 				operation oeDecryptSystemMessageAndSendEncryptedNonceBAndName(AdtNonceB:dtInteger, AdtName:ptString, AdtKey:ptString):ptBoolean
+				operation oeLoginUsingBiometric(AdtBiometricData:dtBiometricData):ptBoolean
 			}
 			
 			input interface inactAuthenticated{

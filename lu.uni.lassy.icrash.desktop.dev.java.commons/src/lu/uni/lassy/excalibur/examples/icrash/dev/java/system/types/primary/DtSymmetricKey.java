@@ -16,6 +16,7 @@ public class DtSymmetricKey extends DtString  implements JIntIs{
 		super(s);
 	}
 
+	
 	@Override
 	public PtBoolean is() {
 		return null;

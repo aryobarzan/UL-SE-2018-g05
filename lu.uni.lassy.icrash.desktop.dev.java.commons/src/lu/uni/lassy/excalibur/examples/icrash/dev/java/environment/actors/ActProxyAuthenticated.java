@@ -64,7 +64,7 @@ public interface ActProxyAuthenticated extends Remote, JIntHasServerSideActor, J
 	/**
 	 * Performs the oeLoginUsingBiometric function with the biometric data provided.
 	 * 
-	 * @param aDtBiometricData
+	 * @param aDtBiometricData The biometric data to logon with
 	 * @return The success of the operation
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings

@@ -71,7 +71,7 @@ public abstract class AbstractUserController implements HasListeners {
 	/**
 	 * The method that allows the user to logon using biometric data.
 	 *
-	 * @param biometricdata The biometric data to logon
+	 * @param biometricdata The biometric data to logon with
 	 * @return The success of the method
 	 * @throws ServerOfflineException Thrown if the server is currently offline
 	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings

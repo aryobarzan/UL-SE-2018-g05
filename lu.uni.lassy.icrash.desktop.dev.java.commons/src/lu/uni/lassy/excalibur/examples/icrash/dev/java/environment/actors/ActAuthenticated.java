@@ -61,7 +61,7 @@ public interface ActAuthenticated extends java.rmi.Remote, Serializable, JIntIsA
 	/**
 	 * Allow a user to logon to the system using his biometricData.
 	 * 
-	 * @param aDtBiometricData
+	 * @param aDtBiometricData The biometric data to logon with
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server isn't online
 	 * @throws NotBoundException Thrown if the server has not been bound in the RMI settings

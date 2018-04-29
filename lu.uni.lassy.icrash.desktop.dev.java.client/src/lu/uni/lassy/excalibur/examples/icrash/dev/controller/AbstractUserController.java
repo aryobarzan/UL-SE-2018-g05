@@ -18,6 +18,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNo
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -59,6 +60,26 @@ public abstract class AbstractUserController implements HasListeners {
 		DtPassword aDtPassword = new DtPassword(new PtString(password));
 		try {
 			return this.getAuth().oeLogin(aDtLogin, aDtPassword);
+		} catch (RemoteException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerOfflineException();
+		} catch (NotBoundException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerNotBoundException();
+		}
+	}
+	/**
+	 * The method that allows the user to logon using biometric data.
+	 *
+	 * @param biometricdata The biometric data to logon
+	 * @return The success of the method
+	 * @throws ServerOfflineException Thrown if the server is currently offline
+	 * @throws ServerNotBoundException Thrown if the server hasn't been bound in the RMI settings
+	 */
+	public PtBoolean oeLoginUsingBiometric(String biometricData) throws ServerOfflineException, ServerNotBoundException {
+		DtBiometricData aDtBiometricData = new DtBiometricData(new PtString(biometricData));
+		try {
+			return this.getAuth().oeLoginUsingBiometric(aDtBiometricData);
 		} catch (RemoteException e) {
 			Log4JUtils.getInstance().getLogger().error(e);
 			throw new ServerOfflineException();

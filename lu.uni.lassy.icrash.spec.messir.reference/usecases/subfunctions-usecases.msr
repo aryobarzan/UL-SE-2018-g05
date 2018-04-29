@@ -168,21 +168,11 @@ import icrash.environment
 				ieGetAuthenticationCompleteMessage(AdtMessage) returned to actAuthenticated
 			}
 		}
-<<<<<<< HEAD
 	use case system subfunction oeLoginUsingBiometric(AdtBiometricData:dtBiometricData) {
 			actor actAuthenticated[primary, active]
 			returned messages {
    		   	ieMessage(AMessage) returned to actAuthenticated
 	  		}
 		}
-=======
-	use case system subfunction oeLoginUsingBiometric(AdtBiometricData:dtBiometricData) {
-			actor actAuthenticated[primary, active]
-			returned messages {
-   		   	ieMessage(AMessage) returned to actAuthenticated
-	  		}
-		}
->>>>>>> refs/remotes/origin/master
 	}
-
 }

@@ -30,6 +30,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCr
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtHuman;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtState;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID;
@@ -391,5 +392,7 @@ public interface IcrashSystem extends Remote {
 			throws RemoteException;
 	
 	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage aDtencryptedLoginAndNonce) throws RemoteException;
+	
+	public PtBoolean oeLoginUsingBiometric(DtBiometricData aDtBiometricDate) throws RemoteException;
 
 }

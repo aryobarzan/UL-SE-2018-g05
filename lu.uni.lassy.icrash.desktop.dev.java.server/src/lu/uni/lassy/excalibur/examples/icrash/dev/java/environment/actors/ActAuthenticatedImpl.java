@@ -93,8 +93,25 @@ public abstract class ActAuthenticatedImpl extends UnicastRemoteObject
 		return res;
 	}
 	
-	synchronized public PtBoolean oeLoginUsingBiometric(DtBiometricData AdtBiometricData) throws RemoteException, NotBoundException {
-		return new PtBoolean(true);
+	synchronized public PtBoolean oeLoginUsingBiometric(DtBiometricData adtBiometricData) throws RemoteException, NotBoundException {
+		Logger log = Log4JUtils.getInstance().getLogger();
+
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+		//Gathering the remote object as it was published into the registry
+		IcrashSystem iCrashSys_Server = (IcrashSystem) registry
+				.lookup("iCrashServer");
+
+		//set up ActAuthenticated instance that performs the request
+		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+
+		log.info("message ActAuthenticated.oeLoginUsingBiometric sent to system");
+		PtBoolean res = iCrashSys_Server.oeLoginUsingBiometric(adtBiometricData);
+
+		if (res.getValue() == true)
+			log.info("operation oeLoginUsingBiometric successfully executed by the system");
+
+		return res;
 	}
 	
 	/* (non-Javadoc)

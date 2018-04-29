@@ -104,6 +104,9 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/**  A hashtable of all authenticated users in the system, stored by their login as a key. */
 	Hashtable<String, CtAuthenticated> cmpSystemCtAuthenticated = new Hashtable<String, CtAuthenticated>();
 	
+	/**  A List of all authenticated users in the system */
+	List<CtAuthenticated> cmpSystemCtAuthenticatedList = new ArrayList<CtAuthenticated>();
+	
 	/**  A hashtable of the alerts in the system, stored by their ID as a key. */
 	Hashtable<String, CtAlert> cmpSystemCtAlert = new Hashtable<String, CtAlert>();
 	
@@ -583,7 +586,8 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			CtAdministrator ctAdmin = new CtAdministrator();
 			DtLogin aLogin = new DtLogin(new PtString(adminName));
 			DtPassword aPwd = new DtPassword(new PtString("7WXC1359"));
-			ctAdmin.init(aLogin, aPwd);
+			DtBiometricData aBioData = new DtBiometricData(new PtString("BIOMETRICDATA"));
+			ctAdmin.init(aLogin, aPwd, aBioData);
 			/*
 			PostF 7 the association between ctAdministrator and actAdministrator is made of 
 			one couple made of the jointly specified instances.
@@ -1446,7 +1450,56 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 
 	@Override
 	public PtBoolean oeLoginUsingBiometric(DtBiometricData aDtBiometricDate) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			log.debug("The current requesting authenticating actor is " + currentRequestingAuthenticatedActor.getLogin().value.getValue());
+			//PreP1
+			isSystemStarted();
+			CtAuthenticated ctAuthenticatedInstance = null;
+			/**
+			 * check whether the credentials corresponds to an existing user
+			 * this is done by checking if there exists an instance with
+			 * such credential in the ctAuthenticatedInstances list
+			 */
+			for(CtAuthenticated ctAuthenticated : cmpSystemCtAuthenticatedList) {
+				if (ctAuthenticated.getBiometricData().equals(aDtBiometricDate)){
+					ctAuthenticatedInstance = cmpSystemCtAuthenticated
+							.get(ctAuthenticated.login.value.getValue());
+					break;
+				}
+			}
+			if (ctAuthenticatedInstance != null){
+					//PostP1
+					/**
+					 * Make sure that the user logging in is the current requesting user
+					 * We do this as each window is a dumb terminal and only one use can logon at each individual window
+					 * So user 1 can only logon at the window for user 1, if user 2 tries, it should fail
+					 */
+					ActAuthenticated authActorCheck = assCtAuthenticatedActAuthenticated.get(ctAuthenticatedInstance);
+					log.debug("The logging in actor is " + authActorCheck.getLogin().value.getValue());
+					if (authActorCheck != null && authActorCheck.getLogin().value.getValue().equals(currentRequestingAuthenticatedActor.getLogin().value.getValue())){
+						ctAuthenticatedInstance.vpIsLogged = new PtBoolean(true);
+						//PostF1
+						PtString aMessage = new PtString("You are logged ! Welcome ...");
+						currentRequestingAuthenticatedActor.ieMessage(aMessage);
+						return new PtBoolean(true);
+				}
+			}
+			//PostF1
+			PtString aMessage = new PtString(
+					"No match! Please try again ...");
+			currentRequestingAuthenticatedActor.ieMessage(aMessage);
+			Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(), RmiUtils.getInstance().getPort());
+			IcrashEnvironment env = (IcrashEnvironment) registry
+					.lookup("iCrashEnvironment");
+			//notify to all administrators that exist in the environment
+			for (String adminKey : env.getAdministrators().keySet()) {
+				ActAdministrator admin = env.getActAdministrator(adminKey);
+				aMessage = new PtString("Intrusion tentative !");
+				admin.ieMessage(aMessage);
+			}
+		} catch (Exception ex) {
+			log.error("Exception in oeLoginUsingBiometric..." + ex);
+		}
+		return new PtBoolean(false);
 	}
 }

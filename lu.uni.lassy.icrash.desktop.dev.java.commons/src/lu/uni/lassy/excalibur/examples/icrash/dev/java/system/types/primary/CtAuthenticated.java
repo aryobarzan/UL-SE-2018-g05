@@ -29,6 +29,9 @@ public abstract class CtAuthenticated implements Serializable {
 	/**  The user's password. */
 	public DtPassword pwd;
 	
+	/**  The user's biometric data. */
+	private DtBiometricData biometricData;
+	
 	/**  A check to see if the current Ct class is considered logged into the system. */
 	public PtBoolean vpIsLogged;	
 	
@@ -37,15 +40,21 @@ public abstract class CtAuthenticated implements Serializable {
 	 *
 	 * @param aLogin The username of the user
 	 * @param aPwd The password of the user
+	 * @param aBioData The biometric data of the user
 	 * @return The success of the initialisation of the user
 	 */
-	public PtBoolean init(DtLogin aLogin, DtPassword aPwd){
+	public PtBoolean init(DtLogin aLogin, DtPassword aPwd, DtBiometricData aBioData){
 			login = aLogin;
 			pwd = aPwd;
+			biometricData = aBioData;
 			vpIsLogged = new PtBoolean(false);
 			return new PtBoolean(true); 
 	}
 	
+	public DtBiometricData getBiometricData() {
+		return biometricData;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

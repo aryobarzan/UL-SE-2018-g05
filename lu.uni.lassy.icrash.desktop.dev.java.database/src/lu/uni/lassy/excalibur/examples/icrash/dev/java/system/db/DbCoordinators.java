@@ -20,6 +20,7 @@ import java.sql.Statement;
 import java.util.Hashtable;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCoordinator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -106,8 +107,10 @@ public class DbCoordinators extends DbAbstract{
 					DtLogin aLogin = new DtLogin(new PtString(res.getString("login")));
 					//coordinator's pwd
 					DtPassword aPwd = new DtPassword(new PtString(res.getString("pwd")));
+					//coordinator's biometric data
+					DtBiometricData aBio = new DtBiometricData(new PtString(res.getString("bio")));
 
-					aCtCoordinator.init(aId, aLogin,aPwd);
+					aCtCoordinator.init(aId, aLogin,aPwd, aBio);
 					
 				}
 								
@@ -232,8 +235,9 @@ public class DbCoordinators extends DbAbstract{
 							res.getString("id")));
 					DtLogin aLogin = new DtLogin(new PtString(res.getString("login")));
 					DtPassword aPwd = new DtPassword(new PtString(res.getString("pwd")));
+					DtBiometricData aBio = new DtBiometricData(new PtString(res.getString("bio")));
 					//init aCtAlert instance
-					aCtCoord.init(aId, aLogin, aPwd);
+					aCtCoord.init(aId, aLogin, aPwd, aBio);
 					
 					//add instance to the hash
 					cmpSystemCtCoord

@@ -396,7 +396,7 @@ public interface IcrashSystem extends Remote {
 	/**
 	 * Processes a login for the biometric data specified.
 	 *
-	 * @param aDtBiometricData The biometric data to logon
+	 * @param aDtBiometricData The biometric data to logon with 
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */

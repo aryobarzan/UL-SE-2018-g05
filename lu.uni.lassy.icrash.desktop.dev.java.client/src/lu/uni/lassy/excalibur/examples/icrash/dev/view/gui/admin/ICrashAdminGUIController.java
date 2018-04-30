@@ -453,16 +453,17 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	private void showQuestionScreen(TypeOfEdit type){
 		for(int i = anchrpnQuestionDetails.getChildren().size() -1; i >= 0; i--)
 			anchrpnQuestionDetails.getChildren().remove(i);
+		
+		TextField txtfldQuestionName = new TextField();
+		TextField txtfldAnswer1 = new TextField();
+		TextField txtfldAnswer2 = new TextField();
+		TextField txtfldAnswer3 = new TextField();
+		TextField txtfldAnswer4 = new TextField();
+		
 		Button bttntypOK = null;
 		GridPane grdpn = new GridPane();
 		switch(type){
 		case Add:
-			TextField txtfldQuestionName = new TextField();
-			TextField txtfldAnswer1 = new TextField();
-			TextField txtfldAnswer2 = new TextField();
-			TextField txtfldAnswer3 = new TextField();
-			TextField txtfldAnswer4 = new TextField();
-
 			bttntypOK = new Button("Create");
 			txtfldQuestionName.setPromptText("Question name");
 			txtfldAnswer1.setPromptText("Answer 1 name");
@@ -497,12 +498,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 					try {
 						switch(type){
 						case Add: //replace biometricData here
-//							if (userController.oeAddCoordinator()){
-//								listOfOpenWindows.add(new CreateICrashCoordGUI(coordID, systemstateController.getActCoordinator(txtfldUserName.getText())));
-//								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
-//							}
-							//Do nothing for the moment
-							if (true)
+							if (userController.oeAddQuestion(txtfldQuestionName.getText(), 
+									txtfldAnswer1.getText(), 
+									txtfldAnswer2.getText(), 
+									txtfldAnswer3.getText(), 
+									txtfldAnswer4.getText()).getValue())
 								anchrpnQuestionDetails.getChildren().remove(grdpn);
 							else
 								showErrorMessage("Unable to add question", "An error occured when adding the question");

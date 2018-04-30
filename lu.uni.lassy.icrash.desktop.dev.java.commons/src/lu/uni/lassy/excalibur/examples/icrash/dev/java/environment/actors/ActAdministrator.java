@@ -16,6 +16,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
@@ -54,13 +55,24 @@ public interface ActAdministrator extends ActAuthenticated {
 	public PtBoolean oeDeleteCoordinator(DtCoordinatorID aDtCoordinatorID)
 			throws RemoteException, NotBoundException;
 	
-	/**
-	 * Add a question to the system, using the parameters passed.
-	 * 
-	 * @param aDtQuestionText
-	 * @return
-	 */
-	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException, NotBoundException;	
+/**
+ * 	 
+ * Add a question to the system, using the parameters passed.
+ *
+ * @param aDtQuestionText
+ * @param aDtAnswerText1
+ * @param aDtAnswerText2
+ * @param aDtAnswerText3
+ * @param aDtAnswerText4
+ * @return The success of the operation
+ * @throws RemoteException
+ * @throws NotBoundException
+ */
+	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
+													DtAnswerText aDtAnswerText1, 
+													DtAnswerText aDtAnswerText2,
+													DtAnswerText aDtAnswerText3, 
+													DtAnswerText aDtAnswerText4) throws RemoteException, NotBoundException;	
 
 	/**
 	 * Ask the system to get the statistic of a specific question of a specific Alert

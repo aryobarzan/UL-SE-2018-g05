@@ -16,6 +16,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
@@ -53,12 +54,20 @@ public interface ActProxyAdministrator extends ActProxyAuthenticated {
 	/**
 	 * Add a question to the system, using the parameters passed.
 	 * 
-	 * @param aDtQuestionTest The Text of the question to add
+	 * @param aDtQuestionText The Text of the question to add
+	 * @param aDtAnswerText1
+	 * @param aDtAnswerText2
+	 * @param aDtAnswerText3
+	 * @param aDtAnswerText4
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
 	 */
-	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException, NotBoundException;
+	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
+			DtAnswerText aDtAnswerText1, 
+			DtAnswerText aDtAnswerText2,
+			DtAnswerText aDtAnswerText3, 
+			DtAnswerText aDtAnswerText4) throws RemoteException, NotBoundException;
 	
 	/**
 	 * A message received from the server side actor saying the coordinator was created .

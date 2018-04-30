@@ -10,18 +10,9 @@ package usecases.uciugAddQuestion {
 			use case steps {
 				bill executed instanceof subfunction 
 						icrash.usecases.subfunctions.oeAddQuestion
-									("Are-you satisfied of the service?"){
-										ieGetQuestionID("1")  
-												returned to bill
-									}
-				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
-									("1", "Really not")
-				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
-									("1", "No")
-				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
-									("1", "Yes")
-				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
-									("1", "Really yes")
+									("Are-you satisfied of the service?", "really not",
+										"no", "yes", "really yes"
+									)
 				
 			}
 		}

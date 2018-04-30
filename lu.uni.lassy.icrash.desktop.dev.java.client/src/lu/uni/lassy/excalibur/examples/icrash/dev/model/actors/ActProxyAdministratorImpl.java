@@ -16,6 +16,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAdministrator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
@@ -67,9 +68,13 @@ public class ActProxyAdministratorImpl extends ActProxyAuthenticatedImpl impleme
 			return new PtBoolean(false);
 	}
 	
-	synchronized public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException, NotBoundException{
+	synchronized public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
+			DtAnswerText aDtAnswerText1, 
+			DtAnswerText aDtAnswerText2,
+			DtAnswerText aDtAnswerText3, 
+			DtAnswerText aDtAnswerText4) throws RemoteException, NotBoundException{
 		if(getServerSideActor() != null)
-			return ((ActAdministrator) getServerSideActor()).oeAddQuestion(aDtQuestionText);
+			return ((ActAdministrator) getServerSideActor()).oeAddQuestion(aDtQuestionText, aDtAnswerText1, aDtAnswerText2, aDtAnswerText3, aDtAnswerText4);
 		else
 			return new PtBoolean(false);
 	}

@@ -13,7 +13,7 @@ public class DtQuestionText extends DtString implements JIntIs{
 	}
 	
 	public PtBoolean is() {
-		if(this.value.getValue().length() <= 160)
+		if(this.value.getValue().length() <= 80)
 			return new PtBoolean(true);
 		return new PtBoolean(false);
 	}

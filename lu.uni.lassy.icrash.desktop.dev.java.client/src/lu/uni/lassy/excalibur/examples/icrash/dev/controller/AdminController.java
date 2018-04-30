@@ -22,6 +22,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOf
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIs;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
@@ -116,12 +117,21 @@ public class AdminController extends AbstractUserController {
 	 * @throws ServerNotBoundException is only thrown when attempting to access a server which has no current binding. This shouldn't happen, but you never know!
 	 * @throws IncorrectFormatException is thrown when a Dt/Et information type does not match the is() method specified in the specification
 	 */
-	public PtBoolean oeAddQuestion(String questionText) throws ServerOfflineException, ServerNotBoundException, IncorrectFormatException {
+	public PtBoolean oeAddQuestion(String questionText, 
+			String answerText1, 
+			String answerText2, 
+			String answerText3,
+			String answerText4) throws ServerOfflineException, ServerNotBoundException, IncorrectFormatException {
 		if(getUserType() == UserType.Admin) {
 			ActProxyAdministratorImpl actorAdmin = (ActProxyAdministratorImpl)getAuth();
 			try {
 				DtQuestionText aDtQuestionText = new DtQuestionText(new PtString(questionText));
-				return actorAdmin.oeAddQuestion(aDtQuestionText);
+				DtAnswerText aDtAnswerText1 = new DtAnswerText(new PtString(answerText1));
+				DtAnswerText aDtAnswerText2 = new DtAnswerText(new PtString(answerText2));
+				DtAnswerText aDtAnswerText3 = new DtAnswerText(new PtString(answerText3));
+				DtAnswerText aDtAnswerText4 = new DtAnswerText(new PtString(answerText4));
+				
+				return actorAdmin.oeAddQuestion(aDtQuestionText, aDtAnswerText1, aDtAnswerText2, aDtAnswerText3, aDtAnswerText4);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();

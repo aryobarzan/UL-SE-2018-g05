@@ -47,6 +47,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCr
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtHuman;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtState;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
@@ -74,6 +75,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.AdminActors;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.ICrashUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.MySqlUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.PropertyUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.RmiUtils;
 import org.apache.log4j.Logger;
@@ -1266,12 +1268,19 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeAddQuestion(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText)
 	 */
-	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException {
+	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
+									DtAnswerText aDtAnswerText1, 
+									DtAnswerText aDtAnswerText2,
+									DtAnswerText aDtAnswerText3, 
+									DtAnswerText aDtAnswerText4) throws RemoteException {
 		try {
 			//PreP1
 			isSystemStarted();
 			//PreP2
 			isAdminLoggedIn();
+			//
+			MySqlUtils sql = MySqlUtils.getInstance();
+			
 			return new PtBoolean(true);
 		} catch (Exception e) {
 			log.error("Exception in oeAddQuestion..." + e);

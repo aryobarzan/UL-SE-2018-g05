@@ -176,11 +176,12 @@ import icrash.environment
    		   		ieMessage(AMessage) returned to actAuthenticated
 	  		}
 		}
-	use case system subfunction oeAddQuestion(AdtQuestionText:dtQuestionText) {
+	use case system subfunction oeAddQuestion(AdtQuestionText:dtQuestionText,
+												AdtAnswerText1:dtAnswerText,
+												AdtAnswerText2:dtAnswerText,
+												AdtAnswerText3:dtAnswerText,
+												AdtAnswerText4:dtAnswerText) {
 			actor actAdministrator[primary, active]
-			returned messages {
-				ieGetQuestionID(AdtQuestionID) returned to actAdministrator
-			}
 		}
 	use case system subfunction oeAddAnswer(AdtQuestionID:dtQuestionID, AdtAnswerText:dtAnswerText) {
 			actor actAdministrator[primary, active]

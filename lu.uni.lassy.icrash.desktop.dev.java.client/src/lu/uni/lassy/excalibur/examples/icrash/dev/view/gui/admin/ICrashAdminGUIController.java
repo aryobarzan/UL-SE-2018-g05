@@ -87,6 +87,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     @FXML
     private AnchorPane anchrpnCoordinatorDetails;
 
+    /** The anchorpane that will have the add or delete question controls added/removed from it */
+    @FXML
+    private AnchorPane anchrpnQuestionDetails;
+
     /** The button that shows the controls for adding a coordinator */
     @FXML
     private Button bttnBottomAdminCoordinatorAddACoordinator;
@@ -94,6 +98,14 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     /** The button that shows the controls for deleting a coordinator */
     @FXML
     private Button bttnBottomAdminCoordinatorDeleteACoordinator;
+    
+    /** The button that shows the controls for adding a question */
+    @FXML
+    private Button bttnBottomAdminCoordinatorAddAQuestion;
+
+    /** The button that shows the controls for deleting a question */
+    @FXML
+    private Button bttnBottomAdminCoordinatorDeleteAQuestion;
 
     /** The tableview of the recieved messages from the system */
     @FXML
@@ -141,7 +153,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	
 	/** The Pane containing the coordinator administration interface */
 	@FXML
-	private Tab coordintorTab;
+	private Tab coordinatorTab;
 	
 	/** The pane containing the survey administration interface */
 	@FXML
@@ -165,6 +177,26 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
     @FXML
     void bttnBottomAdminCoordinatorDeleteACoordinator_OnClick(ActionEvent event) {
     	showCoordinatorScreen(TypeOfEdit.Delete);
+    }
+	
+    /**
+     * The button event that will show the controls for adding a question
+     *
+     * @param event The event type thrown, we do not need this, but it must be specified
+     */
+    @FXML
+    void bttnBottomAdminCoordinatorAddAQuestion_OnClick(ActionEvent event) {
+    	showQuestionScreen(TypeOfEdit.Add);
+    }
+
+    /**
+     * The button event that will show the controls for deleting a question
+     *
+     * @param event The event type thrown, we do not need this, but it must be specified
+     */
+    @FXML
+    void bttnBottomAdminCoordinatorDeleteAQuestion_OnClick(ActionEvent event) {
+    	showQuestionScreen(TypeOfEdit.Delete);
     }
 
     /**
@@ -411,6 +443,99 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		AnchorPane.setBottomAnchor(grdpn, 0.0);
 		AnchorPane.setRightAnchor(grdpn, 0.0);
 		txtfldUserID.requestFocus();
+	}
+
+	/**
+	 * Shows the modify survey/question screen.
+	 *
+	 * @param type The type of edit to be done, this could be add or delete
+	 */
+	private void showQuestionScreen(TypeOfEdit type){
+		for(int i = anchrpnQuestionDetails.getChildren().size() -1; i >= 0; i--)
+			anchrpnQuestionDetails.getChildren().remove(i);
+		Button bttntypOK = null;
+		GridPane grdpn = new GridPane();
+		switch(type){
+		case Add:
+			TextField txtfldQuestionName = new TextField();
+			TextField txtfldAnswer1 = new TextField();
+			TextField txtfldAnswer2 = new TextField();
+			TextField txtfldAnswer3 = new TextField();
+			TextField txtfldAnswer4 = new TextField();
+			TextField txtfldAnswer5 = new TextField();
+
+			bttntypOK = new Button("Create");
+			txtfldQuestionName.setPromptText("Question name");
+			txtfldAnswer1.setPromptText("Answer 1 name");
+			txtfldAnswer2.setPromptText("Answer 2 name");
+			txtfldAnswer3.setPromptText("Answer 3 name");
+			txtfldAnswer4.setPromptText("Answer 4 name");
+			txtfldAnswer5.setPromptText("Answer 5 name");
+			grdpn.add(txtfldQuestionName, 1, 2);
+			grdpn.add(txtfldAnswer1, 1, 3);
+			grdpn.add(txtfldAnswer2, 1, 4);
+			grdpn.add(txtfldAnswer3, 1, 5);
+			grdpn.add(txtfldAnswer4, 1, 6);
+			grdpn.add(txtfldAnswer5, 1, 7);
+
+			grdpn.add(bttntypOK, 1, 8);
+			txtfldQuestionName.requestFocus();
+			break;
+		case Delete:
+			TextField txtfldQuestionsID = new TextField();
+			txtfldQuestionsID.setPromptText("Question ID");
+			bttntypOK = new Button("Delete");
+			grdpn.add(txtfldQuestionsID, 1, 1);
+			grdpn.add(bttntypOK, 1, 2);
+			txtfldQuestionsID.requestFocus();
+			break;		
+		}
+		bttntypOK.setDefaultButton(true);
+		bttntypOK.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (!checkIfAllDialogHasBeenFilledIn(grdpn))
+					showWarningNoDataEntered();
+				else{
+					try {
+						switch(type){
+						case Add: //replace biometricData here
+//							if (userController.oeAddCoordinator()){
+//								listOfOpenWindows.add(new CreateICrashCoordGUI(coordID, systemstateController.getActCoordinator(txtfldUserName.getText())));
+//								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
+//							}
+							//Do nothing for the moment
+							if (true)
+								anchrpnQuestionDetails.getChildren().remove(grdpn);
+							else
+								showErrorMessage("Unable to add question", "An error occured when adding the question");
+							break;
+						case Delete:
+//							if (userController.oeDeleteCoordinator(txtfldUserID.getText()).getValue()){
+//								for(CreateICrashCoordGUI window : listOfOpenWindows){
+//									if (window.getDtCoordinatorID().value.getValue().equals(coordID.value.getValue()))
+//										window.closeWindow();
+//								}
+//								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
+//							}
+							//Do nothing for the moment
+							if(true)
+								anchrpnQuestionDetails.getChildren().remove(grdpn);
+							else
+								showErrorMessage("Unable to delete question", "An error occured when deleting the question");
+							break;
+						}
+					} catch (Exception e) {
+						showExceptionErrorMessage(e);
+					}					
+				}
+			}
+		});
+		anchrpnQuestionDetails.getChildren().add(grdpn);
+		AnchorPane.setTopAnchor(grdpn, 0.0);
+		AnchorPane.setLeftAnchor(grdpn, 0.0);
+		AnchorPane.setBottomAnchor(grdpn, 0.0);
+		AnchorPane.setRightAnchor(grdpn, 0.0);
 	}
 
 	/* (non-Javadoc)

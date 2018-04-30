@@ -85,7 +85,7 @@
                                  <content>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <HBox prefHeight="53.0" prefWidth="240.0">
+                                          <HBox prefHeight="141.0" prefWidth="232.0">
                                              <children>
                                                 <Button id="bttnBottomAdminCoordinatorAddACoordinator" fx:id="bttnBottomAdminCoordinatorAddACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorAddACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Add a coordinator" textAlignment="CENTER" wrapText="true">
                                                    <font>
@@ -99,12 +99,33 @@
                                                 </Button>					                    
                                              </children>
                                           </HBox>                                         
-      					                      <AnchorPane id="anchrpnCoordinatorDetails" fx:id="anchrpnCoordinatorDetails" prefHeight="200.0" prefWidth="200.0" />
+      					                      <AnchorPane id="anchrpnCoordinatorDetails" fx:id="anchrpnCoordinatorDetails" prefHeight="222.0" prefWidth="240.0" />
                                        </children>
                                     </VBox>
                                  </content>
                               </Tab>
-                            <Tab fx:id="surveyTab" text="Survey" />
+                            <Tab fx:id="surveyTab" text="Survey">
+                                 <content>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <HBox prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <Button id="bttnBottomAdminCoordinatorAddAQuestion" fx:id="bttnBottomAdminCoordinatorAddAQuestion" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorAddAQuestion_OnClick" prefHeight="50.0" prefWidth="100.0" text="Add a question" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button id="bttnBottomAdminCoordinatorDeleteAQuestion" fx:id="bttnBottomAdminCoordinatorDeleteAQuestion" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorDeleteAQuestion_OnClick" prefHeight="50.0" prefWidth="100.0" text="Delete a question" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                          <AnchorPane id="anchrpnQuestionDetails" fx:id="anchrpnQuestionDetails" prefHeight="200.0" prefWidth="200.0" />
+                                       </children>
+                                    </VBox>
+                                 </content></Tab>
                           </tabs>
                         </TabPane>
                      </left>

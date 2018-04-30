@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin.ICrashAdminGUIController">
@@ -77,31 +78,30 @@
                      </children>
                   </Pane>
                   <BorderPane id="brdpnAdmin" fx:id="brdpnAdmin" prefHeight="232.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <center>
-                        <AnchorPane id="anchrpnCoordinatorDetails" fx:id="anchrpnCoordinatorDetails" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin></AnchorPane>
-                     </center>
                      <left>
-                        <TabPane fx:id="adminTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                        <TabPane fx:id="adminTabPane" prefHeight="200.0" prefWidth="240.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                           <tabs>
                             <Tab fx:id="coordinatorTab" closable="false" text="Coordinator">
                                  <content>
-                                    <HBox prefHeight="53.0" prefWidth="240.0">
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Button id="bttnBottomAdminCoordinatorAddACoordinator" fx:id="bttnBottomAdminCoordinatorAddACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorAddACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Add a coordinator" textAlignment="CENTER" wrapText="true">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Button>
-                                          <Button id="bttnBottomAdminCoordinatorDeleteACoordinator" fx:id="bttnBottomAdminCoordinatorDeleteACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorDeleteACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Delete a coordinator" textAlignment="CENTER" wrapText="true">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Button>
+                                          <HBox prefHeight="53.0" prefWidth="240.0">
+                                             <children>
+                                                <Button id="bttnBottomAdminCoordinatorAddACoordinator" fx:id="bttnBottomAdminCoordinatorAddACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorAddACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Add a coordinator" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button id="bttnBottomAdminCoordinatorDeleteACoordinator" fx:id="bttnBottomAdminCoordinatorDeleteACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorDeleteACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Delete a coordinator" textAlignment="CENTER" wrapText="true">
+                                                   <font>
+                                                      <Font name="System Bold" size="12.0" />
+                                                   </font>
+                                                </Button>					                    
+                                             </children>
+                                          </HBox>                                         
+      					                      <AnchorPane id="anchrpnCoordinatorDetails" fx:id="anchrpnCoordinatorDetails" prefHeight="200.0" prefWidth="200.0" />
                                        </children>
-                                    </HBox>
+                                    </VBox>
                                  </content>
                               </Tab>
                             <Tab fx:id="surveyTab" text="Survey" />

@@ -141,7 +141,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	
 	/** The Pane containing the coordinator administration interface */
 	@FXML
-	private Tab coordintaorTab;
+	private Tab coordintorTab;
 	
 	/** The pane containing the survey administration interface */
 	@FXML

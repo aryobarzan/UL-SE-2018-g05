@@ -128,17 +128,17 @@ import lu.uni.lassy.messir.libraries.calendar
 			output interface outactAuthenticated{
 				operation oeLogin(AdtLogin:dtLogin , AdtPassword:dtPassword ):ptBoolean
 				operation oeLogout():ptBoolean
-				operation oeComputeKeySendAndGetRandomNumber(AdtRandomX:dtInteger):ptBoolean
-				operation oeSendNonceAndName(AdtNonceA:dtInteger, AdtName:ptString):ptBoolean
-				operation oeDecryptSystemMessageAndSendEncryptedNonceBAndName(AdtNonceB:dtInteger, AdtName:ptString, AdtKey:ptString):ptBoolean
+				operation oeSendRandomNumberAndComputeSymmetricKey(AdtRandomX:dtInteger):ptBoolean
+				operation oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin(AdtNonceA:dtNonce, AdtName:ptString):ptBoolean
+				operation oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin(AdtEncryptedMessage:dtEncryptedMessage):ptBoolean
 				operation oeLoginUsingBiometric(AdtBiometricData:dtBiometricData):ptBoolean
 			}
 			
 			input interface inactAuthenticated{
 				operation ieMessage(AMessage:ptString):ptBoolean
-				operation ieComputeKeyGetRandomNumber(AdtRandomY:dtInteger):ptBoolean
-				operation ieGenerateNewNonceAndSendEncryptedNonceAndSystemNameWithNewNonceInPlaintext(AdtNonceA:dtInteger, AdtSystemName:ptString, AdtKey:ptString, AdtNonceB:dtInteger):ptBoolean
-				operation ieGetAuthenticationCompleteMessage(AdtMessage:ptString):ptBoolean			
+				operation ieGetRandomNumber(AdtRandomY:dtInteger):ptBoolean
+				operation ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(AdtEncryptedMessage:dtEncryptedMessage, AdtNonceB:dtNonce):ptBoolean
+				operation ieGetConfirmationMessageForSymmetricLogin(AdtMessage:ptString):ptBoolean			
 	 		}
 		}
 

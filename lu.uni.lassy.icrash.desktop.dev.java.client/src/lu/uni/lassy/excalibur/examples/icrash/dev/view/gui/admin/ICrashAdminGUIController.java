@@ -43,6 +43,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -132,7 +134,19 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	/** The progress indicator that shows the progress of the biometric scan. */
 	@FXML
 	private ProgressIndicator progressIndicatorAdminBiometricScan;
-
+	
+	/** The TabPane holding the tab after the admin has log on */
+	@FXML
+	private TabPane adminTabPane;
+	
+	/** The Pane containing the coordinator administration interface */
+	@FXML
+	private Tab coordintaorTab;
+	
+	/** The pane containing the survey administration interface */
+	@FXML
+	private Tab surveyTab;
+	
     /**
      * The button event that will show the controls for adding a coordinator
      *

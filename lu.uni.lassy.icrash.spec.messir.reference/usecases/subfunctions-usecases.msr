@@ -152,22 +152,22 @@ import icrash.environment
   }
 //------------------------------------------------------
   
-  use case system subfunction oeComputeKeySendAndGetRandomNumber(AdtRandomX:dtInteger) {
+  use case system subfunction oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtInteger) {
 			actor actAuthenticated[primary, active]
 			returned messages{
-				ieComputeKeyGetRandomNumber(AdtRandomY) returned to actAuthenticated
+				ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY) returned to actAuthenticated
 			}
 		}
-	use case system subfunction oeSendNonceAndName(AdtNonceA:dtInteger, AdtName:ptString) {
+	use case system subfunction oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin(AdtNonceA:dtNonce, AdtLogin:dtLogin) {
 			actor actAuthenticated[primary, active]
 			returned messages{
-				ieGenerateNewNonceAndSendEncryptedNonceAndSystemNameWithNewNonceInPlaintext(AdtNonceA, AdtSystemName, AdtKey, AdtNonceB) returned to actAuthenticated
+				ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(AdtEncryptedMessage, AdtNonceB) returned to actAuthenticated
 			}
 		}
-	use case system subfunction oeDecryptSystemMessageAndSendEncryptedNonceBAndName(AdtNonceB:dtInteger, AdtName:ptString, AdtKey:ptString) {
+	use case system subfunction oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin(AdtEncryptedMessage:dtEncryptedMessage) {
 			actor actAuthenticated[primary, active]
 			returned messages{
-				ieGetAuthenticationCompleteMessage(AdtMessage) returned to actAuthenticated
+				ieGetConfirmationMessageForSymmetricLogin(AdtMessage) returned to actAuthenticated
 			}
 		}
 	use case system subfunction oeLoginUsingBiometric(AdtBiometricData:dtBiometricData) {

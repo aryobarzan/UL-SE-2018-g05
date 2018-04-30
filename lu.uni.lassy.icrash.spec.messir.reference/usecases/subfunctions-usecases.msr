@@ -152,22 +152,22 @@ import icrash.environment
   }
 //------------------------------------------------------
   
-  use case system subfunction oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtInteger) {
+  use case system subfunction oeComputeKeySendAndGetRandomNumber(AdtRandomX:dtInteger) {
 			actor actAuthenticated[primary, active]
 			returned messages{
-				ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY) returned to actAuthenticated
+				ieComputeKeyGetRandomNumber(AdtRandomY) returned to actAuthenticated
 			}
 		}
-	use case system subfunction oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin(AdtNonceA:dtNonce, AdtLogin:dtLogin) {
+	use case system subfunction oeSendNonceAndName(AdtNonceA:dtInteger, AdtName:ptString) {
 			actor actAuthenticated[primary, active]
 			returned messages{
-				ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(AdtEncryptedMessage, AdtNonceB) returned to actAuthenticated
+				ieGenerateNewNonceAndSendEncryptedNonceAndSystemNameWithNewNonceInPlaintext(AdtNonceA, AdtSystemName, AdtKey, AdtNonceB) returned to actAuthenticated
 			}
 		}
-	use case system subfunction oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin(AdtEncryptedMessage:dtEncryptedMessage) {
+	use case system subfunction oeDecryptSystemMessageAndSendEncryptedNonceBAndName(AdtNonceB:dtInteger, AdtName:ptString, AdtKey:ptString) {
 			actor actAuthenticated[primary, active]
 			returned messages{
-				ieGetConfirmationMessageForSymmetricLogin(AdtMessage) returned to actAuthenticated
+				ieGetAuthenticationCompleteMessage(AdtMessage) returned to actAuthenticated
 			}
 		}
 	use case system subfunction oeLoginUsingBiometric(AdtBiometricData:dtBiometricData) {
@@ -176,11 +176,12 @@ import icrash.environment
    		   		ieMessage(AMessage) returned to actAuthenticated
 	  		}
 		}
-	use case system subfunction oeAddQuestion(AdtQuestionText:dtQuestionText) {
+	use case system subfunction oeAddQuestion(AdtQuestionText:dtQuestionText,
+												AdtAnswerText1:dtAnswerText,
+												AdtAnswerText2:dtAnswerText,
+												AdtAnswerText3:dtAnswerText,
+												AdtAnswerText4:dtAnswerText) {
 			actor actAdministrator[primary, active]
-			returned messages {
-				ieGetQuestionID(AdtQuestionID) returned to actAdministrator
-			}
 		}
 	use case system subfunction oeAddAnswer(AdtQuestionID:dtQuestionID, AdtAnswerText:dtAnswerText) {
 			actor actAdministrator[primary, active]

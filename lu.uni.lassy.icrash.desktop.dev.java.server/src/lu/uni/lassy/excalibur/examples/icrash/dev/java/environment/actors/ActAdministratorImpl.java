@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
@@ -110,7 +111,11 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		
 	}
 	
-	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException, NotBoundException {
+	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
+									DtAnswerText aDtAnswerText1, 
+									DtAnswerText aDtAnswerText2,
+									DtAnswerText aDtAnswerText3, 
+									DtAnswerText aDtAnswerText4) throws RemoteException, NotBoundException {
 
 		Logger log = Log4JUtils.getInstance().getLogger();
 
@@ -124,7 +129,11 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 		
 		log.info("message ActAdministrator.oeAddQuestion sent to system");
-		PtBoolean res = iCrashSys_Server.oeAddQuestion(aDtQuestionText);
+		PtBoolean res = iCrashSys_Server.oeAddQuestion(aDtQuestionText, 
+														aDtAnswerText1, 
+														aDtAnswerText2,
+														aDtAnswerText3, 
+														aDtAnswerText4);
 		
 		if (res.getValue() == true)
 			log.info("operation oeAddQuestion successfully executed by the system");

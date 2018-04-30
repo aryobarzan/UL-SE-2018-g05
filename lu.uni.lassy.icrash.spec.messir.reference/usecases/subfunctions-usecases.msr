@@ -150,6 +150,8 @@ import icrash.environment
        ieSmsSend(AdtPhoneNumber,AdtSMS) returned to actComCompany
  	}
   }
+//------------------------------------------------------
+  
   use case system subfunction oeComputeKeySendAndGetRandomNumber(AdtRandomX:dtInteger) {
 			actor actAuthenticated[primary, active]
 			returned messages{
@@ -173,6 +175,15 @@ import icrash.environment
 			returned messages {
    		   	ieMessage(AMessage) returned to actAuthenticated
 	  		}
+		}
+	use case system subfunction oeAddQuestion(AdtQuestionText:dtQuestionText) {
+			actor actAdministrator[primary, active]
+			returned messages {
+				actAdministrator.inactAdministrator.ieGetQuestionID(AdtQuestionID) returned to actAdministrator
+			}
+		}
+	use case system subfunction oeAddAnswer(AdtQuestionID:dtQuestionID, AdtAnswerText:dtAnswerText) {
+			actor actAdministrator[primary, active]
 		}
 	}
 }

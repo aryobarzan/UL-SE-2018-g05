@@ -52,6 +52,7 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation ieCoordinatorAdded():ptBoolean
 				operation ieCoordinatorDeleted():ptBoolean
 				operation ieGetAnswer():ptBoolean
+				operation ieGetQuestionID(AdtQuestionId:dtQuestionID):ptBoolean
 	 		}
 		}
 		

@@ -30,5 +30,6 @@ package usecases.uciugSurvey {
 
 			}
 		}
+
 	}
 }

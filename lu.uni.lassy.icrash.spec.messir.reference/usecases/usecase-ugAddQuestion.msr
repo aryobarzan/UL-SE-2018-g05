@@ -1,0 +1,19 @@
+package icrash.usecases.ugAddQuestion {
+
+	import icrash.environment
+	import icrash.usecases.subfunctions
+
+	Use Case Model {
+		use case system usergoal ugAddQuestion() {
+			actor icrash.environment.actAdministrator[primary, active]
+			
+			step a: icrash.environment.actAdministrator executes oeAddQuestion
+			step b: icrash.environment.actAdministrator executes oeAddAnswer
+			
+			ordering constraint 
+				"step (a)  must always be first step"
+			ordering constraint 
+				"step (b) should be done 4 times (4 answer per question)"
+		}
+	}
+}

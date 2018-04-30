@@ -1,0 +1,29 @@
+package usecases.uciugAddQuestion {
+	import icrash.usecases.ugAddQuestion
+
+	Use Case Model {
+
+		use case instance uciugAddQuestion : ugAddQuestion{
+			actors {
+				bill:icrash.environment.actAdministrator
+			}
+			use case steps {
+				bill executed instanceof subfunction 
+						icrash.usecases.subfunctions.oeAddQuestion
+									(AdtQuestionText="Are-you satisfied of the service?"){
+										actAdministrator.inactAdministrator.ieGetQuestionID("1")  
+												returned to bill
+									}
+				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
+									("1", "Really not")
+				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
+									("1", "No")
+				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
+									("1", "Yes")
+				bill executed instanceof subfunction icrash.usecases.subfunctions.oeAddAnswer
+									("1", "Really yes")
+				
+			}
+		}
+	}
+}

@@ -462,7 +462,6 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			TextField txtfldAnswer2 = new TextField();
 			TextField txtfldAnswer3 = new TextField();
 			TextField txtfldAnswer4 = new TextField();
-			TextField txtfldAnswer5 = new TextField();
 
 			bttntypOK = new Button("Create");
 			txtfldQuestionName.setPromptText("Question name");
@@ -470,13 +469,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			txtfldAnswer2.setPromptText("Answer 2 name");
 			txtfldAnswer3.setPromptText("Answer 3 name");
 			txtfldAnswer4.setPromptText("Answer 4 name");
-			txtfldAnswer5.setPromptText("Answer 5 name");
 			grdpn.add(txtfldQuestionName, 1, 2);
 			grdpn.add(txtfldAnswer1, 1, 3);
 			grdpn.add(txtfldAnswer2, 1, 4);
 			grdpn.add(txtfldAnswer3, 1, 5);
 			grdpn.add(txtfldAnswer4, 1, 6);
-			grdpn.add(txtfldAnswer5, 1, 7);
 
 			grdpn.add(bttntypOK, 1, 8);
 			txtfldQuestionName.requestFocus();

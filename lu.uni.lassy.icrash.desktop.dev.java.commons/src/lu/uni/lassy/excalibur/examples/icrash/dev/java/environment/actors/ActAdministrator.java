@@ -21,6 +21,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 
 /**
@@ -53,6 +54,14 @@ public interface ActAdministrator extends ActAuthenticated {
 	public PtBoolean oeDeleteCoordinator(DtCoordinatorID aDtCoordinatorID)
 			throws RemoteException, NotBoundException;
 	
+	/**
+	 * Add a question to the system, using the parameters passed.
+	 * 
+	 * @param aDtQuestionText
+	 * @return
+	 */
+	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException, NotBoundException;	
+
 	/**
 	 * Ask the system to get the statistic of a specific question of a specific Alert
 	 * 
@@ -103,5 +112,6 @@ public interface ActAdministrator extends ActAuthenticated {
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
 	 */
-	public PtBoolean ieCoordinatorUpdated() throws RemoteException;	
+	public PtBoolean ieCoordinatorUpdated() throws RemoteException;
+
 }

@@ -1,0 +1,10 @@
+/*
+@author koala
+@date Mon Apr 30 18:13:18 CEST 2018
+*/
+
+
+@@view uci-uciugAddQuestion
+@instance Use-Case usecases.uciugAddQuestion.uciugAddQuestion 
+@description "Show how a Question is added to the system"
+@caption ""

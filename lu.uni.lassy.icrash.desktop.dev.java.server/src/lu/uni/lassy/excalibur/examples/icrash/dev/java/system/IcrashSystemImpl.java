@@ -57,6 +57,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
@@ -1258,6 +1259,22 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			return new PtBoolean(false);
 		} catch (Exception e) {
 			log.error("Exception in oeDeleteCoordinator..." + e);
+			return new PtBoolean(false);
+		}
+	}
+	
+	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeAddQuestion(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText)
+	 */
+	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText) throws RemoteException {
+		try {
+			//PreP1
+			isSystemStarted();
+			//PreP2
+			isAdminLoggedIn();
+			return new PtBoolean(true);
+		} catch (Exception e) {
+			log.error("Exception in oeAddQuestion..." + e);
 			return new PtBoolean(false);
 		}
 	}

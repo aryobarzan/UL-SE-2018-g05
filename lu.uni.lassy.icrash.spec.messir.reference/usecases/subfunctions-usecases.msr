@@ -173,13 +173,13 @@ import icrash.environment
 	use case system subfunction oeLoginUsingBiometric(AdtBiometricData:dtBiometricData) {
 			actor actAuthenticated[primary, active]
 			returned messages {
-   		   	ieMessage(AMessage) returned to actAuthenticated
+   		   		ieMessage(AMessage) returned to actAuthenticated
 	  		}
 		}
 	use case system subfunction oeAddQuestion(AdtQuestionText:dtQuestionText) {
 			actor actAdministrator[primary, active]
 			returned messages {
-				actAdministrator.inactAdministrator.ieGetQuestionID(AdtQuestionID) returned to actAdministrator
+				ieGetQuestionID(AdtQuestionID) returned to actAdministrator
 			}
 		}
 	use case system subfunction oeAddAnswer(AdtQuestionID:dtQuestionID, AdtAnswerText:dtAnswerText) {

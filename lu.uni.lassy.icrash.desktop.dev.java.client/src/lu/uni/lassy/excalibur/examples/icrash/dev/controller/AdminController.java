@@ -26,6 +26,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBi
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
@@ -97,6 +98,30 @@ public class AdminController extends AbstractUserController {
 				return new PtBoolean(false);
 			try {
 				return actorAdmin.oeDeleteCoordinator(aDtCoordinatorID);
+			} catch (RemoteException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerOfflineException();
+			} catch (NotBoundException e) {
+				Log4JUtils.getInstance().getLogger().error(e);
+				throw new ServerNotBoundException();
+			}
+		}
+		return new PtBoolean(false);
+	}
+	
+	/**
+	 * If an administrator is logged in, will send a AddQuestion request to the server.
+	 * @return Returns a PtBoolean if the Question was added, otherwise it will return false.
+	 * @throws ServerOfflineException is an error that is thrown when the server is offline or not reachable
+	 * @throws ServerNotBoundException is only thrown when attempting to access a server which has no current binding. This shouldn't happen, but you never know!
+	 * @throws IncorrectFormatException is thrown when a Dt/Et information type does not match the is() method specified in the specification
+	 */
+	public PtBoolean oeAddQuestion(String questionText) throws ServerOfflineException, ServerNotBoundException, IncorrectFormatException {
+		if(getUserType() == UserType.Admin) {
+			ActProxyAdministratorImpl actorAdmin = (ActProxyAdministratorImpl)getAuth();
+			try {
+				DtQuestionText aDtQuestionText = new DtQuestionText(new PtString(questionText));
+				return actorAdmin.oeAddQuestion(aDtQuestionText);
 			} catch (RemoteException e) {
 				Log4JUtils.getInstance().getLogger().error(e);
 				throw new ServerOfflineException();

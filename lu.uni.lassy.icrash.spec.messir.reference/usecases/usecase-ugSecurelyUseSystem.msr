@@ -20,26 +20,26 @@ Use Case Model {
 	 	"step (a) must always precede step (b)."
 	}
 	
-	use case system usergoal ugSecurelyUseSystemWithSymmetricKey() {
-		actor actAuthenticated[primary,active]
-		
-		reuse oeComputeKeySendAndGetRandomNumber[1..1]
-		reuse oeSendNonceAndName[1..1]
-		reuse oeDecryptSystemMessageAndSendEncryptedNonceBAndName[1..1]
-		
-		step a: actAuthenticated
-			 executes oeComputeKeySendAndGetRandomNumber
-	    step b: actAuthenticated
-	         executes oeSendNonceAndName
-	    step c: actAuthenticated
-	         executes oeDecryptSystemMessageAndSendEncryptedNonceBAndName
-	         
-	    ordering constraint
-	     "step (a) must always precede step (b)."
-	    ordering constraint
-	     "step (b) must always precede step (c)."
-		
-		}
+	  use case system usergoal ugSecurelyUseSystemWithSymmetricKey() {
+        		actor actAuthenticated[primary,active]
+        		
+        		reuse oeSendRandomNumberForSymmetricKeyExchange[1..1]
+        		reuse oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin[1..1]
+        		reuse oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin[1..1]
+        		
+        		step a: actAuthenticated
+        			 executes oeSendRandomNumberForSymmetricKeyExchange
+        	    step b: actAuthenticated
+        	         executes oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin
+        	    step c: actAuthenticated
+        	         executes oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin
+        	         
+        	    ordering constraint
+        	     "step (a) must always precede step (b)."
+        	    ordering constraint
+        	     "step (b) must always precede step (c)."
+        		
+        		}
 		
 	use case system usergoal ugSecurelyUseSystemWithBiometricData() {
 		actor actAuthenticated[primary,active]

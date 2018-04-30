@@ -128,15 +128,15 @@ import lu.uni.lassy.messir.libraries.calendar
 			output interface outactAuthenticated{
 				operation oeLogin(AdtLogin:dtLogin , AdtPassword:dtPassword ):ptBoolean
 				operation oeLogout():ptBoolean
-				operation oeSendRandomNumberAndComputeSymmetricKey(AdtRandomX:dtInteger):ptBoolean
-				operation oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin(AdtNonceA:dtNonce, AdtName:ptString):ptBoolean
+				operation oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtInteger):ptBoolean
+				operation oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin(AdtNonceA:dtNonce, AdtLogin:dtLogin):ptBoolean
 				operation oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin(AdtEncryptedMessage:dtEncryptedMessage):ptBoolean
 				operation oeLoginUsingBiometric(AdtBiometricData:dtBiometricData):ptBoolean
 			}
 			
 			input interface inactAuthenticated{
 				operation ieMessage(AMessage:ptString):ptBoolean
-				operation ieGetRandomNumber(AdtRandomY:dtInteger):ptBoolean
+				operation ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY:dtInteger):ptBoolean
 				operation ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(AdtEncryptedMessage:dtEncryptedMessage, AdtNonceB:dtNonce):ptBoolean
 				operation ieGetConfirmationMessageForSymmetricLogin(AdtMessage:ptString):ptBoolean			
 	 		}

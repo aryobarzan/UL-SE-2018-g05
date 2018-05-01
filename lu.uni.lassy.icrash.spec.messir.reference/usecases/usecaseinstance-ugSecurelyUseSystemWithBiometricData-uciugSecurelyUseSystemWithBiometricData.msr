@@ -1,0 +1,27 @@
+package usecases.uciugSecurelyUseSystemWithBiometricData {
+	import icrash.usecases.ugSecurelyUseSystem
+	import icrash.environment
+	import icrash.usecases.subfunctions
+
+	Use Case Model {
+
+		use case instance uciugSecurelyUseSystemWithBiometricData : ugSecurelyUseSystemWithBiometricData{
+			actors {
+				bill:actAuthenticated
+			}
+			use case steps {
+				
+				bill executed instanceof subfunction
+							oeLoginUsingBiometric("BIOMETRICDATA"){
+								ieMessage("Match!") returned to bill
+								ieMessage("You are logged! Welcome ...") returned to bill
+							}	
+				
+				bill executed instanceof subfunction 
+							oeLogout(){
+								ieMessage("You are logged out! Good Bye ...") returned to bill
+							}
+			}
+		}
+	}
+}

@@ -1,0 +1,10 @@
+/*
+@author HaoCheng
+@date Tue May 01 12:35:16 CEST 2018
+*/
+
+
+@@view uci-uciugSecurelyUseSystemWithBiometricData
+@instance Use-Case usecases.uciugSecurelyUseSystemWithBiometricData.uciugSecurelyUseSystemWithBiometricData 
+@description "Login using biometric data"
+@caption ""

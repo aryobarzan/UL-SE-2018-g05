@@ -45,6 +45,15 @@ public class CtState implements Serializable {
 	
 	/**  If the system has been started or not. */
 	public PtBoolean vpStarted;
+	
+	/**  The current login name of the authenticating actor attempting a symmetric login. */
+	public DtLogin currentLoginForSymmetricLogin;
+	
+	/**  The current symmetric key being used by an authenticating actor to log in. */
+	public DtSymmetricKey currentSymmetricKeyForAuthenticatingActor;
+	
+	/**  The current system nonce sent to an authenticating actor and to be re-sent to the icrash system in an encrypted message by the authenticating actor. */
+	public DtNonce currentNonceForAuthenticatingActor;
 			
 	/**
 	 * Initialises the system's state.
@@ -61,7 +70,7 @@ public class CtState implements Serializable {
 	public PtBoolean init(DtInteger aNextValueForAlertID, DtInteger aNextValueForCrisisID, 
 						DtDateAndTime aClock, DtSecond aCrisisReminderPeriod, 
 						DtSecond aMaxCrisisReminderPeriod, DtDateAndTime aVpLastReminder, 
-						PtBoolean aVpStarted){
+						PtBoolean aVpStarted, DtLogin aCurrentLoginForSymmetricLogin, DtSymmetricKey aCurrentSymmetricKeyForAuthenticatingActor, DtNonce aCurrentNonceForAuthenticatingActor){
 	
 	
 				nextValueForAlertID = aNextValueForAlertID;
@@ -71,6 +80,9 @@ public class CtState implements Serializable {
 				maxCrisisReminderPeriod = aMaxCrisisReminderPeriod;
 				vpLastReminder = aVpLastReminder;
 				vpStarted = aVpStarted;
+				currentLoginForSymmetricLogin = aCurrentLoginForSymmetricLogin;
+				currentSymmetricKeyForAuthenticatingActor = aCurrentSymmetricKeyForAuthenticatingActor;
+				currentNonceForAuthenticatingActor = aCurrentNonceForAuthenticatingActor;
 				
 				return new PtBoolean(true);
 	}

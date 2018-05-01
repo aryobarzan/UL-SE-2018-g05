@@ -63,6 +63,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtSymmetricKey;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisType;
@@ -549,9 +550,12 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			DtInteger aNextValueForCrisisID = new DtInteger(new PtInteger(
 					nextValueForCrisisID));
 			PtBoolean aVpStarted = new PtBoolean(true);
+			DtLogin aCurrentLoginForSymmetricLogin = new DtLogin(new PtString(""));
+			DtSymmetricKey aCurrentSymmetricKeyForAuthenticatingActor = new DtSymmetricKey(new PtString(""));
+			DtNonce aCurrentNonceForAuthenticatingActor = new DtNonce(new PtInteger(0));
 			ctState.init(aNextValueForAlertID, aNextValueForCrisisID, aClock,
 					aCrisisReminderPeriod, aMaxCrisisReminderPeriod, aClock,
-					aVpStarted);
+					aVpStarted, aCurrentLoginForSymmetricLogin, aCurrentSymmetricKeyForAuthenticatingActor, aCurrentNonceForAuthenticatingActor);
 			/* ENV
 			PostF 2 the actMsrCreator actor instance is initiated (remember that since the
 			oeCreateSystemAndEnvironment is a special event, its role is to make consistent the post
@@ -594,7 +598,9 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			DtLogin aLogin = new DtLogin(new PtString(adminName));
 			DtPassword aPwd = new DtPassword(new PtString("7WXC1359"));
 			DtBiometricData aBioData = new DtBiometricData(new PtString("BIOMETRICDATA"));
+			DtSymmetricKey aSymmetricKey = new DtSymmetricKey(new PtString("ABCD"));
 			ctAdmin.init(aLogin, aPwd, aBioData);
+			ctAdmin.symmetricKey = aSymmetricKey;
 			/*
 			PostF 7 the association between ctAdministrator and actAdministrator is made of 
 			one couple made of the jointly specified instances.
@@ -1431,7 +1437,6 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 				//PreP2
 				if(ctAuthenticatedInstance.vpIsLogged.getValue())
 					throw new Exception("User " + aDtLogin.value.getValue() + " is already logged in");
-				// also check if symmetric key is initialized for this actor
 					//PostP1
 					/**
 					 * Make sure that the user logging in is the current requesting user
@@ -1449,16 +1454,22 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 							aDtNonceB = new DtNonce(new PtInteger(random.nextInt()));
 						}
 						// encrypt received nonce A with system name
-						String symmetricKey = "ABC"; // change this to currentRequestingAuthenticatedActor.getSymmetricKey()
+						DtSymmetricKey symmetricKey = ctAuthenticatedInstance.symmetricKey;
+						ctState.currentSymmetricKeyForAuthenticatingActor = ctAuthenticatedInstance.symmetricKey;
+						ctState.currentLoginForSymmetricLogin = ctAuthenticatedInstance.login;
+						ctState.currentNonceForAuthenticatingActor = aDtNonceB;
+						
+						
 						String systemName = "icrash";
 						String textToEncrypt = systemName.toUpperCase() + aDtNonce.value.getValue();
+						String symmetricKeyString = symmetricKey.value.getValue();
 						String encryptedText = "";
 						for(int i = 0, j = 0; i < textToEncrypt.length(); i++) {
 							char character = textToEncrypt.charAt(i);
 							if(!(character < 'A' || character > 'Z')) {
-								char newCharacter = (char) (((character + symmetricKey.charAt(j)) % 26) + 'A');
+								char newCharacter = (char) (((character + symmetricKeyString.charAt(j)) % 26) + 'A');
 								j++;
-								j = j % symmetricKey.length();
+								j = j % symmetricKeyString.length();
 								encryptedText += newCharacter;
 							}
 							else {

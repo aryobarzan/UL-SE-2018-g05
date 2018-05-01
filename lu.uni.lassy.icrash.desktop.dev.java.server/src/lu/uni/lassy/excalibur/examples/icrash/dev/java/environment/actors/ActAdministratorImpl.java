@@ -16,6 +16,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.sql.SQLException;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
@@ -129,11 +130,17 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
 		
 		log.info("message ActAdministrator.oeAddQuestion sent to system");
-		PtBoolean res = iCrashSys_Server.oeAddQuestion(aDtQuestionText, 
-														aDtAnswerText1, 
-														aDtAnswerText2,
-														aDtAnswerText3, 
-														aDtAnswerText4);
+		PtBoolean res;
+		try {
+			res = iCrashSys_Server.oeAddQuestion(aDtQuestionText, 
+															aDtAnswerText1, 
+															aDtAnswerText2,
+															aDtAnswerText3, 
+															aDtAnswerText4);
+		} catch (SQLException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			res = new PtBoolean(false);
+		}
 		
 		if (res.getValue() == true)
 			log.info("operation oeAddQuestion successfully executed by the system");

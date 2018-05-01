@@ -16,6 +16,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -1057,6 +1061,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeCloseCrisis(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCrisisID)
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	public  synchronized PtBoolean oeCloseCrisis(DtCrisisID aDtCrisisID) {
 		try{
 			//PreP1
@@ -1272,14 +1277,28 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 									DtAnswerText aDtAnswerText1, 
 									DtAnswerText aDtAnswerText2,
 									DtAnswerText aDtAnswerText3, 
-									DtAnswerText aDtAnswerText4) throws RemoteException {
+									DtAnswerText aDtAnswerText4) throws RemoteException, SQLException {
 		try {
 			//PreP1
 			isSystemStarted();
 			//PreP2
 			isAdminLoggedIn();
-			//
+			//Adding the question to the database
 			MySqlUtils sql = MySqlUtils.getInstance();
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
+			log.debug("Connected to the database");
+
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO question(question, answer1, answer2, answer3, answer4) VALUES(?, ?, ? ,?, ?)");
+			ps.setString(1, aDtQuestionText.value.getValue());
+			ps.setString(2, aDtAnswerText1.value.getValue());
+			ps.setString(3, aDtAnswerText2.value.getValue());
+			ps.setString(4, aDtAnswerText3.value.getValue());
+			ps.setString(5, aDtAnswerText4.value.getValue());
+			ps.executeUpdate();
+			
+			//PostF
 			
 			return new PtBoolean(true);
 		} catch (Exception e) {

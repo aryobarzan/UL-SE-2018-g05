@@ -12,9 +12,9 @@
  ******************************************************************************/
 package lu.uni.lassy.excalibur.examples.icrash.dev.java.system;
 
-import java.rmi.NotBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -410,11 +410,12 @@ public interface IcrashSystem extends Remote {
 	 * @param aDtQuestionText
 	 * @return The success of the method
 	 * @throws RemoteException Thrown if the server is offline
+	 * @throws SQLException 
 	 */
 	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
 									DtAnswerText aDtAnswerText1, 
 									DtAnswerText aDtAnswerText2,
 									DtAnswerText aDtAnswerText3, 
-									DtAnswerText aDtAnswerText4) throws RemoteException;
+									DtAnswerText aDtAnswerText4) throws RemoteException, SQLException;
 
 }

@@ -19,6 +19,8 @@ import lu.uni.lassy.messir.libraries.calendar
 				attribute maxCrisisReminderPeriod:dtSecond
 				attribute vpLastReminder:dtDateAndTime
 				attribute vpStarted:ptBoolean
+				attribute currentSymmetricKeyForAuthenticatingActor:dtSymmetricKey
+				attribute currentNonceForAuthenticatingActor:dtNonce
 				
 				operation init(	AnextValueForAlertID:dtInteger,
 												AnextValueForCrisisID:dtInteger,

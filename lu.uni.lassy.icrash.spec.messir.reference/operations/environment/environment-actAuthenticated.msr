@@ -136,8 +136,6 @@ postF{
   let TheSystem: ctState in
   let TheactAuthenticated:actAuthenticated in
 
-  let AptStringMessageForTheactAuthenticated: ptString in
-  let AptStringMessageForTheactAdministrator:ptString in
   let RandomY:dtNonce in
   
   self.rnActor.rnSystem = TheSystem
@@ -171,6 +169,8 @@ preP{
   and TheSystem.vpStarted = true
 /* PreP02 */
   and TheActor.rnctAuthenticated.vpIsLogged = false
+  /* PreP03 */
+  and TheActor.rnctAuthenticated.symmetricKey <> ""
 }
 preF{
 /* PreF01 */
@@ -182,23 +182,39 @@ postF{
 
   let AptStringMessageForTheactAuthenticated: ptString in
   let AptStringMessageForTheactAdministrator:ptString in
-  let RandomY:dtNonce in
+  let SystemsNonceB:dtNonce in
+  let EncryptedNonceAAndSystemName:dtEncryptedMessage in
   
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
   
   and /* PostF01 */
-      RandomY.eq(RandomNumberDifferentFromRandomX)
-            and TheactAuthenticated.rnInterfaceIN^ieGetRandomNumberForSymmetricKeyExchange(RandomY)
+     if (TheactAuthenticated.rnctAuthenticated.login
+              = AdtLogin
+         )
+      then (EncryptedNonceAAndSystemName.eq('icrash' + AdtNonceA)
+            and TheactAuthenticated.rnInterfaceIN^ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(EncryptedNonceAAndSystemName, SystemsNonceB)
+           )
+      else (AptStringMessageForTheactAuthenticated
+            .eq('Wrong identification information ! Please try again ...')
+            and TheactAuthenticated.rnInterfaceIN^ieMessage(AptStringMessageForTheactAuthenticated)
+            and AptStringMessageForTheactAdministrator.eq('Intrusion tentative !')
+            and TheSystem.rnactAdministrator
+                .rnInterfaceIN^ieMessage(AptStringMessageForTheactAdministrator)
+           )
+      endif
 }
 postP{
   let TheSystem: ctState in
   let TheactAuthenticated:actAuthenticated in
+  
+  let SystemsNonceB:dtNonce in
 
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
 /* PostP01 */
-  TheactAuthenticated.rnctAuthenticated@post.symmetricKey <> "" //the symmetric key is no longer empty and is initialized
+  TheSystem.currentSymmetricKeyForAuthenticatingActor = TheactAuthenticated.rnctAuthenticated.symmetricKey
+  TheSystem.currentNonceForAuthenticatingActor = SystemsNonceB
 }
 prolog{"src/Operations/Environment/OUT/outactAuthenticated-oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin.pl"}
 }
@@ -224,16 +240,14 @@ postF{
   let TheSystem: ctState in
   let TheactAuthenticated:actAuthenticated in
 
-  let AptStringMessageForTheactAuthenticated: ptString in
-  let AptStringMessageForTheactAdministrator:ptString in
-  let RandomY:dtNonce in
+  let AptConfirmationMessageForSymmetricLogin:ptString in
   
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
   
   and /* PostF01 */
-      RandomY.eq(RandomNumberDifferentFromRandomX)
-            and TheactAuthenticated.rnInterfaceIN^ieGetRandomNumberForSymmetricKeyExchange(RandomY)
+      AptConfirmationMessageForSymmetricLogin.eq('Symmetric login successful! You are logged in.')
+            and TheactAuthenticated.rnInterfaceIN^ieMessage(AptConfirmationMessageForSymmetricLogin)
 }
 postP{
   let TheSystem: ctState in
@@ -242,7 +256,7 @@ postP{
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
 /* PostP01 */
-  TheactAuthenticated.rnctAuthenticated@post.symmetricKey <> "" //the symmetric key is no longer empty and is initialized
+  TheactAuthenticated.rnctAuthenticated@post.vpIsLogged = true
 }
 prolog{"src/Operations/Environment/OUT/outactAuthenticated-oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin.pl"}
 }

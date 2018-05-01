@@ -138,13 +138,14 @@ postF{
 
   let AptStringMessageForTheactAuthenticated: ptString in
   let AptStringMessageForTheactAdministrator:ptString in
+  let RandomY:dtNonce in
   
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
   
   and /* PostF01 */
-      AptStringMessageForTheactAuthenticated.eq('Symmetric key initialized!')
-            and TheactAuthenticated.rnInterfaceIN^ieMessage(AptStringMessageForTheactAuthenticated)
+      RandomY.eq(RandomNumberDifferentFromRandomX)
+            and TheactAuthenticated.rnInterfaceIN^ieGetRandomNumberForSymmetricKeyExchange(RandomY)
 }
 postP{
   let TheSystem: ctState in

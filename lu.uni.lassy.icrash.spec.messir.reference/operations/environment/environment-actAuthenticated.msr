@@ -152,7 +152,7 @@ postP{
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
 /* PostP01 */
-  TheactAuthenticated.rnctAuthenticated@post.symmetricKey <> "" //the symmetric key is no longer empty and is initialized
+  TheactAuthenticated.rnctAuthenticated@post.symmetricKey <> null //the symmetric key is no longer empty and is initialized
 }
 prolog{"src/Operations/Environment/OUT/outactAuthenticated-oeSendRandomNumberForSymmetricKeyExchange.pl"}
 }
@@ -170,7 +170,7 @@ preP{
 /* PreP02 */
   and TheActor.rnctAuthenticated.vpIsLogged = false
   /* PreP03 */
-  and TheActor.rnctAuthenticated.symmetricKey <> ""
+  and TheActor.rnctAuthenticated.symmetricKey <> null
 }
 preF{
 /* PreF01 */
@@ -213,8 +213,11 @@ postP{
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
 /* PostP01 */
-  TheSystem.currentSymmetricKeyForAuthenticatingActor = TheactAuthenticated.rnctAuthenticated.symmetricKey
-  TheSystem.currentNonceForAuthenticatingActor = SystemsNonceB
+TheSystem.currentLoginForSymmetricLogin = AdtLogin
+/* PostP02 */
+TheSystem.currentSymmetricKeyForAuthenticatingActor = TheactAuthenticated.rnctAuthenticated.symmetricKey
+/* PostP03 */
+TheSystem.currentNonceForAuthenticatingActor = SystemsNonceB
 }
 prolog{"src/Operations/Environment/OUT/outactAuthenticated-oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin.pl"}
 }
@@ -231,6 +234,11 @@ preP{
   and TheSystem.vpStarted = true
 /* PreP02 */
   and TheActor.rnctAuthenticated.vpIsLogged = false
+/* PreP03 */
+  and TheSystem.currentSymmetricKeyForAuthenticatingActor <> null
+/* PreP04 */
+  and TheSystem.currentNonceForAuthenticatingActor <> null
+  
 }
 preF{
 /* PreF01 */
@@ -241,13 +249,20 @@ postF{
   let TheactAuthenticated:actAuthenticated in
 
   let AptConfirmationMessageForSymmetricLogin:ptString in
+  let AdtLogin:dtLogin in // extracted from the encrypted emssage
+  let SystemsNonceB:dtNonce in // extracted from the encrypted message
   
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
   
   and /* PostF01 */
-      AptConfirmationMessageForSymmetricLogin.eq('Symmetric login successful! You are logged in.')
-            and TheactAuthenticated.rnInterfaceIN^ieMessage(AptConfirmationMessageForSymmetricLogin)
+  	  if (AdtLogin = TheSystem.currentLoginForSymmetricLogin
+         and SystemsNonceB = TheSystem.currentNonceForAuthenticatingActor)
+      then (AptConfirmationMessageForSymmetricLogin.eq('Symmetric login successful! You are logged in.')
+            and TheactAuthenticated.rnInterfaceIN^ieMessage(AptConfirmationMessageForSymmetricLogin))
+      else(AptConfirmationMessageForSymmetricLogin.eq('Wrong credentials (login name / nonce) for symmetric login!')
+            and TheactAuthenticated.rnInterfaceIN^ieMessage(AptConfirmationMessageForSymmetricLogin))
+       endif
 }
 postP{
   let TheSystem: ctState in

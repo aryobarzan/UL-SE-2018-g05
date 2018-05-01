@@ -1299,7 +1299,8 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			ps.executeUpdate();
 			
 			//PostF
-			
+			ActAdministrator admin = (ActAdministrator) currentRequestingAuthenticatedActor;
+			admin.ieMessage(new PtString("New Question added"));
 			return new PtBoolean(true);
 		} catch (Exception e) {
 			log.error("Exception in oeAddQuestion..." + e);

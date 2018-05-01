@@ -167,7 +167,7 @@ import icrash.environment
     use case system subfunction oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin(AdtEncryptedMessage:dtEncryptedMessage) {
      			actor actAuthenticated[primary, active]
      			returned messages{
-     				ieGetConfirmationMessageForSymmetricLogin(AdtMessage) returned to actAuthenticated
+     				ieMessage(AdtConfirmationMessageForSymmetricLogin) returned to actAuthenticated
      			}
      		}
 	use case system subfunction oeLoginUsingBiometric(AdtBiometricData:dtBiometricData) {

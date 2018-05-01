@@ -138,7 +138,6 @@ import lu.uni.lassy.messir.libraries.calendar
 				operation ieMessage(AMessage:ptString):ptBoolean
 				operation ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY:dtInteger):ptBoolean
 				operation ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(AdtEncryptedMessage:dtEncryptedMessage, AdtNonceB:dtNonce):ptBoolean
-				operation ieGetConfirmationMessageForSymmetricLogin(AdtMessage:ptString):ptBoolean			
 	 		}
 		}
 

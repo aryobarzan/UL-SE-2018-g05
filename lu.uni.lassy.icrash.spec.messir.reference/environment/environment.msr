@@ -128,7 +128,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			output interface outactAuthenticated{
 				operation oeLogin(AdtLogin:dtLogin , AdtPassword:dtPassword ):ptBoolean
 				operation oeLogout():ptBoolean
-				operation oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtInteger):ptBoolean
+				operation oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtNonce):ptBoolean
 				operation oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin(AdtNonceA:dtNonce, AdtLogin:dtLogin):ptBoolean
 				operation oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin(AdtEncryptedMessage:dtEncryptedMessage):ptBoolean
 				operation oeLoginUsingBiometric(AdtBiometricData:dtBiometricData):ptBoolean
@@ -136,7 +136,7 @@ import lu.uni.lassy.messir.libraries.calendar
 			
 			input interface inactAuthenticated{
 				operation ieMessage(AMessage:ptString):ptBoolean
-				operation ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY:dtInteger):ptBoolean
+				operation ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY:dtNonce):ptBoolean
 				operation ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(AdtEncryptedMessage:dtEncryptedMessage, AdtNonceB:dtNonce):ptBoolean
 	 		}
 		}

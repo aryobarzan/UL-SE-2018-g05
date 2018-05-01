@@ -152,7 +152,7 @@ import icrash.environment
   }
 //------------------------------------------------------
   
-  	use case system subfunction oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtInteger) {
+  	use case system subfunction oeSendRandomNumberForSymmetricKeyExchange(AdtRandomX:dtNonce) {
      			actor actAuthenticated[primary, active]
      			returned messages{
      				ieGetRandomNumberForSymmetricKeyExchange(AdtRandomY) returned to actAuthenticated

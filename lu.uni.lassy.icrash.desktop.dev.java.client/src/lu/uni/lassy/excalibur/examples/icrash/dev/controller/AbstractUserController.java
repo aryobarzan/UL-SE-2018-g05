@@ -19,6 +19,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOf
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAuthenticated.UserType;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtEncryptedMessage;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
@@ -171,7 +172,15 @@ public abstract class AbstractUserController implements HasListeners {
 		}
 	}
 	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(String encryptedLoginAndNonce)throws ServerOfflineException, ServerNotBoundException{
-		// to be implemented
-		return null;
+		DtEncryptedMessage aDtEncryptedLoginAndNonce = new DtEncryptedMessage(new PtString(encryptedLoginAndNonce));
+		try {
+			return this.getAuth().oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(aDtEncryptedLoginAndNonce);
+		} catch (RemoteException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerOfflineException();
+		} catch (NotBoundException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerNotBoundException();
+		}
 	}
 }

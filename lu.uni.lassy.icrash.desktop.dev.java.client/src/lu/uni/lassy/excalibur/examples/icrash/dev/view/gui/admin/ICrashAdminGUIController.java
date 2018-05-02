@@ -304,7 +304,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	}
 
 	/**
-	 * The button event that reveal submit user input for symmetric login
+	 * The button event that submit user input (login and chosen nonce) for symmetric login
 	 *
 	 * @param event The event type thrown, we do not need this, but it must be specified
 	 */
@@ -312,6 +312,18 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	void bttnBottomLoginPaneSymmetricLogin_OnClick(ActionEvent event) {
 		// Handle symmetric submit button here
 		sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin();
+
+	}
+	
+	/**
+	 * The button event that submit user input (encrypted login and system nonce) for symmetric login
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnBottomLoginPaneSymmetricLogin2_OnClick(ActionEvent event) {
+		// Handle symmetric submit button here
+		sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin();
 
 	}
 	
@@ -658,6 +670,20 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	} 
 	@Override
 	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
-		// to be implemented
+		if(txtfldAdminSymmetricField3.getText().length() > 0){
+			try {
+				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldAdminSymmetricField3.getText()).getValue() == true)
+					txtfldAdminSymmetricField3.setVisible(false);
+				    bttnAdminSymmetricLogin2.setVisible(false);
+					
+				    logonShowPanes(true);
+					System.out.println("Second step of symmetric login successful");
+			}
+			catch (ServerOfflineException | ServerNotBoundException e) {
+				showExceptionErrorMessage(e);
+			}	
+    	}
+    	else
+    		showWarningNoDataEntered();
 	}
 }

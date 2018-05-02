@@ -1456,7 +1456,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 						// encrypt received nonce A with system name
 						DtSymmetricKey symmetricKey = ctAuthenticatedInstance.symmetricKey;
 						ctState.currentSymmetricKeyForAuthenticatingActor = ctAuthenticatedInstance.symmetricKey;
-						ctState.currentLoginForSymmetricLogin = ctAuthenticatedInstance.login;
+						ctState.currentLoginForSymmetricLogin = aDtLogin;
 						ctState.currentNonceForAuthenticatingActor = aDtNonceB;
 						
 						
@@ -1500,9 +1500,70 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 		}
 		return new PtBoolean(false);
 	}
-	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage aDtencryptedLoginAndNonce)throws RemoteException{
-		return null;
-		// to be implemented
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(DtEncryptedMessage aDtEncryptedLoginAndNonce)throws RemoteException{
+		try {
+			log.debug("The current requesting authenticating actor is " + currentRequestingAuthenticatedActor.getLogin().value.getValue());
+			//PreP1
+			isSystemStarted();
+			/**
+			 * check whether the credentials corresponds to an existing user
+			 *this is done by checking if there exists an instance with
+			 *such credential in the ctAuthenticatedInstances data structure
+			 */
+			CtAuthenticated ctAuthenticatedInstance = cmpSystemCtAuthenticated
+					.get(ctState.currentLoginForSymmetricLogin.value.getValue());
+			if (ctAuthenticatedInstance != null){
+				//PreP2
+				if(ctAuthenticatedInstance.vpIsLogged.getValue())
+					throw new Exception("User " + ctState.currentLoginForSymmetricLogin.value.getValue() + " is already logged in");
+					//PostP1
+					/**
+					 * Make sure that the user logging in is the current requesting user
+					 * We do this as each window is a dumb terminal and only one use can logon at each individual window
+					 * So user 1 can only logon at the window for user 1, if user 2 tries, it should fail
+					 */
+					ActAuthenticated authActorCheck = assCtAuthenticatedActAuthenticated.get(ctAuthenticatedInstance);
+					log.debug("The logging in actor is " + authActorCheck.getLogin().value.getValue());
+					String textToDecrypt = aDtEncryptedLoginAndNonce.value.getValue().toUpperCase();
+					String keyToUseForDecryption = ctState.currentSymmetricKeyForAuthenticatingActor.value.getValue();
+					String decryptedText = "";
+					for(int i = 0, j = 0; i < textToDecrypt.length(); i++) {
+						char character = textToDecrypt.charAt(i);
+						if(!(character < 'A' || character > 'Z')) {
+							char newCharacter = (char) (((character - keyToUseForDecryption.charAt(j)) % 26) + 'A');
+							j++;
+							j = j % keyToUseForDecryption.length();
+							decryptedText += newCharacter;
+						}
+						else {
+							decryptedText += character;
+						}
+					}
+					if(decryptedText.equals(ctState.currentLoginForSymmetricLogin.value.getValue()+ctState.currentNonceForAuthenticatingActor.value.getValue())) {
+						//PostF1
+						PtString aMessage = new PtString("Symmetric Login successful! You are logged in.");
+						currentRequestingAuthenticatedActor.ieMessage(aMessage);
+						ctAuthenticatedInstance.vpIsLogged = new PtBoolean(true);
+						return new PtBoolean(true);
+					}
+			}
+			//PostF1
+			PtString aMessage = new PtString(
+					"Wrong identification information! Please try again ...");
+			currentRequestingAuthenticatedActor.ieMessage(aMessage);
+			Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(), RmiUtils.getInstance().getPort());
+			IcrashEnvironment env = (IcrashEnvironment) registry
+					.lookup("iCrashEnvironment");
+			//notify to all administrators that exist in the environment
+			for (String adminKey : env.getAdministrators().keySet()) {
+				ActAdministrator admin = env.getActAdministrator(adminKey);
+				aMessage = new PtString("Intrusion tentative !");
+				admin.ieMessage(aMessage);
+			}
+		} catch (Exception ex) {
+			log.error("Exception in oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin..." + ex);
+		}
+		return new PtBoolean(false);
 	}
 
 	@Override

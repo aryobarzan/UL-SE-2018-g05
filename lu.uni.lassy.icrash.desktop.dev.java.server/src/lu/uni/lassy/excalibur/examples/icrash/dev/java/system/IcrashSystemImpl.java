@@ -1539,7 +1539,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 							decryptedText += character;
 						}
 					}
-					if(decryptedText.equals(ctState.currentLoginForSymmetricLogin.value.getValue()+ctState.currentNonceForAuthenticatingActor.value.getValue())) {
+					if(decryptedText.equalsIgnoreCase(ctState.currentLoginForSymmetricLogin.value.getValue()+ctState.currentNonceForAuthenticatingActor.value.getValue())) {
 						//PostF1
 						PtString aMessage = new PtString("Symmetric Login successful! You are logged in.");
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);

@@ -112,9 +112,6 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 	/**  A hashtable of all authenticated users in the system, stored by their login as a key. */
 	Hashtable<String, CtAuthenticated> cmpSystemCtAuthenticated = new Hashtable<String, CtAuthenticated>();
 	
-	/**  A List of all authenticated users in the system */
-	List<CtAuthenticated> cmpSystemCtAuthenticatedList = new ArrayList<CtAuthenticated>();
-	
 	/**  A hashtable of the alerts in the system, stored by their ID as a key. */
 	Hashtable<String, CtAlert> cmpSystemCtAlert = new Hashtable<String, CtAlert>();
 	
@@ -1576,10 +1573,10 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			/**
 			 * check whether the credentials corresponds to an existing user
 			 * this is done by checking if there exists an instance with
-			 * such credential in the ctAuthenticatedInstances list
+			 * such credential in the ctAuthenticatedInstances
 			 */
-			for(CtAuthenticated ctAuthenticated : cmpSystemCtAuthenticatedList) {
-				if (ctAuthenticated.getBiometricData().equals(aDtBiometricDate)){
+			for(CtAuthenticated ctAuthenticated : cmpSystemCtAuthenticated.values()) {
+				if (ctAuthenticated.getBiometricData().eq(aDtBiometricDate).getValue()){
 					ctAuthenticatedInstance = cmpSystemCtAuthenticated
 							.get(ctAuthenticated.login.value.getValue());
 					break;

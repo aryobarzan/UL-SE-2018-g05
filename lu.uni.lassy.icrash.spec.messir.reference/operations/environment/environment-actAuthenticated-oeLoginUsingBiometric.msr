@@ -1,0 +1,74 @@
+package icrash.environment.operations.actAuthenticated.outactAuthenticated.oeLoginUsingBiometric {
+
+import lu.uni.lassy.messir.libraries.primitives
+
+import icrash.concepts.primarytypes.datatypes
+import icrash.concepts.primarytypes.classes
+import icrash.concepts.secondarytypes.datatypes
+import icrash.concepts.secondarytypes.classes
+import icrash.environment
+
+	Operation Model {
+
+		operation: icrash.environment.actAuthenticated.outactAuthenticated.oeLoginUsingBiometric(AdtBiometricData:dtBiometricData):ptBoolean{
+			preP{
+				let TheSystem: ctState in
+				let TheActor:actAuthenticated in
+				self.rnActor.enSystem = TheSystem
+				and self.rnActor = theActor
+				
+				/* PreP01 */
+				and TheSystem.vpStarted = true
+				/* PreP02 */
+				and TheActor.rnctAuthenticated.vpIsLogged = false
+			}
+			
+			preF{
+				/* PreF01 */
+				true
+			}
+			
+			postF{
+				let TheSystem: ctState in
+				let TheactAuthenticated:actAuthenticated in
+				
+				let AptStringMessageForTheactAuthenticated:ptString in
+				let AptStringMessageForTheactAdministrator:ptString in
+				
+				self.rnActor.rnSystem = TheSystem
+				and self.rnActor = TheactAuthenticated
+				
+				and /* PostF01 */
+					if(TheactAuthenticated.rnctAuthenticated.biometricData
+						= AdtBiometricData
+					)
+					then(AptStringMessageForTheactAuthenticated
+						.eq('You are logged ! Welcome'+ rnctAuthenticated.login +'.')
+						and TheactAuthenticated.rnInterfaceIN^ieMessage(AptStringMessageForTheactAuthenticated)
+						)
+					else(AptStringMessageForTheactAuthenticated
+						.eq('No match! Please try again ...')
+						and TheactAuthenticated.rnInterfaceIN^ieMessage(aptStringMessageForTheactAuthenticated)
+						and AptStringMessageFortheactAdministrator.eq('Intrusion tentative ! ')
+						and TheSystem.rnactAdministrator.rnInterfaceIn^ieMessage(AprStringMessageForTheactAdministrator)
+						)
+					endif
+			}
+			
+			postP{
+				let TheSystem: ctState in
+				let TheactAuthenticated:actAuthenticated in
+				
+				self.rn.Actor.rnSystem = TheSystem
+				and self.rnActor = TheactAuthenticated
+				
+				/* PostP01 */
+				if(TheactAuthenticated.rnctAuthenticated.biometricData = AdtBiometricData)
+				then(TheactAuthenticated.rnctAuthenticated@post.vpIsLogged = true)
+				else true
+				endif
+			}
+			prolog{"src/Operations/Environment/OUT/outactAuthenticated-oeLoginUsingBiometric.pl"}
+		}
+	}
+}

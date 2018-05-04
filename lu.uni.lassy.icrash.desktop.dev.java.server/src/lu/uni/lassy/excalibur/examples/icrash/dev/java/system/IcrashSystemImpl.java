@@ -594,7 +594,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			CtAdministrator ctAdmin = new CtAdministrator();
 			DtLogin aLogin = new DtLogin(new PtString(adminName));
 			DtPassword aPwd = new DtPassword(new PtString("7WXC1359"));
-			DtBiometricData aBioData = new DtBiometricData(new PtString("BIOMETRICDATA"));
+			DtBiometricData aBioData = new DtBiometricData(new PtString("55534552534f444f5552"));
 			DtSymmetricKey aSymmetricKey = new DtSymmetricKey(new PtString("ABCD"));
 			ctAdmin.init(aLogin, aPwd, aBioData);
 			ctAdmin.symmetricKey = aSymmetricKey;

@@ -1148,7 +1148,7 @@
       </ownedStyle>
       <actualMapping xmi:type="description_2:InstanceRoleMapping" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']/@ownedRepresentations[name='Use%20Case%20Instance%20Sequence%20Diagram']/@defaultLayer/@nodeMappings[name='UCI_SD_UseCaseActor%20Instance%20Role']"/>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_V2GmgE0rEeiN5eV0laUaew" name="oeLoginUsingBiometric(&quot;BIOMETRICDATA&quot;)" sourceNode="_V2Gmdk0rEeiN5eV0laUaew" targetNode="_V181dE0rEeiN5eV0laUaew">
+    <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_V2GmgE0rEeiN5eV0laUaew" name="oeLoginUsingBiometric(&quot;55534552534f444f5552&quot;)" sourceNode="_V2Gmdk0rEeiN5eV0laUaew" targetNode="_V181dE0rEeiN5eV0laUaew">
       <target xmi:type="messir:UseCaseInstanceStepActor" href="usecases/usecaseinstance-ugSecurelyUseSystemWithBiometricData-uciugSecurelyUseSystemWithBiometricData.msr#//@usecaseM/@useCaseInstances.0/@useCaseInstanceDefinition/@useCaseInstanceStepsBlock/@useCaseInstanceSteps.0/@actor"/>
       <semanticElements xmi:type="messir:UseCaseInstanceStepActor" href="usecases/usecaseinstance-ugSecurelyUseSystemWithBiometricData-uciugSecurelyUseSystemWithBiometricData.msr#//@usecaseM/@useCaseInstances.0/@useCaseInstanceDefinition/@useCaseInstanceStepsBlock/@useCaseInstanceSteps.0/@actor"/>
       <graphicalFilters xmi:type="diagram:AbsoluteBoundsFilter" xmi:id="_V2x75U0rEeiN5eV0laUaew" y="130" height="0"/>

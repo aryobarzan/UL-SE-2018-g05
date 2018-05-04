@@ -12,7 +12,7 @@ package usecases.uciugSecurelyUseSystemWithBiometricData {
 			use case steps {
 				
 				bill executed instanceof subfunction
-							oeLoginUsingBiometric("BIOMETRICDATA"){
+							oeLoginUsingBiometric("55534552534f444f5552"){
 								ieMessage("Match!") returned to bill
 								ieMessage("You are logged! Welcome ...") returned to bill
 							}	

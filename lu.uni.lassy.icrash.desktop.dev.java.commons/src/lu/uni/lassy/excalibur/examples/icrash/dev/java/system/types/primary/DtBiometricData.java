@@ -11,6 +11,11 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 public class DtBiometricData extends DtString implements JIntIs{
 
 		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 529976213652419269L;
+
+		/**
 		 * Instantiates a new datatype BiometricData.
 		 *
 		 * @param s The primitive type of the string to create the datatype 
@@ -20,9 +25,6 @@ public class DtBiometricData extends DtString implements JIntIs{
 
 		}
 		
-		/* (non-Javadoc)
-		 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.DtIs#is()
-		 */
 		public PtBoolean is(){
 			return new PtBoolean(true);
 		}

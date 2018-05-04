@@ -90,12 +90,14 @@ import lu.uni.lassy.messir.libraries.calendar
 
 				attribute login:dtLogin
 				attribute pwd: dtPassword
+				attribute biometricData: dtBiometricData
 				attribute symmetricKey: dtSymmetricKey
 				attribute vpIsLogged:ptBoolean
 				
 				operation init(
 										Alogin:dtLogin ,
-										Apwd:dtPassword ):ptBoolean
+										Apwd:dtPassword ,
+										ABioData:dtBiometricData):ptBoolean
 			}
 			
 			class ctCoordinator 

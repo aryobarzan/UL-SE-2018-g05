@@ -25,6 +25,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNo
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
@@ -33,6 +34,11 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
 import javafx.scene.layout.GridPane;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -50,6 +56,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 /*
  * This is the end of the import section to be replaced by modifications in the ICrash.fxml document from the sample skeleton controller
  */
@@ -328,8 +335,21 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	}
 	
 	@FXML
-	void bttnAdminScan_OnClick(ActionEvent event) {
+	void bttnBottomLoginPaneAdminScan_OnClick(ActionEvent event) {
 		// Handle scan of the biometric data here
+		bttnAdminScan.setDisable(true);
+		IntegerProperty seconds = new SimpleIntegerProperty();
+		progressIndicatorAdminBiometricScan.progressProperty().bind(seconds.divide(60.0));
+		Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(seconds, 0)),
+				new KeyFrame(Duration.minutes(0.1), e -> {
+					bttnAdminScan.setDisable(false);
+					try {
+						userController.oeLoginUsingBiometric("55534552534f444f5552");
+					} catch (ServerOfflineException | ServerNotBoundException exception) {
+						showExceptionErrorMessage(exception);
+					}	
+				}, new KeyValue(seconds, 60)));
+		timeline.play();
 	}
 
     /*

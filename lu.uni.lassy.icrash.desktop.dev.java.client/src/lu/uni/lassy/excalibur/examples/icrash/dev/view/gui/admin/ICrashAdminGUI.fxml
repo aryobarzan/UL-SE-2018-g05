@@ -48,7 +48,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="bttnAdminScan" mnemonicParsing="false" onAction="#bttnAdminScan_OnClick" prefWidth="52.0" text="Scan" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                              <Button fx:id="bttnAdminScan" mnemonicParsing="false" onAction="#bttnBottomLoginPaneAdminScan_OnClick" prefWidth="52.0" text="Scan" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

@@ -1594,7 +1594,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 					if (authActorCheck != null && authActorCheck.getLogin().value.getValue().equals(currentRequestingAuthenticatedActor.getLogin().value.getValue())){
 						ctAuthenticatedInstance.vpIsLogged = new PtBoolean(true);
 						//PostF1
-						PtString aMessage = new PtString("You are logged ! Welcome ...");
+						PtString aMessage = new PtString("You are logged ! Welcome "+ ctAuthenticatedInstance.login.value.getValue() +".");
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);
 						return new PtBoolean(true);
 				}

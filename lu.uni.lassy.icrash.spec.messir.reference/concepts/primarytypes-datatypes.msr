@@ -57,8 +57,12 @@ import lu.uni.lassy.messir.libraries.calendar
 			datatype dtNonce extends dtInteger {
 				operation is():ptBoolean
 			}
-			datatype dtEncryptedMessage extends dtString {
+			datatype dtEncryptedMessage {
+				attribute encryptedName: dtString
+				attribute encryptedNonce: dtString
 				operation is():ptBoolean
+				operation decryptName():dtLogin
+				operation decryptNonce():dtNonce
 			}
 			datatype dtSymmetricKey extends dtString {
 				operation is():ptBoolean

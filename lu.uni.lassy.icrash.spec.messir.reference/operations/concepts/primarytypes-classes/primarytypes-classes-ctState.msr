@@ -51,6 +51,7 @@ operation: icrash.concepts.primarytypes.classes.ctState.generateRandomIntegerBet
 }
 	
 operation: icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce(ALogin:dtLogin, ANonce:dtNonce, ASymmetricKey:dtSymmetricKey):dtEncryptedMessage{
+/* Post P01 */
 postF{
   let encryptedMessage:dtEncryptedMessage in
   and ()//encryptedMessage contains both login and nonce encrypted via the Vigenère cipher
@@ -59,6 +60,7 @@ postF{
 }
 
 operation: icrash.concepts.primarytypes.classes.ctState.decryptLogin(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtLogin{
+/* Post P01 */
 postF{
   let decryptedLogin:dtLogin in
   and ()//decryptedLogin obtained by decrypting the encryptedLogin attribute of the AEncryptedMessage using the ASymmetricKey the Vigenère cipher
@@ -67,6 +69,7 @@ postF{
 }
 
 operation: icrash.concepts.primarytypes.classes.ctState.decryptNonce(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtNonce{
+/* Post P01 */
 postF{
   let decryptedNonce:dtNonce in
   and ()//decryptedNonce obtained by decrypting the encryptedNonce attribute of the AEncryptedMessage using the ASymmetricKey the Vigenère cipher

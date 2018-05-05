@@ -182,7 +182,9 @@ postF{
 
   let AptStringMessageForTheactAuthenticated: ptString in
   let AptStringMessageForTheactAdministrator:ptString in
+  let SystemsLogin:dtLogin in
   let SystemsNonceB:dtNonce in
+  let AuthenticatedSymmetricKey:dtSymmetricKey in
   let EncryptedNonceAAndSystemName:dtEncryptedMessage in
   
   self.rnActor.rnSystem = TheSystem
@@ -192,7 +194,9 @@ postF{
      if (TheactAuthenticated.rnctAuthenticated.login
               = AdtLogin
          )
-      then (EncryptedNonceAAndSystemName.eq('icrash' + AdtNonceA)
+      then (SystemsLogin.eq('icrash')
+      	and SystemsNonceB.eq(TheSystem.generateRandomIntegerBetween0And50000())
+      	and EncryptedNonceAAndSystemName.eq(TheSystem.encryptLoginAndNonce(SystemsLogin, AdtNonceA, AuthenticatedSymmetricKey))
             and TheactAuthenticated.rnInterfaceIN^ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext(EncryptedNonceAAndSystemName, SystemsNonceB)
            )
       else (AptStringMessageForTheactAuthenticated

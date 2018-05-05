@@ -1504,21 +1504,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 					 */
 					ActAuthenticated authActorCheck = assCtAuthenticatedActAuthenticated.get(ctAuthenticatedInstance);
 					log.debug("The logging in actor is " + authActorCheck.getLogin().value.getValue());
-					String textToDecrypt = aDtEncryptedLoginAndNonce.encryptedLogin.value.getValue().toUpperCase() + aDtEncryptedLoginAndNonce.encryptedNonce.value.getValue().toUpperCase();
-					String keyToUseForDecryption = ctState.currentSymmetricKeyForAuthenticatingActor.value.getValue();
-					String decryptedText = "";
-					for(int i = 0, j = 0; i < textToDecrypt.length(); i++) {
-						char character = textToDecrypt.charAt(i);
-						if(!(character < 'A' || character > 'Z')) {
-							char newCharacter = (char) (((character - keyToUseForDecryption.charAt(j)) % 26) + 'A');
-							j++;
-							j = j % keyToUseForDecryption.length();
-							decryptedText += newCharacter;
-						}
-						else {
-							decryptedText += character;
-						}
-					}
+
 					DtLogin decryptedLogin = ctState.decryptLogin(aDtEncryptedLoginAndNonce, ctState.currentSymmetricKeyForAuthenticatingActor);
 					DtNonce decryptedNonce = ctState.decryptNonce(aDtEncryptedLoginAndNonce, ctState.currentSymmetricKeyForAuthenticatingActor);
 					if(decryptedLogin.value.getValue().equalsIgnoreCase(ctState.currentLoginForSymmetricLogin.value.getValue()) && decryptedNonce.value.getValue() == ctState.currentNonceForAuthenticatingActor.value.getValue()) {

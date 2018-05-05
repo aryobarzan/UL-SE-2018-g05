@@ -1456,7 +1456,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 						ctState.currentLoginForSymmetricLogin = aDtLogin;
 						ctState.currentNonceForAuthenticatingActor = aDtNonceB;
 						
-						DtEncryptedMessage aDtEncryptedMessage = ctState.encryptedLoginAndNonce(new DtLogin(new PtString("icrash")), aDtNonce, symmetricKey);
+						DtEncryptedMessage aDtEncryptedMessage = ctState.encryptLoginAndNonce(new DtLogin(new PtString("icrash")), aDtNonce, symmetricKey);
 						PtString aMessage = new PtString("Encrypted: " + aDtEncryptedMessage.encryptedLogin.value.getValue() + aDtEncryptedMessage.encryptedNonce.value.getValue() + " | New Nonce: " + aDtNonceB.value.getValue());
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);
 						return new PtBoolean(true);
@@ -1519,7 +1519,9 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 							decryptedText += character;
 						}
 					}
-					if(decryptedText.equalsIgnoreCase(ctState.currentLoginForSymmetricLogin.value.getValue()+ctState.currentNonceForAuthenticatingActor.value.getValue())) {
+					DtLogin decryptedLogin = ctState.decryptLogin(aDtEncryptedLoginAndNonce, ctState.currentSymmetricKeyForAuthenticatingActor);
+					DtNonce decryptedNonce = ctState.decryptNonce(aDtEncryptedLoginAndNonce, ctState.currentSymmetricKeyForAuthenticatingActor);
+					if(decryptedLogin.value.getValue().equalsIgnoreCase(ctState.currentLoginForSymmetricLogin.value.getValue()) && decryptedNonce.value.getValue() == ctState.currentNonceForAuthenticatingActor.value.getValue()) {
 						//PostF1
 						PtString aMessage = new PtString("Symmetric Login successful! You are logged in.");
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);

@@ -13,10 +13,15 @@
 package lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary;
 
 import java.io.Serializable;
+import java.util.Random;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDateAndTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtInteger;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtSecond;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtInteger;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 
 /**
  * The Class CtState which has the systems's status.
@@ -24,6 +29,9 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 public class CtState implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 227L;
+	
+	/** Random generator used for the symmetric login system nonce creation. */
+	private Random random;
 
 	/** The next available value for alert id, this is retrieved from the database at moment of system and environment creation. */
 	public DtInteger nextValueForAlertID;
@@ -71,7 +79,7 @@ public class CtState implements Serializable {
 						DtDateAndTime aClock, DtSecond aCrisisReminderPeriod, 
 						DtSecond aMaxCrisisReminderPeriod, DtDateAndTime aVpLastReminder, 
 						PtBoolean aVpStarted, DtLogin aCurrentLoginForSymmetricLogin, DtSymmetricKey aCurrentSymmetricKeyForAuthenticatingActor, DtNonce aCurrentNonceForAuthenticatingActor){
-	
+				random = new Random(System.currentTimeMillis());
 	
 				nextValueForAlertID = aNextValueForAlertID;
 				nextValueForCrisisID = aNextValueForCrisisID;
@@ -85,5 +93,74 @@ public class CtState implements Serializable {
 				currentNonceForAuthenticatingActor = aCurrentNonceForAuthenticatingActor;
 				
 				return new PtBoolean(true);
+	}
+	
+	public PtInteger generateRandomIntegerBetween0And50000() {
+		return new PtInteger(Math.abs(random.nextInt(50000)));
+	}
+	
+	public DtEncryptedMessage encryptedLoginAndNonce(DtLogin ALogin, DtNonce ANonce, DtSymmetricKey ASymmetricKey) {
+		String loginToEncrypt = ALogin.value.getValue().toUpperCase();
+		String nonceToEncrypt = "" + ANonce.value.getValue();
+		String symmetricKeyString = ASymmetricKey.value.getValue();
+		String encryptedLogin = "";
+		for(int i = 0, j = 0; i < loginToEncrypt.length(); i++) {
+			char character = loginToEncrypt.charAt(i);
+			if(!(character < 'A' || character > 'Z')) {
+				char newCharacter = (char) (((character + symmetricKeyString.charAt(j)) % 26) + 'A');
+				j++;
+				j = j % symmetricKeyString.length();
+				encryptedLogin += newCharacter;
+			}
+			else {
+				encryptedLogin += character;
+			}
+		}
+		String encryptedNonce = "";
+		for(int i = 0, j = 0; i < nonceToEncrypt.length(); i++) {
+			char character = nonceToEncrypt.charAt(i);
+			int newCharacter = (char) (((character + symmetricKeyString.charAt(j))%10));
+			j++;
+			j = j % symmetricKeyString.length();
+			encryptedNonce += newCharacter;
+			}
+		DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new DtString(new PtString(encryptedLogin)), new DtString(new PtString(encryptedNonce)));
+		return aDtEncryptedMessage;
+	}
+		
+	
+	public DtLogin decryptLogin(DtEncryptedMessage AEncryptedMessage, DtSymmetricKey ASymmetricKey) {
+		String loginToDecrypt = AEncryptedMessage.encryptedLogin.value.getValue().toUpperCase();
+		String keyToUseForDecryption = ASymmetricKey.value.getValue();
+		String decryptedLogin = "";
+		for(int i = 0, j = 0; i < loginToDecrypt.length(); i++) {
+			char character = loginToDecrypt.charAt(i);
+			if(!(character < 'A' || character > 'Z')) {
+				char newCharacter = (char) (((character - keyToUseForDecryption.charAt(j)) % 26) + 'A');
+				j++;
+				j = j % keyToUseForDecryption.length();
+				decryptedLogin += newCharacter;
+			}
+			else {
+				decryptedLogin += character;
+			}
+		}
+		DtLogin aDtDecryptedLogin = new DtLogin(new PtString(decryptedLogin));
+		return aDtDecryptedLogin;
+	}
+	
+	public DtNonce decryptNonce(DtEncryptedMessage AEncryptedMessage, DtSymmetricKey ASymmetricKey) {
+		String nonceToDecrypt = AEncryptedMessage.encryptedNonce.value.getValue().toUpperCase();
+		String keyToUseForDecryption = ASymmetricKey.value.getValue();
+		String decryptedNonce = "";
+		for(int i = 0, j = 0; i < nonceToDecrypt.length(); i++) {
+			char character = nonceToDecrypt.charAt(i);
+				int newCharacter = (char) (((character - keyToUseForDecryption.charAt(j)) % 10));
+				j++;
+				j = j % keyToUseForDecryption.length();
+				decryptedNonce += newCharacter;
+		}
+		DtNonce aDtDecryptedNonce = new DtNonce(new PtInteger(Integer.parseInt(decryptedNonce)));
+		return aDtDecryptedNonce;
 	}
 }

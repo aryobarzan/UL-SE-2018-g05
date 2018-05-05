@@ -1446,10 +1446,9 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 					if (authActorCheck != null && authActorCheck.getLogin().value.getValue().equals(currentRequestingAuthenticatedActor.getLogin().value.getValue())){
 						//PostF1
 						// generate new nonce B != nonce A
-						Random random = new Random(System.currentTimeMillis());
-						DtNonce aDtNonceB = new DtNonce(new PtInteger(random.nextInt()));
+						DtNonce aDtNonceB = new DtNonce(ctState.generateRandomIntegerBetween0And50000());
 						while(aDtNonceB.value.getValue() == aDtNonce.value.getValue()) {
-							aDtNonceB = new DtNonce(new PtInteger(random.nextInt()));
+							aDtNonceB = new DtNonce(ctState.generateRandomIntegerBetween0And50000());
 						}
 						// encrypt received nonce A with system name
 						DtSymmetricKey symmetricKey = ctAuthenticatedInstance.symmetricKey;
@@ -1457,24 +1456,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 						ctState.currentLoginForSymmetricLogin = aDtLogin;
 						ctState.currentNonceForAuthenticatingActor = aDtNonceB;
 						
-						
-						String systemName = "icrash";
-						String textToEncrypt = systemName.toUpperCase() + aDtNonce.value.getValue();
-						String symmetricKeyString = symmetricKey.value.getValue();
-						String encryptedText = "";
-						for(int i = 0, j = 0; i < textToEncrypt.length(); i++) {
-							char character = textToEncrypt.charAt(i);
-							if(!(character < 'A' || character > 'Z')) {
-								char newCharacter = (char) (((character + symmetricKeyString.charAt(j)) % 26) + 'A');
-								j++;
-								j = j % symmetricKeyString.length();
-								encryptedText += newCharacter;
-							}
-							else {
-								encryptedText += character;
-							}
-						}
-						DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new DtString(new PtString(encryptedText)), new DtString(new PtString("")));
+						DtEncryptedMessage aDtEncryptedMessage = ctState.encryptedLoginAndNonce(new DtLogin(new PtString("icrash")), aDtNonce, symmetricKey);
 						PtString aMessage = new PtString("Encrypted: " + aDtEncryptedMessage.encryptedLogin.value.getValue() + aDtEncryptedMessage.encryptedNonce.value.getValue() + " | New Nonce: " + aDtNonceB.value.getValue());
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);
 						return new PtBoolean(true);

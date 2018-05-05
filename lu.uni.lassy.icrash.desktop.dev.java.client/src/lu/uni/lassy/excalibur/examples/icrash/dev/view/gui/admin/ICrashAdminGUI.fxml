@@ -74,7 +74,8 @@
                               </Button>
                               <Button fx:id="bttnAdminSymmetricLogin2" mnemonicParsing="false" onAction="#bttnBottomLoginPaneSymmetricLogin2_OnClick" text="Submit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-                              <TextField fx:id="txtfldAdminSymmetricField3" promptText="Encrypted System Nonce and Login" visible="false" />
+                              <TextField fx:id="txtfldAdminSymmetricField3" promptText="Encrypted Login" visible="false" GridPane.columnIndex="0"/>
+                              <TextField fx:id="txtfldAdminSymmetricField4" promptText="Encrypted Nonce" visible="false" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                      </children>

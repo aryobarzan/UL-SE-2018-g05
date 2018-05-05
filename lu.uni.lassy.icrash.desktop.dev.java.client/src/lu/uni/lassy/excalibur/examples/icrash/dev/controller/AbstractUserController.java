@@ -23,6 +23,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtEn
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtInteger;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
@@ -171,8 +172,8 @@ public abstract class AbstractUserController implements HasListeners {
 			throw new ServerNotBoundException();
 		}
 	}
-	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(String encryptedLoginAndNonce)throws ServerOfflineException, ServerNotBoundException{
-		DtEncryptedMessage aDtEncryptedLoginAndNonce = new DtEncryptedMessage(new PtString(encryptedLoginAndNonce));
+	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(String encryptedLogin, String encryptedNonce)throws ServerOfflineException, ServerNotBoundException{
+		DtEncryptedMessage aDtEncryptedLoginAndNonce = new DtEncryptedMessage(new DtString(new PtString(encryptedLogin)), new DtString(new PtString(encryptedNonce)));
 		try {
 			return this.getAuth().oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(aDtEncryptedLoginAndNonce);
 		} catch (RemoteException e) {

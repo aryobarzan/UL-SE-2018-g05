@@ -73,6 +73,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDateAndTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtInteger;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtSecond;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtInteger;
@@ -1473,8 +1474,8 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 								encryptedText += character;
 							}
 						}
-						DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new PtString(encryptedText));
-						PtString aMessage = new PtString("Encrypted: " + aDtEncryptedMessage.value.getValue() + " | New Nonce: " + aDtNonceB.value.getValue());
+						DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new DtString(new PtString(encryptedText)), new DtString(new PtString("")));
+						PtString aMessage = new PtString("Encrypted: " + aDtEncryptedMessage.encryptedLogin.value.getValue() + aDtEncryptedMessage.encryptedNonce.value.getValue() + " | New Nonce: " + aDtNonceB.value.getValue());
 						currentRequestingAuthenticatedActor.ieMessage(aMessage);
 						return new PtBoolean(true);
 					}
@@ -1521,7 +1522,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 					 */
 					ActAuthenticated authActorCheck = assCtAuthenticatedActAuthenticated.get(ctAuthenticatedInstance);
 					log.debug("The logging in actor is " + authActorCheck.getLogin().value.getValue());
-					String textToDecrypt = aDtEncryptedLoginAndNonce.value.getValue().toUpperCase();
+					String textToDecrypt = aDtEncryptedLoginAndNonce.encryptedLogin.value.getValue().toUpperCase() + aDtEncryptedLoginAndNonce.encryptedNonce.value.getValue().toUpperCase();
 					String keyToUseForDecryption = ctState.currentSymmetricKeyForAuthenticatingActor.value.getValue();
 					String decryptedText = "";
 					for(int i = 0, j = 0; i < textToDecrypt.length(); i++) {

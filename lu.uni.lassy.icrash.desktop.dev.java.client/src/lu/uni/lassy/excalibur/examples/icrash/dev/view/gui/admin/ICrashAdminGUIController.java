@@ -130,9 +130,13 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	@FXML
 	private TextField txtfldAdminSymmetricField2;
 	
-	/** The textfield that allows input of the encrypted system nonce and user login. */
+	/** The textfield that allows input of the encrypted user login. */
 	@FXML
 	private TextField txtfldAdminSymmetricField3;
+	
+	/** The textfield that allows input of the encrypted system nonce. */
+	@FXML
+	private TextField txtfldAdminSymmetricField4;
 
 	/** The button that switches to the symmetric login. */
 	@FXML
@@ -246,6 +250,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		bttnAdminSymmetricLogin.setVisible(true);
 		
 		txtfldAdminSymmetricField3.setVisible(false);
+		txtfldAdminSymmetricField4.setVisible(false);
 	    bttnAdminSymmetricLogin2.setVisible(false);
 
 		txtfldAdminUserName.setVisible(false);
@@ -277,6 +282,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		txtfldAdminSymmetricField2.setVisible(false);
 		bttnAdminSymmetricLogin.setVisible(false);
 		txtfldAdminSymmetricField3.setVisible(false);
+		txtfldAdminSymmetricField4.setVisible(false);
 	    bttnAdminSymmetricLogin2.setVisible(false);
 
 		bttnAdminSwitchToSymmetricLogin.setDisable(false);
@@ -302,6 +308,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		bttnAdminScan.setVisible(false);
 		progressIndicatorAdminBiometricScan.setVisible(false);
 		txtfldAdminSymmetricField3.setVisible(false);
+		txtfldAdminSymmetricField4.setVisible(false);
 	    bttnAdminSymmetricLogin2.setVisible(false);
 
 		bttnAdminSwitchToSymmetricLogin.setDisable(false);
@@ -674,6 +681,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				int nonce = Integer.parseInt((txtfldAdminSymmetricField2.getText()));
 				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldAdminSymmetricField1.getText(), nonce).getValue())
 					txtfldAdminSymmetricField3.setVisible(true);
+				    txtfldAdminSymmetricField4.setVisible(true);
 				    bttnAdminSymmetricLogin2.setVisible(true);
 					
 					txtfldAdminSymmetricField1.setVisible(false);
@@ -690,11 +698,16 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	} 
 	@Override
 	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
-		if(txtfldAdminSymmetricField3.getText().length() > 0){
+		if(txtfldAdminSymmetricField3.getText().length() > 0 && txtfldAdminSymmetricField4.getText().length() > 0){
 			try {
-				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldAdminSymmetricField3.getText()).getValue() == true)
+				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldAdminSymmetricField3.getText(), txtfldAdminSymmetricField4.getText()).getValue() == true)
 					txtfldAdminSymmetricField3.setVisible(false);
+				    txtfldAdminSymmetricField4.setVisible(false);
 				    bttnAdminSymmetricLogin2.setVisible(false);
+				    
+				    txtfldAdminSymmetricField1.setVisible(true);
+				    txtfldAdminSymmetricField2.setVisible(true);
+				    bttnAdminSymmetricLogin.setVisible(true);
 					
 				    logonShowPanes(true);
 					System.out.println("Second step of symmetric login successful");

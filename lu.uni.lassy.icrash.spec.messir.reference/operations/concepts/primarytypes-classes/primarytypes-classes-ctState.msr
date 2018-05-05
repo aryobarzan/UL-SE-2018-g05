@@ -5,6 +5,7 @@ import lu.uni.lassy.messir.libraries.calendar
 import lu.uni.lassy.messir.libraries.math
 
 import icrash.concepts.primarytypes.classes
+import icrash.concepts.primarytypes.datatypes
 
 Operation Model {
 	
@@ -40,12 +41,40 @@ endif
 }
 prolog{"src/Operations/Concepts/PrimaryTypesClasses/PrimaryTypesClasses-ctState-init.pl"	}
 	}
-	operation: icrash.concepts.primarytypes.classes.ctState.generateRandomIntegerBetween0And50000():dtInteger{
+	
+operation: icrash.concepts.primarytypes.classes.ctState.generateRandomIntegerBetween0And50000():dtInteger{
 		/* Post P01 */
 		postF{
 			//Documented: result = a random integer between 0 and 50000 included is returned
 		}
 		
-	}
+}
+	
+operation: icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce(ALogin:dtLogin, ANonce:dtNonce, ASymmetricKey:dtSymmetricKey):dtEncryptedMessage{
+postF{
+  let encryptedMessage:dtEncryptedMessage in
+  and ()//encryptedMessage contains both login and nonce encrypted via the Vigenère cipher
+  (result = encryptedMessage)
+}
+}
+
+operation: icrash.concepts.primarytypes.classes.ctState.decryptLogin(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtLogin{
+postF{
+  let decryptedLogin:dtLogin in
+  and ()//decryptedLogin obtained by decrypting the encryptedLogin attribute of the AEncryptedMessage using the ASymmetricKey the Vigenère cipher
+  (result = decryptedLogin)
+}
+}
+
+operation: icrash.concepts.primarytypes.classes.ctState.decryptNonce(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtNonce{
+postF{
+  let decryptedNonce:dtNonce in
+  and ()//decryptedNonce obtained by decrypting the encryptedNonce attribute of the AEncryptedMessage using the ASymmetricKey the Vigenère cipher
+  (result = decryptedNonce)
+}
+}
+			    
+			    
+			    
 	}
 }

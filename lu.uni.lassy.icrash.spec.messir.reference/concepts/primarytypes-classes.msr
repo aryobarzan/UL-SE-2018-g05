@@ -33,6 +33,8 @@ import lu.uni.lassy.messir.libraries.calendar
 												AvpStarted:ptBoolean ): ptBoolean
 			    operation generateRandomIntegerBetween0And50000():dtInteger
 			    operation encryptLoginAndNonce(ALogin:dtLogin, ANonce:dtNonce, ASymmetricKey:dtSymmetricKey):dtEncryptedMessage
+			    operation decryptLogin(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtLogin
+			    operation decryptNonce(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtNonce
 			}
 	
 			class ctAlert role rnctAlert cardinality [0..*]{

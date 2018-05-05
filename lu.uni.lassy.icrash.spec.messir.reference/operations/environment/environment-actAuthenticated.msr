@@ -253,15 +253,13 @@ postF{
   let TheactAuthenticated:actAuthenticated in
 
   let AptConfirmationMessageForSymmetricLogin:ptString in
-  let AdtLogin:dtLogin in // extracted from the encrypted emssage
-  let SystemsNonceB:dtNonce in // extracted from the encrypted message
   
   self.rnActor.rnSystem = TheSystem
   and self.rnActor = TheactAuthenticated
   
   and /* PostF01 */
-  	  if (AdtLogin = TheSystem.currentLoginForSymmetricLogin
-         and SystemsNonceB = TheSystem.currentNonceForAuthenticatingActor)
+  	  if (TheSystem.decryptLogin(AdtEncryptedMessage.encryptedLogin) = TheSystem.currentLoginForSymmetricLogin
+         and TheSystem.decryptNonce(AdtEncryptedMessage.encryptedNonce) = TheSystem.currentNonceForAuthenticatingActor)
       then (AptConfirmationMessageForSymmetricLogin.eq('Symmetric login successful! You are logged in.')
             and TheactAuthenticated.rnInterfaceIN^ieMessage(AptConfirmationMessageForSymmetricLogin))
       else(AptConfirmationMessageForSymmetricLogin.eq('Wrong credentials (login name / nonce) for symmetric login!')

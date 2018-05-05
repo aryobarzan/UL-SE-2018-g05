@@ -31,7 +31,7 @@ import lu.uni.lassy.messir.libraries.calendar
 												AmaxCrisisReminderPeriod:dtSecond ,
 												AvpLastReminder:dtDateAndTime ,
 												AvpStarted:ptBoolean ): ptBoolean
-			    operation generateRandomNumberBetween0And50000():dtInteger
+			    operation generateRandomIntegerBetween0And50000():dtInteger
 			    operation encryptLoginAndNonce(ALogin:dtLogin, ANonce:dtNonce, ASymmetricKey:dtSymmetricKey):dtEncryptedMessage
 			}
 	

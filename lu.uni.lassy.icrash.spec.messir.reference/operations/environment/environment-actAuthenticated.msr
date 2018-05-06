@@ -142,7 +142,7 @@ postF{
   and self.rnActor = TheactAuthenticated
   
   and /* PostF01 */
-      RandomY.eq(RandomNumberDifferentFromRandomX)
+      RandomY.eq(TheSystem.generateRandomIntegerBetween0And50000())
             and TheactAuthenticated.rnInterfaceIN^ieGetRandomNumberForSymmetricKeyExchange(RandomY)
 }
 postP{

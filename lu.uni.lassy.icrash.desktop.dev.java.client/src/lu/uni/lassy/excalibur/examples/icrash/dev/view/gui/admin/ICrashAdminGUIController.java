@@ -351,8 +351,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				new KeyFrame(Duration.minutes(0.1), e -> {
 					bttnAdminScan.setDisable(false);
 					try {
-						userController.oeLoginUsingBiometric("55534552534f444f5552");
-					} catch (ServerOfflineException | ServerNotBoundException exception) {
+						if (userController.oeLoginUsingBiometric("55534552534f444f5552").getValue())
+							logonShowPanes(true);
+					}
+					catch (ServerOfflineException | ServerNotBoundException exception) {
 						showExceptionErrorMessage(exception);
 					}	
 				}, new KeyValue(seconds, 60)));

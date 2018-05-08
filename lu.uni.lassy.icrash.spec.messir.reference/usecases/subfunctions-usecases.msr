@@ -181,9 +181,16 @@ import icrash.environment
 												AdtAnswerText2:dtAnswerText,
 												AdtAnswerText3:dtAnswerText,
 												AdtAnswerText4:dtAnswerText) {
-			actor actAdministrator[primary, active]
+			actor actAdministrator[primary, active] 
+			returned messages {
+				ieMessage(AMessage) returned to actAdministrator
+			}
 		}
-	use case system subfunction oeAddAnswer(AdtQuestionID:dtQuestionID, AdtAnswerText:dtAnswerText) {
+	use case system subfunction oeAddAnswer(AdtQuestionID:dtQuestionID, AdtAnswerText1:dtAnswerText, 
+						AdtAnswerText2:dtAnswerText, 
+						AdtAnswerText3:dtAnswerText, 
+						AdtAnswerText4:dtAnswerText
+	) {
 			actor actAdministrator[primary, active]
 		}
 	}

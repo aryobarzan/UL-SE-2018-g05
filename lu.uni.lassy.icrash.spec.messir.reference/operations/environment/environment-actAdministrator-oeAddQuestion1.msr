@@ -1,0 +1,44 @@
+package icrash.environment.operations.actAdministrator.outactAdministrator.oeAddQuestion {
+
+import lu.uni.lassy.messir.libraries.primitives
+import lu.uni.lassy.messir.libraries.math
+import lu.uni.lassy.messir.libraries.string
+import lu.uni.lassy.messir.libraries.calendar
+
+import icrash.concepts.primarytypes.datatypes
+	Operation Model {
+
+		operation: icrash.environment.actAdministrator.outactAdministrator.oeAddQuestion(AdtQuestionText:dtQuestionText, AdtAnswerText1:dtAnswerText, AdtAnswerText2:dtAnswerText, AdtAnswerText3:dtAnswerText, AdtAnswerText4:dtAnswerText):ptBoolean
+		{
+			preP {
+				/*
+				 * AdtQuestionText and AdtAnswerText[1-4] are mandatory parameters and cannot be null.
+				 */
+			}
+			
+			preF {
+				/*
+				 * 
+				 */
+			}
+	
+			postF {
+				/*
+				 * We assume that AdtAnswerText1 has a value of -2
+				 * We assume that AdtAnswerText2 has a value of -1
+				 * We assume that AdtAnswerText3 has a value of 1
+				 * We assume that AdtAnswerText4 has a value of 2
+				 * -2 = very bad, -1 = bad, 1 = good, 2 = very good
+				 * 
+				 */
+			}
+
+			postP {
+				/*
+				 * AdtQuestionText and AdtAnswerText[1-4] is an entry in the database
+				 */
+			}
+		}
+	}
+}
+

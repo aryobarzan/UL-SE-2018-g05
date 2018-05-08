@@ -12,7 +12,10 @@ package usecases.uciugAddQuestion {
 						icrash.usecases.subfunctions.oeAddQuestion
 									("Are-you satisfied of the service?", "really not",
 										"no", "yes", "really yes"
-									)
+									) {
+										ieMessage("Question added!") returned to bill
+									}
+									
 				
 			}
 		}

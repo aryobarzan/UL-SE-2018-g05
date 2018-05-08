@@ -17,23 +17,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import lu.uni.lassy.excalibur.examples.icrash.dev.controller.AdminController;
-import lu.uni.lassy.excalibur.examples.icrash.dev.controller.SystemStateController;
-import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectActorException;
-import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
-import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
-import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
-import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
-import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
-import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
-import javafx.scene.layout.GridPane;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -55,8 +38,28 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
+import lu.uni.lassy.excalibur.examples.icrash.dev.controller.AdminController;
+import lu.uni.lassy.excalibur.examples.icrash.dev.controller.SystemStateController;
+import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectActorException;
+import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
+import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
+import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerOfflineException;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
+import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
+import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
+import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
 /*
  * This is the end of the import section to be replaced by modifications in the ICrash.fxml document from the sample skeleton controller
  */
@@ -508,6 +511,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 * @param type The type of edit to be done, this could be add or delete
 	 */
 	private void showQuestionScreen(TypeOfEdit type){
+		String disclaimer = "Disclaimer:\n"
+				+ "Answer 1 has a value of -2 and should be considered as very bad\n"
+				+ "Answer 2 has a value of -1 and should be considered as bad\n"
+				+ "Answer 3 has a value of 1 and should be considered as good\n"
+				+ "Answer 4 has a value of 2 and should be considered as very good";
 		for(int i = anchrpnQuestionDetails.getChildren().size() -1; i >= 0; i--)
 			anchrpnQuestionDetails.getChildren().remove(i);
 		
@@ -516,9 +524,13 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		TextField txtfldAnswer2 = new TextField();
 		TextField txtfldAnswer3 = new TextField();
 		TextField txtfldAnswer4 = new TextField();
+		Text distxt = new Text(disclaimer);
+		Rectangle border = new Rectangle(0, 0, Color.TRANSPARENT);
+		StackPane sp = new StackPane();
 		
 		Button bttntypOK = null;
 		GridPane grdpn = new GridPane();
+		grdpn.setMinWidth(500);
 		switch(type){
 		case Add:
 			bttntypOK = new Button("Create");
@@ -534,6 +546,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			grdpn.add(txtfldAnswer4, 1, 6);
 
 			grdpn.add(bttntypOK, 1, 8);
+			sp.getChildren().addAll(distxt, border);
+			grdpn.add(sp, 1, 9);
 			txtfldQuestionName.requestFocus();
 			break;
 		case Delete:
@@ -543,6 +557,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			grdpn.add(txtfldQuestionsID, 1, 1);
 			grdpn.add(bttntypOK, 1, 2);
 			txtfldQuestionsID.requestFocus();
+			
 			break;		
 		}
 		bttntypOK.setDefaultButton(true);

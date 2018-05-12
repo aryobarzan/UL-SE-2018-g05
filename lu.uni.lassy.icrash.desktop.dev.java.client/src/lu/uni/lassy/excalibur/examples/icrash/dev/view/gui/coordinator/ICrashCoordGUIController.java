@@ -147,6 +147,42 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     /** The button that allows a user to logoff. */
     @FXML
     private Button bttnCoordLogoff;
+    
+    /** The textfield that allows input of a name for symmetric login. */
+	@FXML
+	private TextField txtfldCoordSymmetricField1;
+
+	/** The textfield that allows input of a nonce for symmetric login. */
+	@FXML
+	private TextField txtfldCoordSymmetricField2;
+	
+	/** The textfield that allows input of the encrypted user login. */
+	@FXML
+	private TextField txtfldCoordSymmetricField3;
+	
+	/** The textfield that allows input of the encrypted system nonce. */
+	@FXML
+	private TextField txtfldCoordSymmetricField4;
+
+	/** The button that switches to the symmetric login. */
+	@FXML
+	private Button bttnCoordSwitchToSymmetricLogin;
+
+	/** The button that switches to the biometric login. */
+	@FXML
+	private Button bttnCoordSwitchToBiometricLogin;
+
+	/** The button that switches to the standard login. */
+	@FXML
+	private Button bttnCoordSwitchToStandardLogin;
+
+	/** The button that is utilized for sending login and nonce used by the symmetric login to the icrash System. */
+	@FXML
+	private Button bttnCoordSymmetricLogin;
+	
+	/** The button that is utilized for sending encrypted system nonce and login used by the symmetric login to the icrash System. */
+	@FXML
+	private Button bttnCoordSymmetricLogin2;
 
     /**
      * Button event that deals with changing the status of a crisis
@@ -227,6 +263,56 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
     void bttnValidateAlert_OnClick(ActionEvent event) {
     	validateAlert();
     }
+    
+    /**
+	 * The button event that reveals the symmetric login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnCoordSwitchToSymmetricLogin_OnClick(ActionEvent event) {
+		// to be implemented
+	}
+	
+	/**
+	 * The button event that reveals the standard login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnCoordSwitchToStandardLogin_OnClick(ActionEvent event) {
+		// to be implemented
+	}
+	
+	/**
+	 * The button event that reveals the biometric login view elements
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnCoordSwitchToBiometricLogin_OnClick(ActionEvent event) {
+		// to be implemented
+	}
+	
+	/**
+	 * The button event that submit user input (login and chosen nonce) for symmetric login
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnCoordSymmetricLogin_OnClick(ActionEvent event) {
+		// to be implemented
+	}
+	
+	/**
+	 * The button event that submit user input (encrypted login and system nonce) for symmetric login
+	 *
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnCoordSymmetricLogin2_OnClick(ActionEvent event) {
+		// to be implemented
+	}
     
     /*
      * These are other classes accessed by this controller

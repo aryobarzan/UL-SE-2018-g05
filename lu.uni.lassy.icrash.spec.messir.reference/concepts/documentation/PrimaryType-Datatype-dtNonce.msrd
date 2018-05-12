@@ -1,0 +1,12 @@
+/*
+@author aryobarzan
+@date Sat May 12 21:49:18 CEST 2018
+*/
+
+
+@@Primary Type Datatype icrash.concepts.primarytypes.datatypes.dtNonce
+@description "used to store an integer for the symmetric key exchange and symmetric login"
+@operation
+icrash.concepts.primarytypes.datatypes.dtNonce.is
+""
+@endOperations

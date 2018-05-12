@@ -1,0 +1,19 @@
+/*
+@author kael
+@date Sat May 12 21:50:36 CEST 2018
+*/
+
+
+@@Primary Type Datatype icrash.concepts.primarytypes.datatypes.dtEncryptedMessage
+@description "used to store the encrypted information, including a dtLogin and dtNonce, which are both stored as dtStrings in their encrypted form, for the symmetric login"
+@attribute
+icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.encryptedLogin
+""
+@attribute
+icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.encryptedNonce
+""
+@endAttributes
+@operation
+icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.is
+""
+@endOperations

@@ -1,0 +1,12 @@
+/*
+@author kael
+@date Sat May 12 21:51:59 CEST 2018
+*/
+
+
+@@Primary Type Datatype icrash.concepts.primarytypes.datatypes.dtSymmetricKey
+@description "used to store the symmetric key character sequence which is a dtString for the symmetric login, contained by ctAuthenticated but also used by ctState"
+@operation
+icrash.concepts.primarytypes.datatypes.dtSymmetricKey.is
+""
+@endOperations

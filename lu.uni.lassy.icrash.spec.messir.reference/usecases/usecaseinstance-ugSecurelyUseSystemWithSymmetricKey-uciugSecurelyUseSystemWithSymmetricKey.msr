@@ -1,0 +1,32 @@
+package usecases.uciugSecurelyUseSystemWithSymmetricKey {
+	import icrash.usecases.ugSecurelyUseSystem
+	import icrash.concepts.primarytypes.datatypes
+    import icrash.environment
+    import icrash.usecases.subfunctions
+
+	Use Case Model {
+
+		use case instance uciugSecurelyUseSystemWithSymmetricKey : ugSecurelyUseSystemWithSymmetricKey{
+			actors {
+				admin:actAuthenticated
+			}
+			use case steps {
+				 admin
+       			 	executed instanceof subfunction
+             			 oeSendRandomNumberForSymmetricKeyExchange("50"){
+              			 ieGetRandomNumberForSymmetricKeyExchange("100") returned to admin
+              }
+              	 admin
+       			 	executed instanceof subfunction
+             			 oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin("25", "icrashadmin"){
+              			 ieGenerateNonceBAndSendEncryptedNonceAAndSystemNameWithNonceBInPlaintext("IDTDSI291", "3500") returned to admin
+              }
+             	 admin
+       			 	executed instanceof subfunction
+             			 oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin("IDTDSICGMJP3766"){
+              			 ieMessage("You are logged in! Welcome.") returned to admin
+              }
+			}
+		}
+	}
+}

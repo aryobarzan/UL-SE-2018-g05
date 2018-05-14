@@ -30,6 +30,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCr
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtHuman;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtState;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
@@ -242,6 +243,21 @@ public interface IcrashSystem extends Remote {
 				DtTime aDtTime,DtPhoneNumber aDtPhoneNumber,DtGPSLocation aDtGPSLocation,DtComment aDtComment) throws RemoteException; 
 
 	/**
+	 * Creates an answer in the system using the parameters passed
+	 * Uses the actor comminucation company for this method.
+	 * 
+	 * @param aEtHumanKind The kind of human answering the survey
+	 * @param aDtDate The date of the survey
+	 * @param aDtTime The time of the survey
+	 * @param aDtPhoneNumber The phone number of the human answering the survey
+	 * @param aDtQuestionID The question id of the question answered
+	 * @param aDtAnswerID The answer id of the answer
+	 * @return
+	 */
+	public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
+			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID);
+	
+	/**
 	 * Validates an alert on the system
 	 * Uses the coordinator actor to do this function.
 	 *
@@ -427,5 +443,6 @@ public interface IcrashSystem extends Remote {
 	 * @throws RemoteException Thrown if the server is offline
 	 */
 	public PtBoolean oeDeleteQuestion(DtQuestionID aDtQuestionID) throws RemoteException, SQLException;
+
 
 }

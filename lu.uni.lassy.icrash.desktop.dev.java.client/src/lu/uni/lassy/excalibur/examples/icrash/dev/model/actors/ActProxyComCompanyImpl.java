@@ -20,9 +20,11 @@ import java.util.ArrayList;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntHasServerSideActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtGPSLocation;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.DtSMS;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
@@ -102,6 +104,19 @@ public class ActProxyComCompanyImpl extends UnicastRemoteObject implements
 	}
 
 	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyComCompany#oeAnswer(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID)
+	 */
+	@Override
+	synchronized public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
+			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID) throws RemoteException, NotBoundException {
+		if (serverSideActor != null)
+			return serverSideActor.oeAnswer(aEtHumanKind, aDtDate, aDtTime,
+					aDtPhoneNumber, aDtQuestionID, aDtAnswerID);
+		else
+			return new PtBoolean(false);
+	}
+	
+	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyComCompany#ieSmsSend(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.DtSMS)
 	 */
 	public PtBoolean ieSmsSend(DtPhoneNumber aDtPhoneNumber, DtSMS aDtSMS) {
@@ -143,5 +158,5 @@ public class ActProxyComCompanyImpl extends UnicastRemoteObject implements
 			return false;
 		return true;
 	}
-	
+
 }

@@ -17,9 +17,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIsActor;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtGPSLocation;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.DtSMS;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
@@ -57,6 +59,22 @@ public interface ActComCompany extends java.rmi.Remote, Serializable, JIntIsActo
 			DtGPSLocation aDtGPSLocation,DtComment aDtComment) throws RemoteException, NotBoundException;
 
 	/**
+	 * Insert the answer of a question to the server
+	 * 
+	 * @param aEtHumanKind The type of human answering the survey
+	 * @param aDtDate The date of the survey
+	 * @param aDtTime The time of the survey
+	 * @param aDtPhoneNumber The phone number of the human answering the survey
+	 * @param aDtQuestionID The question id of the question answered
+	 * @param aDtAnswerID The answer id of the answer choosen
+	 * @return The success of the method
+	 * @throws RemoteException Thrown if the server is offline
+	 * @throws NotBoundException Thrown if the server is not bound correctly in RMI settings
+	 */
+	public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
+			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID) throws RemoteException, NotBoundException;
+	
+	/**
 	 * Sends a message to the client side actor with details of if the alert was logged or not.
 	 *
 	 * @param aDtPhoneNumber The phone number of the human associated with the accident
@@ -83,4 +101,5 @@ public interface ActComCompany extends java.rmi.Remote, Serializable, JIntIsActo
 	 * @throws NotBoundException Thrown if the server is not bound correctly in RMI settings
 	 */
 	public void removeListener(ActProxyComCompany aActProxyAuthenticated) throws RemoteException, NotBoundException;
+
 }

@@ -15,6 +15,7 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.controller;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Hashtable;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.InvalidHumanKindException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.ServerNotBoundException;
@@ -23,11 +24,13 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.StringTo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyComCompany;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.design.JIntIs;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtGPSLocation;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLatitude;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLongitude;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDay;
@@ -135,6 +138,44 @@ public class ComCompanyController implements HasListeners{
 		}
 	}
 	
+	/**
+	 * Checks the data passed is correct and if so, will create an answer in the system.
+	 *
+	 * @param aEtHumanKind the a et human kind
+	 * @param year is the year that the answer took place
+	 * @param month is the month that the answer took place
+	 * @param day is the day of the month that the answer took place
+	 * @param hour is the hour of the clock at the time that the answer took place
+	 * @param minute is the minute of the clock at the time that the answer took place
+	 * @param second is the second of the clock at the time that the answer took place
+	 * @param phoneNumber is the contact phone number of the person answering to the Survey.
+	 * @param the question id of the answer
+	 * @param the answer id of the answer
+	 * @return Returns a PtBoolean of true if done successfully, otherwise will return a false
+	 * @throws ServerOfflineException is an error that is thrown when the server is offline or not reachable
+	 * @throws InvalidHumanKindException is thrown when the enum type of HumanKind does not match the specification
+	 * @throws ServerNotBoundException is only thrown when attempting to access a server which has no current binding. This shouldn't happen, but you never know!
+	 * @throws IncorrectFormatException is thrown when a Dt/Et information type does not match the is() method specified in the specification
+	 */
+	public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, int year, int month, int day, int hour, int minute, int second,
+			String phoneNumber, Integer questionID, Integer answerID) throws ServerOfflineException, InvalidHumanKindException, ServerNotBoundException, IncorrectFormatException, StringToNumberException{
+		try {
+			if (aActProxyComCompany == null)
+				return new PtBoolean(false);
+			DtPhoneNumber aDtPhoneNumber = new DtPhoneNumber(new PtString(phoneNumber));
+			DtDate aDtDate = new DtDate(new DtYear(new PtInteger(year)), new DtMonth(new PtInteger(month)), new DtDay(new PtInteger(day)));
+			DtTime aDtTime = new DtTime(new DtHour(new PtInteger(hour)), new DtMinute(new PtInteger(minute)), new DtSecond(new PtInteger(second)));
+			DtQuestionID aDtQuestionID = new DtQuestionID(new PtInteger(questionID));
+			DtAnswerID aDtAnswerID = new DtAnswerID(new PtInteger(answerID));
+			return aActProxyComCompany.oeAnswer(aEtHumanKind, aDtDate, aDtTime, aDtPhoneNumber, aDtQuestionID, aDtAnswerID);
+		} catch (RemoteException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerOfflineException();
+		} catch (NotBoundException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			throw new ServerNotBoundException();
+		} 
+	}
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.controller.HasListeners#removeAllListeners()
 	 */

@@ -51,6 +51,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtCr
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtHuman;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.CtState;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBiometricData;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
@@ -772,6 +773,31 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 		}
 		return new PtBoolean(false);
 	}
+	
+	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeAnswer(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID)
+	 */
+	@Override
+	public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
+			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID) {
+		try {
+			//PreP1
+			isSystemStarted();
+			DtDateAndTime aInstant = new DtDateAndTime(aDtDate, aDtTime);
+			
+			//Get Logged in the database
+			MySqlUtils sql = MySqlUtils.getInstance();
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
+			log.debug("Connected to the database");
+			
+			return new PtBoolean(true);
+		} catch(Exception e) {
+			log.error("Exception in oeAnswer..." + e);
+		}
+		return new PtBoolean(false);
+	}
 
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeValidateAlert(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAlertID)
@@ -1374,7 +1400,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			}
 			return new PtBoolean(false);
 		} catch (Exception e) {
-			log.error("Exception in oeDeleteCoordinator..." + e);
+			log.error("Exception in oeUpdateCoordinator..." + e);
 			return new PtBoolean(false);
 		}
 	}

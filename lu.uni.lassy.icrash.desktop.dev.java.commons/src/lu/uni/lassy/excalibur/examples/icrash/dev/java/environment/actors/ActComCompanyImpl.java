@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtComment;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtGPSLocation;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.secondary.DtSMS;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
@@ -100,6 +102,34 @@ public class ActComCompanyImpl extends UnicastRemoteObject implements ActComComp
 
 		if (res.getValue() == true)
 			log.info("operation oeAlert successfully executed by the system");
+
+		return res;
+	}
+	
+	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActComCompany#oeAnswer(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtHumanKind, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate, lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtAnswerID)
+	 */
+	@Override
+	public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
+			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID) throws RemoteException, NotBoundException {
+		
+		Logger log = Log4JUtils.getInstance().getLogger();
+
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+		//Gathering the remote object as it was published into the registry
+		IcrashSystem iCrashSys_Server = (IcrashSystem) registry
+				.lookup("iCrashServer");
+
+		//set up ComCompany instance that performs the request
+		iCrashSys_Server.setCurrentConnectedComCompany(this);
+
+		log.info("message ActComCompany.oeAnswer sent to system");
+		PtBoolean res = iCrashSys_Server.oeAnswer(aEtHumanKind, aDtDate,
+				aDtTime, aDtPhoneNumber, aDtQuestionID, aDtAnswerID);
+
+		if (res.getValue() == true)
+			log.info("operation oeAnswer successfully executed by the system");
 
 		return res;
 	}

@@ -344,6 +344,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 
 	}
 	
+	/**
+	 * The button event that scan the user's biometric data
+	 * 
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
 	@FXML
 	void bttnBottomLoginPaneAdminScan_OnClick(ActionEvent event) {
 		// Handle scan of the biometric data here
@@ -356,6 +361,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 					try {
 						if (userController.oeLoginUsingBiometric("55534552534f444f5552").getValue())
 							logonShowPanes(true);
+							progressIndicatorAdminBiometricScan.progressProperty().unbind();
 					}
 					catch (ServerOfflineException | ServerNotBoundException exception) {
 						showExceptionErrorMessage(exception);

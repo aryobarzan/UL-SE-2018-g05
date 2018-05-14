@@ -792,6 +792,12 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
 			log.debug("Connected to the database");
 			
+			PreparedStatement ps = conn.prepareStatement("INSERT INTO answer(humans_phone, question_id, answer) VALUES(?, ?, ?)");
+			ps.setString(1, aDtPhoneNumber.value.getValue());
+			ps.setInt(2, aDtQuestionID.value.getValue());
+			ps.setInt(3, aDtAnswerID.value.getValue());
+			ps.executeUpdate();
+			
 			return new PtBoolean(true);
 		} catch(Exception e) {
 			log.error("Exception in oeAnswer..." + e);

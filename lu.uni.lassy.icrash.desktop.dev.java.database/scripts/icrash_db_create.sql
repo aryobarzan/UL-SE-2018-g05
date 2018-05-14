@@ -206,7 +206,6 @@ CREATE TABLE `answer` (
 	`id` INTEGER NOT NULL AUTO_INCREMENT,
 	`idQuestion` INTEGER NOT NULL,
 	`idHuman` varchar(80) NOT NULL,
-	`idCrises` varchar(80) NOT NULL,
 	`answer` INTEGER NOT NULL,
 	PRIMARY KEY(`id`, `idQuestion`, `idHuman`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

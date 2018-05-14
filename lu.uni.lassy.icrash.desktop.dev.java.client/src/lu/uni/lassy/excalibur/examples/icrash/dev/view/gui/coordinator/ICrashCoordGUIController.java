@@ -55,6 +55,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableView;
@@ -183,6 +184,14 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	/** The button that is utilized for sending encrypted system nonce and login used by the symmetric login to the icrash System. */
 	@FXML
 	private Button bttnCoordSymmetricLogin2;
+	
+	/** The button that scans the biometric data. */
+	@FXML
+	private Button bttnCoordScan;
+	
+	/** The progress indicator that shows the progress of the biometric scan. */
+	@FXML
+	private ProgressIndicator progressIndicatorCoordBiometricScan;
 
     /**
      * Button event that deals with changing the status of a crisis
@@ -311,6 +320,16 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSymmetricLogin2_OnClick(ActionEvent event) {
+		// to be implemented
+	}
+	
+	/**
+	 * The button event that scan the user's biometric data
+	 * 
+	 * @param event The event type thrown, we do not need this, but it must be specified
+	 */
+	@FXML
+	void bttnBottomLoginPaneCoordScan_OnClick(ActionEvent event) {
 		// to be implemented
 	}
     

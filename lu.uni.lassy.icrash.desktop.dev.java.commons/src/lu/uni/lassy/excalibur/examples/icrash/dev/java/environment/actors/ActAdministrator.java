@@ -55,25 +55,38 @@ public interface ActAdministrator extends ActAuthenticated {
 	public PtBoolean oeDeleteCoordinator(DtCoordinatorID aDtCoordinatorID)
 			throws RemoteException, NotBoundException;
 	
-/**
- * 	 
- * Add a question to the system, using the parameters passed.
- *
- * @param aDtQuestionText
- * @param aDtAnswerText1
- * @param aDtAnswerText2
- * @param aDtAnswerText3
- * @param aDtAnswerText4
- * @return The success of the operation
- * @throws RemoteException
- * @throws NotBoundException
- */
-	public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
-													DtAnswerText aDtAnswerText1, 
-													DtAnswerText aDtAnswerText2,
-													DtAnswerText aDtAnswerText3, 
-													DtAnswerText aDtAnswerText4) throws RemoteException, NotBoundException;	
+	/**
+	 * 	 
+	 * Add a question to the system, using the parameters passed.
+	 *
+	 * @param aDtQuestionText
+	 * @param aDtAnswerText1
+	 * @param aDtAnswerText2
+	 * @param aDtAnswerText3
+	 * @param aDtAnswerText4
+	 * @return The success of the operation
+	 * @throws RemoteException
+	 * @throws NotBoundException
+	 */
+		public PtBoolean oeAddQuestion(DtQuestionText aDtQuestionText, 
+														DtAnswerText aDtAnswerText1, 
+														DtAnswerText aDtAnswerText2,
+														DtAnswerText aDtAnswerText3, 
+														DtAnswerText aDtAnswerText4) throws RemoteException, NotBoundException;	
 
+		
+	/**
+	 * Delete a question to the system, using the parameters passed.
+	 *
+	 * @param aDtQuestionID The ID to use when looking for the question to delete
+	 * @return The success of the method
+	 * @throws RemoteException Thrown if the server is offline
+	 * @throws NotBoundException Thrown if the server has not been bound correctly in RMI settings
+	 */
+	public PtBoolean oeDeleteQuestion(DtQuestionID aDtQuestionID)
+			throws RemoteException, NotBoundException;
+	
+	
 	/**
 	 * Ask the system to get the statistic of a specific question of a specific Alert
 	 * 
@@ -125,5 +138,6 @@ public interface ActAdministrator extends ActAuthenticated {
 	 * @throws RemoteException Thrown if the server is offline
 	 */
 	public PtBoolean ieCoordinatorUpdated() throws RemoteException;
+
 
 }

@@ -41,6 +41,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtCrisisStatus;
@@ -417,5 +418,14 @@ public interface IcrashSystem extends Remote {
 									DtAnswerText aDtAnswerText2,
 									DtAnswerText aDtAnswerText3, 
 									DtAnswerText aDtAnswerText4) throws RemoteException, SQLException;
+
+	/**
+	 * Deletes a question with the details specified.
+	 *
+	 * @param aDtQuestionID The question ID to delete from the system
+	 * @return The success of the method
+	 * @throws RemoteException Thrown if the server is offline
+	 */
+	public PtBoolean oeDeleteQuestion(DtQuestionID aDtQuestionID) throws RemoteException, SQLException;
 
 }

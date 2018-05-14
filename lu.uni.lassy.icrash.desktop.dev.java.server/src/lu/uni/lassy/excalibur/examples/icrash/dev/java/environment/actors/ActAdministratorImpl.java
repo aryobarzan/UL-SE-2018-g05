@@ -150,6 +150,40 @@ public class ActAdministratorImpl extends ActAuthenticatedImpl implements
 	}
 	
 	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator#oeDeleteCoordinator(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID)
+	 */
+	synchronized public PtBoolean oeDeleteQuestion(
+			DtQuestionID aDtQuestionID) throws RemoteException,
+			NotBoundException {
+
+		Logger log = Log4JUtils.getInstance().getLogger();
+
+		Registry registry = LocateRegistry.getRegistry(RmiUtils.getInstance().getHost(),RmiUtils.getInstance().getPort());
+
+		//Gathering the remote object as it was published into the registry
+		IcrashSystem iCrashSys_Server = (IcrashSystem) registry
+				.lookup("iCrashServer");
+
+		//set up ActAuthenticated instance that performs the request
+		iCrashSys_Server.setCurrentRequestingAuthenticatedActor(this);
+
+		log.info("message ActAdministrator.oeDeleteQuestion sent to system");
+		PtBoolean res;
+		try {
+			res = iCrashSys_Server.oeDeleteQuestion(aDtQuestionID);
+		} catch (SQLException e) {
+			Log4JUtils.getInstance().getLogger().error(e);
+			res = new PtBoolean(false);
+		}
+
+		if (res.getValue() == true)
+			log.info("operation oeDeleteQuestion successfully executed by the system");
+
+		return res;
+		
+	}
+	
+	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActAdministrator#oeGetAnswerU(DtAlertID, DtQuestionID)
 	 */
 	public PtBoolean oeGetAnswerU(DtAlertID aDtAlertID, DtQuestionID aDtQuestionID) throws RemoteException {

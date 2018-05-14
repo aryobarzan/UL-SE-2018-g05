@@ -21,6 +21,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBi
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
@@ -80,6 +81,16 @@ public class ActProxyAdministratorImpl extends ActProxyAuthenticatedImpl impleme
 	}
 
 	/* (non-Javadoc)
+	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAdministrator#oeDeleteQuestion(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID)
+	 */
+	synchronized public PtBoolean oeDeleteQuestion(DtQuestionID aDtQuestionID) throws RemoteException, NotBoundException{
+		if(getServerSideActor() !=null)
+			return ((ActAdministrator) getServerSideActor()).oeDeleteQuestion(aDtQuestionID);
+		else
+			return new PtBoolean(false);
+	}
+	
+	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.environment.actors.ActProxyAdministrator#ieCoordinatorAdded()
 	 */
 	public PtBoolean ieCoordinatorAdded(){
@@ -117,4 +128,5 @@ public class ActProxyAdministratorImpl extends ActProxyAuthenticatedImpl impleme
 	public PtBoolean oeLogout() throws RemoteException, NotBoundException {
 		return super.oeLogout();
 	}
+
 }

@@ -62,6 +62,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtNonce;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPhoneNumber;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtQuestionText;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtSymmetricKey;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.EtAlertStatus;
@@ -1311,6 +1312,35 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			return new PtBoolean(false);
 		}
 	}
+	
+	public PtBoolean oeDeleteQuestion(DtQuestionID ADtQuestionID) {
+		try {
+			//PreP1
+			isSystemStarted();
+			//PreP2
+			isAdminLoggedIn();
+			
+			//Get Logged in the database
+			MySqlUtils sql = MySqlUtils.getInstance();
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
+			log.debug("Connected to the database");
+
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM question WHERE id = ?");
+			ps.setInt(1, ADtQuestionID.value.getValue());
+			ps.executeUpdate();
+			
+			//PostF
+			ActAdministrator admin = (ActAdministrator) currentRequestingAuthenticatedActor;
+			admin.ieMessage(new PtString("Question deleted"));
+			return new PtBoolean(true);
+		} catch (Exception e) {
+			log.error("Exception in oeDeleteQuestion..." + e);
+			return new PtBoolean(false);
+		}
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see lu.uni.lassy.excalibur.examples.icrash.dev.java.system.IcrashSystem#oeUpdateCoordinator(lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin, lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword)

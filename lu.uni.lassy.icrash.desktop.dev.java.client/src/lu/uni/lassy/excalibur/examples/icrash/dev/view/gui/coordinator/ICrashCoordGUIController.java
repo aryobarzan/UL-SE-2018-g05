@@ -287,6 +287,9 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		txtfldCoordSymmetricField3.setVisible(false);
 		txtfldCoordSymmetricField4.setVisible(false);
 	    bttnCoordSymmetricLogin2.setVisible(false);
+	    
+	    bttnCoordScan.setVisible(false);
+	    progressIndicatorCoordBiometricScan.setVisible(false);
 
 		txtfldCoordLogonUserName.setVisible(false);
 		psswrdfldCoordLogonPassword.setVisible(false);
@@ -304,17 +307,19 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSwitchToStandardLogin_OnClick(ActionEvent event) {
-		txtfldCoordSymmetricField1.setVisible(false);
-		txtfldCoordSymmetricField2.setVisible(false);
-		bttnCoordSymmetricLogin.setVisible(false);
-		
-		txtfldCoordSymmetricField3.setVisible(false);
-		txtfldCoordSymmetricField4.setVisible(false);
-	    bttnCoordSymmetricLogin2.setVisible(false);
-
 		txtfldCoordLogonUserName.setVisible(true);
 		psswrdfldCoordLogonPassword.setVisible(true);
 		bttnCoordLogon.setVisible(true);
+		
+		txtfldCoordSymmetricField1.setVisible(false);
+		txtfldCoordSymmetricField2.setVisible(false);
+		bttnCoordSymmetricLogin.setVisible(false);
+		txtfldCoordSymmetricField3.setVisible(false);
+		txtfldCoordSymmetricField4.setVisible(false);
+	    bttnCoordSymmetricLogin2.setVisible(false);
+	    
+	    bttnCoordScan.setVisible(false);
+	    progressIndicatorCoordBiometricScan.setVisible(false);
 
 		bttnCoordSwitchToSymmetricLogin.setDisable(false);
 		bttnCoordSwitchToBiometricLogin.setDisable(false);
@@ -328,7 +333,23 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSwitchToBiometricLogin_OnClick(ActionEvent event) {
-		// to be implemented
+		bttnCoordScan.setVisible(true);
+	    progressIndicatorCoordBiometricScan.setVisible(true);
+		
+		txtfldCoordSymmetricField1.setVisible(false);
+		txtfldCoordSymmetricField2.setVisible(false);
+		bttnCoordSymmetricLogin.setVisible(false);
+		txtfldCoordSymmetricField3.setVisible(false);
+		txtfldCoordSymmetricField4.setVisible(false);
+	    bttnCoordSymmetricLogin2.setVisible(false);
+
+		txtfldCoordLogonUserName.setVisible(false);
+		psswrdfldCoordLogonPassword.setVisible(false);
+		bttnCoordLogon.setVisible(false);
+
+		bttnCoordSwitchToSymmetricLogin.setDisable(false);
+		bttnCoordSwitchToBiometricLogin.setDisable(true);
+		bttnCoordSwitchToStandardLogin.setDisable(false);
 	}
 	
 	/**

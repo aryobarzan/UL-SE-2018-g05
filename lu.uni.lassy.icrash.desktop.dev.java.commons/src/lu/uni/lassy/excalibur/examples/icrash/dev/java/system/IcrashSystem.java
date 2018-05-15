@@ -255,7 +255,7 @@ public interface IcrashSystem extends Remote {
 	 * @return
 	 */
 	public PtBoolean oeAnswer(EtHumanKind aEtHumanKind, DtDate aDtDate, DtTime aDtTime, DtPhoneNumber aDtPhoneNumber,
-			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID);
+			DtQuestionID aDtQuestionID, DtAnswerID aDtAnswerID) throws RemoteException;
 	
 	/**
 	 * Validates an alert on the system

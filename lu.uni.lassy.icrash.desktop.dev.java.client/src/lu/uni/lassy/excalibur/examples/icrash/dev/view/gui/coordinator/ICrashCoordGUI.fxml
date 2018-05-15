@@ -149,13 +149,13 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="bttnCoordScan" mnemonicParsing="false" text="Scan" onAction="#bttnBottomLoginPaneCoordScan_OnClick" prefWidth="52.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Button fx:id="bttnCoordScan" mnemonicParsing="false" text="Scan" onAction="#bttnBottomLoginPaneCoordScan_OnClick" prefWidth="52.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" >
                     	                <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Button>
                                     <Button fx:id="bttnCoordSwitchToSymmetricLogin" mnemonicParsing="false" onAction="#bttnCoordSwitchToSymmetricLogin_OnClick" text="Symmetric Login" GridPane.rowIndex="3" />
-                                    <Button fx:id="bttnCoordSwitchToStandardLogin" mnemonicParsing="false" onAction="#bttnCoordSwitchToStandardLogin_OnClick" text="Standard Login" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Button fx:id="bttnCoordSwitchToStandardLogin" disable="true" mnemonicParsing="false" onAction="#bttnCoordSwitchToStandardLogin_OnClick" text="Standard Login" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Button fx:id="bttnCoordSwitchToBiometricLogin" mnemonicParsing="false" onAction="#bttnCoordSwitchToBiometricLogin_OnClick" text="Biometric Login" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>

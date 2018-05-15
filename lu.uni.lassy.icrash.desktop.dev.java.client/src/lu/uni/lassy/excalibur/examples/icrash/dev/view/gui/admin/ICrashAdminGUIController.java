@@ -327,7 +327,6 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnBottomLoginPaneSymmetricLogin_OnClick(ActionEvent event) {
-		// Handle symmetric submit button here
 		sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin();
 
 	}
@@ -339,7 +338,6 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnBottomLoginPaneSymmetricLogin2_OnClick(ActionEvent event) {
-		// Handle symmetric submit button here
 		sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin();
 
 	}

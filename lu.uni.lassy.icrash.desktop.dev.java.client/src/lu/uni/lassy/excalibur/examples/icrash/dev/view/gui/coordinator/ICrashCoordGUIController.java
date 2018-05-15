@@ -280,7 +280,21 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSwitchToSymmetricLogin_OnClick(ActionEvent event) {
-		// to be implemented
+		txtfldCoordSymmetricField1.setVisible(true);
+		txtfldCoordSymmetricField2.setVisible(true);
+		bttnCoordSymmetricLogin.setVisible(true);
+		
+		txtfldCoordSymmetricField3.setVisible(false);
+		txtfldCoordSymmetricField4.setVisible(false);
+	    bttnCoordSymmetricLogin2.setVisible(false);
+
+		txtfldCoordLogonUserName.setVisible(false);
+		psswrdfldCoordLogonPassword.setVisible(false);
+		bttnCoordLogon.setVisible(false);
+
+		bttnCoordSwitchToSymmetricLogin.setDisable(true);
+		bttnCoordSwitchToBiometricLogin.setDisable(false);
+		bttnCoordSwitchToStandardLogin.setDisable(false);
 	}
 	
 	/**
@@ -290,7 +304,21 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSwitchToStandardLogin_OnClick(ActionEvent event) {
-		// to be implemented
+		txtfldCoordSymmetricField1.setVisible(false);
+		txtfldCoordSymmetricField2.setVisible(false);
+		bttnCoordSymmetricLogin.setVisible(false);
+		
+		txtfldCoordSymmetricField3.setVisible(false);
+		txtfldCoordSymmetricField4.setVisible(false);
+	    bttnCoordSymmetricLogin2.setVisible(false);
+
+		txtfldCoordLogonUserName.setVisible(true);
+		psswrdfldCoordLogonPassword.setVisible(true);
+		bttnCoordLogon.setVisible(true);
+
+		bttnCoordSwitchToSymmetricLogin.setDisable(false);
+		bttnCoordSwitchToBiometricLogin.setDisable(false);
+		bttnCoordSwitchToStandardLogin.setDisable(true);
 	}
 	
 	/**
@@ -310,7 +338,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSymmetricLogin_OnClick(ActionEvent event) {
-		// to be implemented
+		sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin();
 	}
 	
 	/**
@@ -320,7 +348,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnCoordSymmetricLogin2_OnClick(ActionEvent event) {
-		// to be implemented
+		sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin();
 	}
 	
 	/**
@@ -696,10 +724,47 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	
 	@Override
 	public void sendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin() {
-		// to be implemented
+		if(txtfldCoordSymmetricField1.getText().length() > 0 && txtfldCoordSymmetricField2.getText().length() > 0){
+			try {
+				int nonce = Integer.parseInt((txtfldCoordSymmetricField2.getText()));
+				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldCoordSymmetricField1.getText(), nonce).getValue())
+					txtfldCoordSymmetricField3.setVisible(true);
+				    txtfldCoordSymmetricField4.setVisible(true);
+				    bttnCoordSymmetricLogin2.setVisible(true);
+					
+					txtfldCoordSymmetricField1.setVisible(false);
+				    txtfldCoordSymmetricField2.setVisible(false);
+				    bttnCoordSymmetricLogin.setVisible(false);
+					System.out.println("First step of symmetric login successful");
+			}
+			catch (ServerOfflineException | ServerNotBoundException e) {
+				showExceptionErrorMessage(e);
+			}	
+    	}
+    	else
+    		showWarningNoDataEntered();
 	} 
 	@Override
 	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
-		// to be implemented
+		if(txtfldCoordSymmetricField3.getText().length() > 0 && txtfldCoordSymmetricField4.getText().length() > 0){
+			try {
+				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldCoordSymmetricField3.getText(), txtfldCoordSymmetricField4.getText()).getValue() == true)
+					txtfldCoordSymmetricField3.setVisible(false);
+				    txtfldCoordSymmetricField4.setVisible(false);
+				    bttnCoordSymmetricLogin2.setVisible(false);
+				    
+				    txtfldCoordSymmetricField1.setVisible(true);
+				    txtfldCoordSymmetricField2.setVisible(true);
+				    bttnCoordSymmetricLogin.setVisible(true);
+					
+				    logonShowPanes(true);
+					System.out.println("Second step of symmetric login successful");
+			}
+			catch (ServerOfflineException | ServerNotBoundException e) {
+				showExceptionErrorMessage(e);
+			}	
+    	}
+    	else
+    		showWarningNoDataEntered();
 	}
 }

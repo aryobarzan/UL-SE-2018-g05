@@ -351,20 +351,21 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	void bttnBottomLoginPaneAdminScan_OnClick(ActionEvent event) {
 		// Handle scan of the biometric data here
 		bttnAdminScan.setDisable(true);
-		IntegerProperty seconds = new SimpleIntegerProperty();
-		progressIndicatorAdminBiometricScan.progressProperty().bind(seconds.divide(60.0));
-		Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(seconds, 0)),
-				new KeyFrame(Duration.minutes(0.1), e -> {
+		IntegerProperty milliSeconds = new SimpleIntegerProperty();
+		progressIndicatorAdminBiometricScan.progressProperty().bind(milliSeconds.divide(1000.0));
+		Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(milliSeconds, 0.0)),
+				new KeyFrame(Duration.seconds(10.0), e -> {
 					bttnAdminScan.setDisable(false);
 					try {
 						if (userController.oeLoginUsingBiometric("55534552534f444f5552").getValue())
 							logonShowPanes(true);
 							progressIndicatorAdminBiometricScan.progressProperty().unbind();
+							progressIndicatorAdminBiometricScan.setProgress(0.0);
 					}
 					catch (ServerOfflineException | ServerNotBoundException exception) {
 						showExceptionErrorMessage(exception);
 					}	
-				}, new KeyValue(seconds, 60)));
+				}, new KeyValue(milliSeconds, 1000.0)));
 		timeline.play();
 	}
 
@@ -447,6 +448,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		TextField txtfldUserID = new TextField();
 		TextField txtfldUserName = new TextField();
 		PasswordField psswrdfldPassword = new PasswordField();
+		TextField txtfldBiometricData = new TextField();
 		txtfldUserID.setPromptText("User ID");
 		Button bttntypOK = null;
 		GridPane grdpn = new GridPane();
@@ -456,9 +458,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			bttntypOK = new Button("Create");
 			txtfldUserName.setPromptText("User name");
 			psswrdfldPassword.setPromptText("Password");
+			txtfldBiometricData.setPromptText("55534552534f444f5552");
 			grdpn.add(txtfldUserName, 1, 2);
 			grdpn.add(psswrdfldPassword, 1, 3);
-			grdpn.add(bttntypOK, 1, 4);
+			grdpn.add(txtfldBiometricData, 1, 4);
+			grdpn.add(bttntypOK, 1, 5);
 			break;
 		case Delete:
 			bttntypOK = new Button("Delete");
@@ -475,8 +479,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 					try {
 						DtCoordinatorID coordID = new DtCoordinatorID(new PtString(txtfldUserID.getText()));
 						switch(type){
-						case Add: //replace biometricData here
-							if (userController.oeAddCoordinator(txtfldUserID.getText(), txtfldUserName.getText(), psswrdfldPassword.getText(), "biometricData").getValue()){
+						case Add:
+							if (userController.oeAddCoordinator(txtfldUserID.getText(), txtfldUserName.getText(), psswrdfldPassword.getText(), txtfldBiometricData.getText()).getValue()){
 								listOfOpenWindows.add(new CreateICrashCoordGUI(coordID, systemstateController.getActCoordinator(txtfldUserName.getText())));
 								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
 							}

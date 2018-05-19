@@ -18,6 +18,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.util.Callback;
+import javafx.util.Duration;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.CoordinatorController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectActorException;
 import lu.uni.lassy.excalibur.examples.icrash.dev.controller.exceptions.IncorrectFormatException;
@@ -40,6 +41,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -379,7 +385,24 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	 */
 	@FXML
 	void bttnBottomLoginPaneCoordScan_OnClick(ActionEvent event) {
-		// to be implemented
+		// Handle scan of the biometric data here
+		bttnCoordScan.setDisable(true);
+		IntegerProperty milliSeconds = new SimpleIntegerProperty();
+		progressIndicatorCoordBiometricScan.progressProperty().bind(milliSeconds.divide(1000.0));
+		Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, new KeyValue(milliSeconds, 0.0)),
+				new KeyFrame(Duration.seconds(10.0), e -> {
+					bttnCoordScan.setDisable(false);
+					try {
+						if (userController.oeLoginUsingBiometric("55534552534f444f5552").getValue())
+							logonShowPanes(true);
+							progressIndicatorCoordBiometricScan.progressProperty().unbind();
+							progressIndicatorCoordBiometricScan.setProgress(0.0);
+					}
+					catch (ServerOfflineException | ServerNotBoundException exception) {
+						showExceptionErrorMessage(exception);
+					}	
+				}, new KeyValue(milliSeconds, 1000.0)));
+		timeline.play();
 	}
     
     /*

@@ -67,6 +67,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.MySqlUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
+import sun.font.TextLabel;
 /*
  * This is the end of the import section to be replaced by modifications in the ICrash.fxml document from the sample skeleton controller
  */
@@ -587,14 +588,34 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			Statement query = conn.createStatement();
 			ResultSet result = query.executeQuery("SELECT * FROM question");
 			
-			int i = 1;
+			String bold = "-fx-font-weight: bold";
+			
+			Text questionLabel = new Text("Question");
+			Text answer1Label = new Text("Answer 1");
+			Text answer2Label = new Text("Answer 2");
+			Text answer3Label = new Text("Answer 3");
+			Text answer4Label = new Text("Answer 4");
+			
+			questionLabel.setStyle(bold);
+			answer1Label.setStyle(bold);
+			answer2Label.setStyle(bold);
+			answer3Label.setStyle(bold);
+			answer4Label.setStyle(bold);
+			
+			grdpn.add(questionLabel, 2, 1);
+			grdpn.add(answer1Label, 3, 1);
+			grdpn.add(answer2Label, 4, 1);
+			grdpn.add(answer3Label, 5, 1);
+			grdpn.add(answer4Label, 6, 1);
+				
+			int i = 2;
 			while(result.next()) {
 				CheckBox id = new CheckBox();
-				TextField txtQuestion = new TextField();
-				TextField txtAnswer1 = new TextField();
-				TextField txtAnswer2 = new TextField();
-				TextField txtAnswer3 = new TextField();
-				TextField txtAnswer4 = new TextField();
+				Text txtQuestion = new Text();
+				Text txtAnswer1 = new Text();
+				Text txtAnswer2 = new Text();
+				Text txtAnswer3 = new Text();
+				Text txtAnswer4 = new Text();
 				
 				id.setId(Integer.toString(result.getInt("id")));
 				txtQuestion.setText(result.getString("question"));
@@ -611,11 +632,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				grdpn.add(txtAnswer4, 6, i);
 				i++;
 			}
-//			TextField txtfldQuestionsID = new TextField();
-//			txtfldQuestionsID.setPromptText("Question ID");
 			bttntypOK = new Button("Delete");
-//			grdpn.add(txtfldQuestionsID, 1, 1);
-			grdpn.add(bttntypOK, 1, i);
+			grdpn.add(bttntypOK, 2, i);
 			
 			break;		
 		}

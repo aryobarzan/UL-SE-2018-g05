@@ -54,7 +54,8 @@ operation: icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce(ALo
 /* Post P01 */
 postF{
   let encryptedMessage:dtEncryptedMessage in
-  and ()//encryptedMessage contains both login and nonce encrypted via the Vigenère cipher
+  and ()//encryptedMessage contains both the login encrypted via the Vigenère cipher
+  		//and the nonce encrypted by adding the ASCII value of each character of the symmetric key to the nonce
   (result = encryptedMessage)
 }
 }
@@ -63,7 +64,7 @@ operation: icrash.concepts.primarytypes.classes.ctState.decryptLogin(AEncryptedM
 /* Post P01 */
 postF{
   let decryptedLogin:dtLogin in
-  and ()//decryptedLogin obtained by decrypting the encryptedLogin attribute of the AEncryptedMessage using the ASymmetricKey the Vigenère cipher
+  and ()//decryptedLogin obtained by decrypting the encryptedLogin attribute of the AEncryptedMessage using the ASymmetricKey with the Vigenère cipher
   (result = decryptedLogin)
 }
 }
@@ -72,7 +73,8 @@ operation: icrash.concepts.primarytypes.classes.ctState.decryptNonce(AEncryptedM
 /* Post P01 */
 postF{
   let decryptedNonce:dtNonce in
-  and ()//decryptedNonce obtained by decrypting the encryptedNonce attribute of the AEncryptedMessage using the ASymmetricKey the Vigenère cipher
+  and ()//decryptedNonce obtained by decrypting the encryptedNonce attribute of the AEncryptedMessage using the ASymmetricKey:
+        //we subtract the ASCII value of each character in the symmetric key from the encrypted nonce
   (result = decryptedNonce)
 }
 }

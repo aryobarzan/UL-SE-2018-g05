@@ -632,9 +632,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				grdpn.add(txtAnswer4, 6, i);
 				i++;
 			}
-			bttntypOK = new Button("Delete");
+			bttntypOK = new Button("Delete Selected");
 			grdpn.add(bttntypOK, 2, i);
-			
+			grdpn.setHgap(10.0);
+			grdpn.setVgap(5.0);
 			break;		
 		}
 		bttntypOK.setDefaultButton(true);

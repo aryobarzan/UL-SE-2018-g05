@@ -75,7 +75,6 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDate;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtDateAndTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtInteger;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtSecond;
-import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.DtTime;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtInteger;
@@ -1272,6 +1271,7 @@ public class IcrashSystemImpl extends UnicastRemoteObject implements
 			//PostF5
 			ActAdministrator admin = (ActAdministrator) currentRequestingAuthenticatedActor;
 			admin.ieCoordinatorAdded();
+			admin.ieMessage(new PtString("The new coordinator's symmetric key is: " + ctCoordinator.symmetricKey.value.getValue()));
 		} catch (Exception ex) {
 			log.error("Exception in oeAddCoordinator..." + ex);
 		}

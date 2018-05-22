@@ -12,7 +12,10 @@
  ******************************************************************************/
 package lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary;
 
+import java.util.Random;
+
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 
 /**
  * The Class CtCoordinator which extends the class of CtAuthenticated
@@ -37,6 +40,14 @@ public class CtCoordinator extends CtAuthenticated {
 	public PtBoolean init(DtCoordinatorID aId,DtLogin aLogin,DtPassword aPwd, DtBiometricData aBioData){
 			super.init(aLogin, aPwd, aBioData);
 			id = aId;
+			Random random = new Random(System.currentTimeMillis());
+			// Generate random symmetric key for the new coordinator. Note that this is not conform to the Messir specification, as a key exchange has to happen to establish the key. However, for the implementation we assume the exchange to have been done.
+			String randomGeneratedSymmetricKey = "";
+			for(int i = 0; i < 4; i++) {
+				char character = (char) (random.nextInt(26) + 65);
+				randomGeneratedSymmetricKey += character;
+			}
+			this.symmetricKey = new DtSymmetricKey(new PtString(randomGeneratedSymmetricKey));
 			return new PtBoolean(true); 
 	}
 	

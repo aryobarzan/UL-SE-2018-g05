@@ -16,10 +16,12 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
@@ -27,6 +29,8 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -557,6 +561,14 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		
 		Button bttntypOK = null;
 		GridPane grdpn = new GridPane();
+		List<String> checkboxList = new ArrayList<String>();
+		
+		
+		//Get Logged in the database
+		MySqlUtils sql = MySqlUtils.getInstance();
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
+
 		grdpn.setMinWidth(500);
 		switch(type){
 		case Add:
@@ -579,12 +591,6 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			break;
 		case Delete:
 			//SQL Statement
-			
-			//Get Logged in the database
-			MySqlUtils sql = MySqlUtils.getInstance();
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
-
 			Statement query = conn.createStatement();
 			ResultSet result = query.executeQuery("SELECT * FROM question");
 			
@@ -617,12 +623,27 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				Text txtAnswer3 = new Text();
 				Text txtAnswer4 = new Text();
 				
-				id.setId(Integer.toString(result.getInt("id")));
+				String id_txt = Integer.toString(result.getInt("id"));
+				
 				txtQuestion.setText(result.getString("question"));
 				txtAnswer1.setText(result.getString("answer1"));
 				txtAnswer2.setText(result.getString("answer2"));
 				txtAnswer3.setText(result.getString("answer3"));
 				txtAnswer4.setText(result.getString("answer4"));
+				
+				id.selectedProperty().addListener(new ChangeListener<Boolean>() {
+					@Override
+					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
+							Boolean newValue) {		
+						if(!oldValue && newValue) {
+							checkboxList.add(id_txt);
+						}
+						else if(!newValue && oldValue) {
+							checkboxList.remove(id_txt);
+						}
+					}
+
+				});
 				
 				grdpn.add(id, 1, i);
 				grdpn.add(txtQuestion, 2, i);
@@ -658,8 +679,13 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 								showErrorMessage("Unable to add question", "An error occured when adding the question");
 							break;
 						case Delete:
-							if(true)
+							if(!checkboxList.isEmpty()) {
+							//	PreparedStatement query = conn.prepareStatement("DELETE FROM question WHERE id = ?");
+								for(String id : checkboxList) {
+									userController.oeDeleteQuestion(Integer.parseInt(id));
+								}
 								anchrpnQuestionDetails.getChildren().remove(grdpn);
+							}
 							else
 								showErrorMessage("Unable to delete question", "An error occured when deleting the question");
 							break;

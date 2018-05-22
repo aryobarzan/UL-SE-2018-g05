@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/lu.uni.lassy.icrash.desktop.dev.java.commons"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
 	<classpathentry kind="lib" path="/lu.uni.lassy.icrash.desktop.dev.java.commons/libs/log4j-1.2.16.jar"/>
+	<classpathentry exported="true" kind="src" path="/lu.uni.lassy.icrash.desktop.dev.java.database"/>
+	<classpathentry kind="lib" path="/home/koala/messir2018/lu.uni.lassy.icrash.desktop.dev.java.database/libs/mysql-connector-java-5.1.6-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

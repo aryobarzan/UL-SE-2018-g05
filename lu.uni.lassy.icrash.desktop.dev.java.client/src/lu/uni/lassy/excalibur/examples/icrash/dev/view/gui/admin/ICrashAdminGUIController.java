@@ -14,6 +14,11 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -30,6 +35,7 @@ import javafx.event.EventHandler;
  */
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
@@ -57,6 +63,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.MySqlUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
@@ -208,7 +215,12 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      */
     @FXML
     void bttnBottomAdminCoordinatorAddAQuestion_OnClick(ActionEvent event) {
-    	showQuestionScreen(TypeOfEdit.Add);
+    	try {
+			showQuestionScreen(TypeOfEdit.Add);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -218,7 +230,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      */
     @FXML
     void bttnBottomAdminCoordinatorDeleteAQuestion_OnClick(ActionEvent event) {
-    	showQuestionScreen(TypeOfEdit.Delete);
+    	try {
+			showQuestionScreen(TypeOfEdit.Delete);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -517,8 +533,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 * Shows the modify survey/question screen.
 	 *
 	 * @param type The type of edit to be done, this could be add or delete
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	private void showQuestionScreen(TypeOfEdit type){
+	private void showQuestionScreen(TypeOfEdit type) throws ClassNotFoundException, SQLException{
 		String disclaimer = "Disclaimer:\n"
 				+ "Answer 1 has a value of -2 and should be considered as very bad\n"
 				+ "Answer 2 has a value of -1 and should be considered as bad\n"
@@ -559,12 +577,45 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			txtfldQuestionName.requestFocus();
 			break;
 		case Delete:
-			TextField txtfldQuestionsID = new TextField();
-			txtfldQuestionsID.setPromptText("Question ID");
+			//SQL Statement
+			
+			//Get Logged in the database
+			MySqlUtils sql = MySqlUtils.getInstance();
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
+
+			Statement query = conn.createStatement();
+			ResultSet result = query.executeQuery("SELECT * FROM question");
+			
+			int i = 1;
+			while(result.next()) {
+				CheckBox id = new CheckBox();
+				TextField txtQuestion = new TextField();
+				TextField txtAnswer1 = new TextField();
+				TextField txtAnswer2 = new TextField();
+				TextField txtAnswer3 = new TextField();
+				TextField txtAnswer4 = new TextField();
+				
+				id.setId(Integer.toString(result.getInt("id")));
+				txtQuestion.setText(result.getString("question"));
+				txtAnswer1.setText(result.getString("answer1"));
+				txtAnswer2.setText(result.getString("answer2"));
+				txtAnswer3.setText(result.getString("answer3"));
+				txtAnswer4.setText(result.getString("answer4"));
+				
+				grdpn.add(id, 1, i);
+				grdpn.add(txtQuestion, 2, i);
+				grdpn.add(txtAnswer1, 3, i);
+				grdpn.add(txtAnswer2, 4, i);
+				grdpn.add(txtAnswer3, 5, i);
+				grdpn.add(txtAnswer4, 6, i);
+				i++;
+			}
+//			TextField txtfldQuestionsID = new TextField();
+//			txtfldQuestionsID.setPromptText("Question ID");
 			bttntypOK = new Button("Delete");
-			grdpn.add(txtfldQuestionsID, 1, 1);
-			grdpn.add(bttntypOK, 1, 2);
-			txtfldQuestionsID.requestFocus();
+//			grdpn.add(txtfldQuestionsID, 1, 1);
+			grdpn.add(bttntypOK, 1, i);
 			
 			break;		
 		}
@@ -577,7 +628,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				else{
 					try {
 						switch(type){
-						case Add: //replace biometricData here
+						case Add: 
 							if (userController.oeAddQuestion(txtfldQuestionName.getText(), 
 									txtfldAnswer1.getText(), 
 									txtfldAnswer2.getText(), 
@@ -588,14 +639,6 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 								showErrorMessage("Unable to add question", "An error occured when adding the question");
 							break;
 						case Delete:
-//							if (userController.oeDeleteCoordinator(txtfldUserID.getText()).getValue()){
-//								for(CreateICrashCoordGUI window : listOfOpenWindows){
-//									if (window.getDtCoordinatorID().value.getValue().equals(coordID.value.getValue()))
-//										window.closeWindow();
-//								}
-//								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
-//							}
-							//Do nothing for the moment
 							if(true)
 								anchrpnQuestionDetails.getChildren().remove(grdpn);
 							else

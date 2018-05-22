@@ -16,7 +16,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -71,7 +70,6 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.MySqlUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
-import sun.font.TextLabel;
 /*
  * This is the end of the import section to be replaced by modifications in the ICrash.fxml document from the sample skeleton controller
  */
@@ -654,6 +652,8 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				i++;
 			}
 			bttntypOK = new Button("Delete Selected");
+			if(i == 2)
+				bttntypOK.setDisable(true);
 			grdpn.add(bttntypOK, 2, i);
 			grdpn.setHgap(10.0);
 			grdpn.setVgap(5.0);
@@ -680,14 +680,12 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 							break;
 						case Delete:
 							if(!checkboxList.isEmpty()) {
-							//	PreparedStatement query = conn.prepareStatement("DELETE FROM question WHERE id = ?");
 								for(String id : checkboxList) {
-									userController.oeDeleteQuestion(Integer.parseInt(id));
+									if(!userController.oeDeleteQuestion(Integer.parseInt(id)).getValue())
+										showErrorMessage("Unable to delete question", "An error occured when deleting the question");
 								}
 								anchrpnQuestionDetails.getChildren().remove(grdpn);
 							}
-							else
-								showErrorMessage("Unable to delete question", "An error occured when deleting the question");
 							break;
 						}
 					} catch (Exception e) {

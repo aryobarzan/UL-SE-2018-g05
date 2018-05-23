@@ -790,7 +790,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		if(txtfldAdminSymmetricField1.getText().length() > 0 && txtfldAdminSymmetricField2.getText().length() > 0){
 			try {
 				int nonce = Integer.parseInt((txtfldAdminSymmetricField2.getText()));
-				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldAdminSymmetricField1.getText(), nonce).getValue())
+				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldAdminSymmetricField1.getText(), nonce).getValue()) {
 					txtfldAdminSymmetricField3.setVisible(true);
 				    txtfldAdminSymmetricField4.setVisible(true);
 				    bttnAdminSymmetricLogin2.setVisible(true);
@@ -799,6 +799,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				    txtfldAdminSymmetricField2.setVisible(false);
 				    bttnAdminSymmetricLogin.setVisible(false);
 					System.out.println("First step of symmetric login successful");
+				}
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);
@@ -811,7 +812,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
 		if(txtfldAdminSymmetricField3.getText().length() > 0 && txtfldAdminSymmetricField4.getText().length() > 0){
 			try {
-				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldAdminSymmetricField3.getText(), txtfldAdminSymmetricField4.getText()).getValue() == true)
+				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldAdminSymmetricField3.getText(), txtfldAdminSymmetricField4.getText()).getValue() == true) {
 					txtfldAdminSymmetricField3.setVisible(false);
 				    txtfldAdminSymmetricField4.setVisible(false);
 				    bttnAdminSymmetricLogin2.setVisible(false);
@@ -822,6 +823,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 					
 				    logonShowPanes(true);
 					System.out.println("Second step of symmetric login successful");
+				}
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);

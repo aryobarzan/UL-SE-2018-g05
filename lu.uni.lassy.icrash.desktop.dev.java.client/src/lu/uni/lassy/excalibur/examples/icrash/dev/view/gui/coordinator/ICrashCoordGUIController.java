@@ -771,7 +771,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		if(txtfldCoordSymmetricField1.getText().length() > 0 && txtfldCoordSymmetricField2.getText().length() > 0){
 			try {
 				int nonce = Integer.parseInt((txtfldCoordSymmetricField2.getText()));
-				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldCoordSymmetricField1.getText(), nonce).getValue())
+				if (userController.oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameForSymmetricLogin(txtfldCoordSymmetricField1.getText(), nonce).getValue()) {
 					txtfldCoordSymmetricField3.setVisible(true);
 				    txtfldCoordSymmetricField4.setVisible(true);
 				    bttnCoordSymmetricLogin2.setVisible(true);
@@ -780,6 +780,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 				    txtfldCoordSymmetricField2.setVisible(false);
 				    bttnCoordSymmetricLogin.setVisible(false);
 					System.out.println("First step of symmetric login successful");
+				}
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);
@@ -792,7 +793,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	public void sendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin() {
 		if(txtfldCoordSymmetricField3.getText().length() > 0 && txtfldCoordSymmetricField4.getText().length() > 0){
 			try {
-				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldCoordSymmetricField3.getText(), txtfldCoordSymmetricField4.getText()).getValue() == true)
+				if (userController.oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(txtfldCoordSymmetricField3.getText(), txtfldCoordSymmetricField4.getText()).getValue() == true) {
 					txtfldCoordSymmetricField3.setVisible(false);
 				    txtfldCoordSymmetricField4.setVisible(false);
 				    bttnCoordSymmetricLogin2.setVisible(false);
@@ -803,6 +804,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 					
 				    logonShowPanes(true);
 					System.out.println("Second step of symmetric login successful");
+				}
 			}
 			catch (ServerOfflineException | ServerNotBoundException e) {
 				showExceptionErrorMessage(e);

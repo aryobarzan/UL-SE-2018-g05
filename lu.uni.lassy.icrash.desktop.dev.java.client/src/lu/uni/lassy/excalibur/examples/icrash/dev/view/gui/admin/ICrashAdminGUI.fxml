@@ -22,7 +22,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin.ICrashAdminGUIController">
    <children>
-      <SplitPane dividerPositions="0.5149863760217984" orientation="VERTICAL" prefHeight="509.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.5149863760217984" orientation="VERTICAL" prefHeight="509.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0">
                <children>
@@ -80,15 +80,15 @@
                         </GridPane>
                      </children>
                   </Pane>
-                  <BorderPane id="brdpnAdmin" fx:id="brdpnAdmin" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <left>
-                        <TabPane fx:id="adminTabPane" prefHeight="257.0" prefWidth="510.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="142.0" prefWidth="748.0" id="brdpnAdmin" fx:id="brdpnAdmin" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <center>
+                        <TabPane fx:id="adminTabPane" prefHeight="257.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                           <tabs>
                             <Tab fx:id="coordinatorTab" closable="false" text="Coordinator">
                                  <content>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <VBox prefHeight="200.0">
                                        <children>
-                                          <HBox prefHeight="141.0" prefWidth="232.0">
+                                          <HBox>
                                              <children>
                                                 <Button id="bttnBottomAdminCoordinatorAddACoordinator" fx:id="bttnBottomAdminCoordinatorAddACoordinator" mnemonicParsing="false" onAction="#bttnBottomAdminCoordinatorAddACoordinator_OnClick" prefHeight="50.0" prefWidth="100.0" text="Add a coordinator" textAlignment="CENTER" wrapText="true">
                                                    <font>
@@ -131,7 +131,7 @@
                                  </content></Tab>
                           </tabs>
                         </TabPane>
-                     </left>
+                     </center>
                   </BorderPane>
                </children>
             </AnchorPane>

@@ -14,7 +14,13 @@ package lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.admin;
 import java.net.URL;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
@@ -22,6 +28,8 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +38,7 @@ import javafx.event.EventHandler;
  */
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
@@ -57,6 +66,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCo
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.Log4JUtils;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.utils.MySqlUtils;
 import lu.uni.lassy.excalibur.examples.icrash.dev.model.Message;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractAuthGUIController;
 import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.CreateICrashCoordGUI;
@@ -208,7 +218,12 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      */
     @FXML
     void bttnBottomAdminCoordinatorAddAQuestion_OnClick(ActionEvent event) {
-    	showQuestionScreen(TypeOfEdit.Add);
+    	try {
+			showQuestionScreen(TypeOfEdit.Add);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -218,7 +233,11 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
      */
     @FXML
     void bttnBottomAdminCoordinatorDeleteAQuestion_OnClick(ActionEvent event) {
-    	showQuestionScreen(TypeOfEdit.Delete);
+    	try {
+			showQuestionScreen(TypeOfEdit.Delete);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     /**
@@ -517,8 +536,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	 * Shows the modify survey/question screen.
 	 *
 	 * @param type The type of edit to be done, this could be add or delete
+	 * @throws ClassNotFoundException 
+	 * @throws SQLException 
 	 */
-	private void showQuestionScreen(TypeOfEdit type){
+	private void showQuestionScreen(TypeOfEdit type) throws ClassNotFoundException, SQLException{
 		String disclaimer = "Disclaimer:\n"
 				+ "Answer 1 has a value of -2 and should be considered as very bad\n"
 				+ "Answer 2 has a value of -1 and should be considered as bad\n"
@@ -538,6 +559,14 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		
 		Button bttntypOK = null;
 		GridPane grdpn = new GridPane();
+		List<String> checkboxList = new ArrayList<String>();
+		
+		
+		//Get Logged in the database
+		MySqlUtils sql = MySqlUtils.getInstance();
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(sql.getURL()+sql.getDBName(),sql.getDBUserName(),sql.getDBPassword());
+
 		grdpn.setMinWidth(500);
 		switch(type){
 		case Add:
@@ -559,13 +588,75 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 			txtfldQuestionName.requestFocus();
 			break;
 		case Delete:
-			TextField txtfldQuestionsID = new TextField();
-			txtfldQuestionsID.setPromptText("Question ID");
-			bttntypOK = new Button("Delete");
-			grdpn.add(txtfldQuestionsID, 1, 1);
-			grdpn.add(bttntypOK, 1, 2);
-			txtfldQuestionsID.requestFocus();
+			//SQL Statement
+			Statement query = conn.createStatement();
+			ResultSet result = query.executeQuery("SELECT * FROM question");
 			
+			String bold = "-fx-font-weight: bold";
+			
+			Text questionLabel = new Text("Question");
+			Text answer1Label = new Text("Answer 1");
+			Text answer2Label = new Text("Answer 2");
+			Text answer3Label = new Text("Answer 3");
+			Text answer4Label = new Text("Answer 4");
+			
+			questionLabel.setStyle(bold);
+			answer1Label.setStyle(bold);
+			answer2Label.setStyle(bold);
+			answer3Label.setStyle(bold);
+			answer4Label.setStyle(bold);
+			
+			grdpn.add(questionLabel, 2, 1);
+			grdpn.add(answer1Label, 3, 1);
+			grdpn.add(answer2Label, 4, 1);
+			grdpn.add(answer3Label, 5, 1);
+			grdpn.add(answer4Label, 6, 1);
+				
+			int i = 2;
+			while(result.next()) {
+				CheckBox id = new CheckBox();
+				Text txtQuestion = new Text();
+				Text txtAnswer1 = new Text();
+				Text txtAnswer2 = new Text();
+				Text txtAnswer3 = new Text();
+				Text txtAnswer4 = new Text();
+				
+				String id_txt = Integer.toString(result.getInt("id"));
+				
+				txtQuestion.setText(result.getString("question"));
+				txtAnswer1.setText(result.getString("answer1"));
+				txtAnswer2.setText(result.getString("answer2"));
+				txtAnswer3.setText(result.getString("answer3"));
+				txtAnswer4.setText(result.getString("answer4"));
+				
+				id.selectedProperty().addListener(new ChangeListener<Boolean>() {
+					@Override
+					public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue,
+							Boolean newValue) {		
+						if(!oldValue && newValue) {
+							checkboxList.add(id_txt);
+						}
+						else if(!newValue && oldValue) {
+							checkboxList.remove(id_txt);
+						}
+					}
+
+				});
+				
+				grdpn.add(id, 1, i);
+				grdpn.add(txtQuestion, 2, i);
+				grdpn.add(txtAnswer1, 3, i);
+				grdpn.add(txtAnswer2, 4, i);
+				grdpn.add(txtAnswer3, 5, i);
+				grdpn.add(txtAnswer4, 6, i);
+				i++;
+			}
+			bttntypOK = new Button("Delete Selected");
+			if(i == 2)
+				bttntypOK.setDisable(true);
+			grdpn.add(bttntypOK, 2, i);
+			grdpn.setHgap(10.0);
+			grdpn.setVgap(5.0);
 			break;		
 		}
 		bttntypOK.setDefaultButton(true);
@@ -577,7 +668,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 				else{
 					try {
 						switch(type){
-						case Add: //replace biometricData here
+						case Add: 
 							if (userController.oeAddQuestion(txtfldQuestionName.getText(), 
 									txtfldAnswer1.getText(), 
 									txtfldAnswer2.getText(), 
@@ -588,18 +679,13 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 								showErrorMessage("Unable to add question", "An error occured when adding the question");
 							break;
 						case Delete:
-//							if (userController.oeDeleteCoordinator(txtfldUserID.getText()).getValue()){
-//								for(CreateICrashCoordGUI window : listOfOpenWindows){
-//									if (window.getDtCoordinatorID().value.getValue().equals(coordID.value.getValue()))
-//										window.closeWindow();
-//								}
-//								anchrpnCoordinatorDetails.getChildren().remove(grdpn);
-//							}
-							//Do nothing for the moment
-							if(true)
+							if(!checkboxList.isEmpty()) {
+								for(String id : checkboxList) {
+									if(!userController.oeDeleteQuestion(Integer.parseInt(id)).getValue())
+										showErrorMessage("Unable to delete question", "An error occured when deleting the question");
+								}
 								anchrpnQuestionDetails.getChildren().remove(grdpn);
-							else
-								showErrorMessage("Unable to delete question", "An error occured when deleting the question");
+							}
 							break;
 						}
 					} catch (Exception e) {

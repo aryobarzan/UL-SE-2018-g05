@@ -686,6 +686,7 @@
     <semanticResources>documentation/View-uci-uciugAddQuestion.msrd</semanticResources>
     <semanticResources>operations/environment/environment-actAuthenticated-oeLoginUsingBiometric.msr</semanticResources>
     <semanticResources>operations/environment/environment-actAdministrator-oeAddQuestion1.msr</semanticResources>
+    <semanticResources>operations/environment/environment-actAdministrator-oeDeleteQuestion.msr</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_WzMfgPWqEeSOM9Kfym77Zg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_2Cl78CyFEei8bZ0rwHjYoQ" name="uc-oeAnswer" repPath="#_2ClU4CyFEei8bZ0rwHjYoQ">

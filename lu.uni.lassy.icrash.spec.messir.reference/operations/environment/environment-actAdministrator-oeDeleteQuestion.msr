@@ -12,7 +12,8 @@ import icrash.environment
 
 		operation: icrash.environment.actAdministrator.outactAdministrator.oeDeleteQuestion(AdtQuestionID:dtQuestionID):ptBoolean{
 			preP {
-			/* if there is no system running, if the user isn't logged in and isn't the admin, if there is no question in the database
+			/* if there is no system running, if the user isn't logged in and isn't the admin, 
+			 * if there is no question in the database
 			 * ---> DO NOTHING
 			 * AdtQuestionID is not null 
 			 */

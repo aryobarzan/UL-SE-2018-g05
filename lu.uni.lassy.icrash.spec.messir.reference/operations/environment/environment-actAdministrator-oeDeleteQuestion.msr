@@ -1,0 +1,58 @@
+package icrash.environment.operations.actAdministrator.outactAdministrator.oeDeleteQuestion {
+
+import lu.uni.lassy.messir.libraries.primitives
+import lu.uni.lassy.messir.libraries.math
+import lu.uni.lassy.messir.libraries.string
+import lu.uni.lassy.messir.libraries.calendar
+import icrash.concepts.primarytypes.datatypes
+import icrash.concepts.primarytypes.classes
+import icrash.environment
+
+	Operation Model {
+
+		operation: icrash.environment.actAdministrator.outactAdministrator.oeDeleteQuestion(AdtQuestionID:dtQuestionID):ptBoolean{
+			preP {
+			/* if there is no system running, if the user isn't logged in and isn't the admin, if there is no question in the database
+			 * ---> DO NOTHING
+			 * AdtQuestionID is not null 
+			 */
+				  let TheSystem: ctState in
+				  let TheActor:actAdministrator in
+				  
+				  self.rnActor.rnSystem = TheSystem
+				  and self.rnActor = TheActor
+				  
+				  /* PreP01 */
+				  and TheSystem.vpStarted = true
+				  /* PreP02 */
+				  and TheActor.rnctAuthenticated.vpIsLogged = true
+				  /* PreP03 */
+				  and TheSystem.rnctQuestion->select(*) = ColctQuestion
+  				  and ColctQuestion->isEmpty() = false
+			
+			}
+			preF {
+			//AdtQuestionID should exist in the system
+				  let TheSystem: ctState in
+				  and TheSystem.rnctQuestion->select(id.eq(AdtQuestionID)) = ColctQuestion
+				  and ColctQuestion->isEmpty() = false
+			}
+			postF {
+			//Delete the occurence in the system as well in the database
+			 	  let TheSystem: ctState in		
+			 	  let ThectQuestion: ctQuestion in
+				  and self.rnActor = TheActor
+				  
+				  /* PostF01 */
+				  TheSystem.rnctQuestion->select(id.eq(AdtQuestionID)) = ThectQuestion
+				  and ThectQuestion.msrIsKilled
+				  /* PostF02 */
+				  and TheActor.rnInterfaceIN^ieQuestionDeleted
+				  and true
+			}
+			postP {
+				true
+			}
+		}
+	}
+}

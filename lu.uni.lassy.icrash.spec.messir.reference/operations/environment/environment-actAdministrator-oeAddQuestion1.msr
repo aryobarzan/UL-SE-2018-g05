@@ -6,20 +6,50 @@ import lu.uni.lassy.messir.libraries.string
 import lu.uni.lassy.messir.libraries.calendar
 
 import icrash.concepts.primarytypes.datatypes
+import icrash.concepts.primarytypes.classes
+import icrash.environment
+import icrash.concepts.primarytypes.datatypes
+
 	Operation Model {
 
 		operation: icrash.environment.actAdministrator.outactAdministrator.oeAddQuestion(AdtQuestionText:dtQuestionText, AdtAnswerText1:dtAnswerText, AdtAnswerText2:dtAnswerText, AdtAnswerText3:dtAnswerText, AdtAnswerText4:dtAnswerText):ptBoolean
 		{
 			preP {
 				/*
-				 * AdtQuestionText and AdtAnswerText[1-4] are mandatory parameters and cannot be null.
 				 */
+				 let TheSystem: ctState in
+  				 let TheActor:actAdministrator in
+ 
+  				 self.rnActor.rnSystem = TheSystem
+ 				 and self.rnActor = TheActor
+  
+				 /* PreP01 */
+				 and TheSystem.vpStarted = true
+				 /* PreP02 */
+				 and TheActor.rnctAuthenticated.vpIsLogged = true
 			}
 			
 			preF {
 				/*
-				 * 
+				* AdtQuestionText and AdtAnswerText[1-4] are mandatory parameters and cannot be null. 
 				 */
+				 let TheSystem: ctState in
+  				 let TheActor:actAdministrator in
+  				 
+  				 self.rnActor.rnSystem = TheSystem
+  				 and self.rnActor = TheActor
+  				 
+  				 /* PreF01 */
+  				 and TheSystem.rnctQuestion->select(id.eq(AdtQuestionID)) 
+  				   		= ColctQuestions
+  				 and ColctQuestions->isEmpty() = true
+  				 /* PreF02 */
+  				 and AdtQuestion->isEmpty() = false
+  				 and AdtAnswer1->isEmpty() = false
+  				 and AdtAnswer2->isEmpty() = false
+  				 and AdtAnswer3->isEmpty() = false
+  				 and AdtAnswer4->isEmpty() = false
+  				   
 			}
 	
 			postF {
@@ -29,14 +59,23 @@ import icrash.concepts.primarytypes.datatypes
 				 * We assume that AdtAnswerText3 has a value of 1
 				 * We assume that AdtAnswerText4 has a value of 2
 				 * -2 = very bad, -1 = bad, 1 = good, 2 = very good
-				 * 
 				 */
-			}
+				 let TheSystem: ctState in
+			  	 let ThectQuestion:ctCoordinator in
+			  	 self.rnActor.rnSystem = TheSystem
+			  	 and self.rnActor = TheActor
+			  	 
+			  	 /* PostF01 */
+			  	 and ThectQuestion.init(AQuestionId, AQuestionText1, AQuestionText2, AQuestionText3, AQuestionText4)
+			  	 /* PostF02 */
+			  	 and TheActor.rnInterfaceIN^ieQuestionAdded()
+			} 
 
 			postP {
 				/*
 				 * AdtQuestionText and AdtAnswerText[1-4] is an entry in the database
 				 */
+				 true
 			}
 		}
 	}

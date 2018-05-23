@@ -133,7 +133,7 @@ import lu.uni.lassy.messir.libraries.calendar
 						attribute id:dtQuestionID
 						attribute text:dtQuestionText
 
-				operation init(AQuestionId:dtQuestionID, AQuestionText:dtQuestionText):ptBoolean
+				operation init(AQuestionId:dtQuestionID, AQuestionText1:dtQuestionText, AQuestionText2:dtQuestionText, AQuestionText3:dtQuestionText, AQuestionText4:dtQuestionText):ptBoolean
 			}
 			
 			class ctAnswer role rnctAnswer cardinality [0..*] {

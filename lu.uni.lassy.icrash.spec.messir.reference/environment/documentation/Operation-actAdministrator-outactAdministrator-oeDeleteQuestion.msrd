@@ -1,0 +1,34 @@
+/*
+@author koala
+@date Wed May 23 13:20:38 CEST 2018
+*/
+
+
+@@Operation
+icrash.environment.actAdministrator.outactAdministrator.oeDeleteQuestion
+//parameters
+@parameter
+icrash.environment.actAdministrator.outactAdministrator.oeDeleteQuestion.AdtQuestionID
+""
+@endParameters
+
+@description 
+"sent to delete an existing coordinator in the system's post state and environment's post state."
+//preProtocol descriptions
+@preP
+"The system is started and at least one question exist in the system"
+@endPreP
+//preFunctional descriptions
+@preF
+"it is supposed that there exist one ctQuestion instance with the same \msrcode{id} attribute than the one the administrator wants to delete."
+@endPreF
+//postFunctional descriptions
+@postF 
+"the ctQuestion class instance having the required id do not belong anymore to the post state as well as is related database entry."
+@endPostF
+//postProtocol descriptions
+@postP 
+"none"
+@endPostP
+//example
+@example" "

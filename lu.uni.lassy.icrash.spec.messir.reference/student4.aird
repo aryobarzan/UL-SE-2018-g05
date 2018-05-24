@@ -673,6 +673,19 @@
   <semanticResources>platform:/resource/lu.uni.lassy.excalibur.libraries.standard.specification/library/documentation/PrimaryType-Primitive-ptInteger.msrd</semanticResources>
   <semanticResources>platform:/resource/lu.uni.lassy.excalibur.libraries.standard.specification/library/documentation/PrimaryType-Primitive-ptReal.msrd</semanticResources>
   <semanticResources>platform:/resource/lu.uni.lassy.excalibur.libraries.standard.specification/library/documentation/PrimaryType-Primitive-ptString.msrd</semanticResources>
+  <semanticResources>documentation/View-uci-uciugSecurelyUseSystemWithBiometricData.msrd</semanticResources>
+  <semanticResources>usecases/usecaseinstance-ugSecurelyUseSystemWithBiometricData-uciugSecurelyUseSystemWithBiometricData.msr</semanticResources>
+  <semanticResources>operations/environment/environment-actAuthenticated-oeLoginUsingBiometric.msr</semanticResources>
+  <semanticResources>documentation/View-cm-SymmetricLogin-ctState.msrd</semanticResources>
+  <semanticResources>documentation/View-cm-SymmetricLogin-ctAuthenticated.msrd</semanticResources>
+  <semanticResources>operations/environment/environment-actAdministrator-oeAddQuestion1.msr</semanticResources>
+  <semanticResources>documentation/View-cm-SymmetricLoginConcernedActorsAndTypes.msrd</semanticResources>
+  <semanticResources>usecases/usecaseinstance-ugSecurelyUseSystemWithSymmetricKey-uciugSecurelyUseSystemWithSymmetricKey.msr</semanticResources>
+  <semanticResources>operations/environment/environment-actAuthenticated-init.msr</semanticResources>
+  <semanticResources>documentation/View-uci-uciugSecurelyUseSystemWithSymmetricKey.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Datatype-dtNonce.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Datatype-dtEncryptedMessage.msrd</semanticResources>
+  <semanticResources>concepts/documentation/PrimaryType-Datatype-dtSymmetricKey.msrd</semanticResources>
   <ownedViews xmi:type="viewpoint:DView" xmi:id="_X0EtsPWqEeSOM9Kfym77Zg">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
   </ownedViews>

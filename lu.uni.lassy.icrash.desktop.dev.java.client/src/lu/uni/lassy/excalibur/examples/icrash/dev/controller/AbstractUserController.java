@@ -173,7 +173,7 @@ public abstract class AbstractUserController implements HasListeners {
 		}
 	}
 	public PtBoolean oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(String encryptedLogin, String encryptedNonce)throws ServerOfflineException, ServerNotBoundException{
-		DtEncryptedMessage aDtEncryptedLoginAndNonce = new DtEncryptedMessage(new DtString(new PtString(encryptedLogin)), new DtString(new PtString(encryptedNonce)));
+		DtEncryptedMessage aDtEncryptedLoginAndNonce = new DtEncryptedMessage(new DtString(new PtString(encryptedLogin)), new DtNonce(new PtInteger(Integer.valueOf(encryptedNonce))));
 		try {
 			return this.getAuth().oeSendEncryptedLoginAndSystemsNonceAndReceiveConfirmationMessageForSymmetricLogin(aDtEncryptedLoginAndNonce);
 		} catch (RemoteException e) {

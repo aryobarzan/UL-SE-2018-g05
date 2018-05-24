@@ -17,9 +17,9 @@ public class DtEncryptedMessage implements Serializable, JIntIs{
 	 */
 	
 	public DtString encryptedLogin;
-	public DtString encryptedNonce;
+	public DtNonce encryptedNonce;
 
-	public DtEncryptedMessage(DtString encryptedLogin, DtString encryptedNonce) {
+	public DtEncryptedMessage(DtString encryptedLogin, DtNonce encryptedNonce) {
 		this.encryptedLogin = encryptedLogin;
 		this.encryptedNonce = encryptedNonce;
 	}

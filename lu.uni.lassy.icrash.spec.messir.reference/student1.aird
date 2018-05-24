@@ -2210,7 +2210,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']/@ownedRepresentations[name='Messir%20Diagram']/@defaultLayer/@containerMappings[name='SimpleDatatype']/@subNodeMappings[name='SimpleDatatype_Attributes']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_sGfvIlYaEeidHpBgdHRPjw" name="encryptedNonce : dtString">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_sGfvIlYaEeidHpBgdHRPjw" name="encryptedNonce : dtNonce">
         <target xmi:type="messir:Attribute" href="concepts/primarytypes-datatypes.msr#icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.encryptedNonce"/>
         <semanticElements xmi:type="messir:Attribute" href="concepts/primarytypes-datatypes.msr#icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.encryptedNonce"/>
         <ownedStyle xmi:type="diagram:Square" xmi:id="_sGfvI1YaEeidHpBgdHRPjw" labelSize="14" iconPath="/lu.uni.lassy.excalibur.dsl.messir.ui/icons/attribute.png" labelAlignment="LEFT">

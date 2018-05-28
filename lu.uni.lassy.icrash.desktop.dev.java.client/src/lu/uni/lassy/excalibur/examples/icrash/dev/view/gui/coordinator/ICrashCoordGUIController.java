@@ -39,6 +39,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.abstractgui.AbstractA
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.animation.KeyFrame;
@@ -191,6 +192,10 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 	@FXML
 	private Button bttnCoordSymmetricLogin2;
 	
+	/** The label that indicates to the user to mouse over the encrypted login and nonce text entry fields for help. */
+	@FXML
+	private Label labelSymmetricHelp;
+	
 	/** The button that scans the biometric data. */
 	@FXML
 	private Button bttnCoordScan;
@@ -323,6 +328,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		txtfldCoordSymmetricField3.setVisible(false);
 		txtfldCoordSymmetricField4.setVisible(false);
 	    bttnCoordSymmetricLogin2.setVisible(false);
+	    labelSymmetricHelp.setVisible(false);
 	    
 	    bttnCoordScan.setVisible(false);
 	    progressIndicatorCoordBiometricScan.setVisible(false);
@@ -348,6 +354,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 		txtfldCoordSymmetricField3.setVisible(false);
 		txtfldCoordSymmetricField4.setVisible(false);
 	    bttnCoordSymmetricLogin2.setVisible(false);
+	    labelSymmetricHelp.setVisible(false);
 
 		txtfldCoordLogonUserName.setVisible(false);
 		psswrdfldCoordLogonPassword.setVisible(false);
@@ -775,6 +782,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 					txtfldCoordSymmetricField3.setVisible(true);
 				    txtfldCoordSymmetricField4.setVisible(true);
 				    bttnCoordSymmetricLogin2.setVisible(true);
+				    labelSymmetricHelp.setVisible(true);
 					
 					txtfldCoordSymmetricField1.setVisible(false);
 				    txtfldCoordSymmetricField2.setVisible(false);
@@ -797,6 +805,7 @@ public class ICrashCoordGUIController extends AbstractAuthGUIController {
 					txtfldCoordSymmetricField3.setVisible(false);
 				    txtfldCoordSymmetricField4.setVisible(false);
 				    bttnCoordSymmetricLogin2.setVisible(false);
+				    labelSymmetricHelp.setVisible(false);
 				    
 				    txtfldCoordSymmetricField1.setVisible(true);
 				    txtfldCoordSymmetricField2.setVisible(true);

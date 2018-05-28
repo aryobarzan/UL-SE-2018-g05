@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.control.Separator?>
@@ -10,6 +11,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -19,7 +21,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.ICrashCoordGUIController">
+<AnchorPane prefHeight="500.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lu.uni.lassy.excalibur.examples.icrash.dev.view.gui.coordinator.ICrashCoordGUIController">
    <children>
       <SplitPane dividerPositions="0.6204819277108434" orientation="VERTICAL" prefHeight="509.0" prefWidth="748.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -137,8 +139,14 @@
                                     <TextField fx:id="txtfldCoordSymmetricField1" promptText="Name" visible="false" GridPane.columnSpan="2" />
                                     <TextField fx:id="txtfldCoordSymmetricField2" promptText="Nonce" visible="false" GridPane.columnSpan="2" GridPane.rowIndex="1" />
                                     <Button fx:id="bttnCoordSymmetricLogin" mnemonicParsing="false" onAction="#bttnCoordSymmetricLogin_OnClick" text="Submit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField fx:id="txtfldCoordSymmetricField3" promptText="Encrypted Login" visible="false" />
-                                    <TextField fx:id="txtfldCoordSymmetricField4" promptText="Encrypted Nonce" visible="false" GridPane.columnIndex="1" />
+                                    <TextField fx:id="txtfldCoordSymmetricField3" promptText="Encrypted Login" visible="false">
+                                       <tooltip>
+                                          <Tooltip text="To encrypt your login, use your symmetric key based on the Vigenere Cipher.To encrypt your login, use your symmetric key based on the Vigenere Cipher." />
+                                       </tooltip></TextField>
+                                    <TextField fx:id="txtfldCoordSymmetricField4" promptText="Encrypted Nonce" visible="false" GridPane.columnIndex="1">
+                                       <tooltip>
+                                          <Tooltip text="To encrypt the nonce received from the system, add the ASCII value of each character in your symmetric key to the nonce. For example, for the nonce 25 and the key &quot;ABC&quot;, 25 + 65 + 66 + 67.To encrypt the nonce received from the system, add the ASCII value of each character in your symmetric key to the nonce. For example, for the nonce 25 and the key &quot;ABC&quot;, 25 + 65 + 66 + 67." />
+                                       </tooltip></TextField>
                                     <Button fx:id="bttnCoordSymmetricLogin2" mnemonicParsing="false" onAction="#bttnCoordSymmetricLogin2_OnClick" text="Submit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Separator prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
                                     <TextField fx:id="txtfldCoordLogonUserName" promptText="Username" GridPane.columnSpan="2" />
@@ -149,7 +157,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="bttnCoordScan" mnemonicParsing="false" text="Scan" onAction="#bttnBottomLoginPaneCoordScan_OnClick" prefWidth="52.0" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" >
+                                    <Button fx:id="bttnCoordScan" mnemonicParsing="false" onAction="#bttnBottomLoginPaneCoordScan_OnClick" prefWidth="52.0" text="Scan" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     	                <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -157,6 +165,7 @@
                                     <Button fx:id="bttnCoordSwitchToSymmetricLogin" mnemonicParsing="false" onAction="#bttnCoordSwitchToSymmetricLogin_OnClick" text="Symmetric Login" GridPane.rowIndex="3" />
                                     <Button fx:id="bttnCoordSwitchToStandardLogin" disable="true" mnemonicParsing="false" onAction="#bttnCoordSwitchToStandardLogin_OnClick" text="Standard Login" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Button fx:id="bttnCoordSwitchToBiometricLogin" mnemonicParsing="false" onAction="#bttnCoordSwitchToBiometricLogin_OnClick" text="Biometric Login" GridPane.rowIndex="4" />
+                                    <Label fx:id="labelSymmetricHelp" text="For help, mouse over each text entry field." visible="false" wrapText="true" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
                            </children>

@@ -1,0 +1,25 @@
+/*
+@author aryobarzan
+@date Mon May 28 17:46:26 CEST 2018
+*/
+
+
+@@Operation
+icrash.concepts.primarytypes.classes.ctState.decryptNonce
+//parameters
+@parameter
+icrash.concepts.primarytypes.classes.ctState.decryptNonce.AEncryptedMessage
+""
+@parameter
+icrash.concepts.primarytypes.classes.ctState.decryptNonce.ASymmetricKey
+""
+@endParameters
+
+@description "Decrypts the parameter AEncryptedMessage's encryptedNonce attribute using the parameter ASymmetricKey by subtracting the ASCII value of each character in the symmetric key from the encryptedNonce.
+ "
+//postFunctional descriptions
+@postF 
+"Returns the decrypted dtNonce. "
+@endPostF
+//example
+@example" "

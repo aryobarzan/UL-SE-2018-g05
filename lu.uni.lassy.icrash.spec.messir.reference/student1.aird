@@ -679,6 +679,13 @@
     <semanticResources>concepts/documentation/PrimaryType-Datatype-dtSymmetricKey.msrd</semanticResources>
     <semanticResources>environment/documentation/Operation-actAdministrator-outactAdministrator-oeDeleteQuestion.msrd</semanticResources>
     <semanticResources>operations/environment/environment-actAdministrator-oeDeleteQuestion.msr</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin.msrd</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin.msrd</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSendRandomNumberForSymmetricKeyExchange.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-generateRandomIntegerBetween0And50000.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-encryptLoginAndNonce.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-decryptNonce.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-decryptLogin.msrd</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_UmILAPWqEeSOM9Kfym77Zg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_Hs3f0CuKEeinz4j6mhW9zQ" name="EnvironmentView1" repPath="#_Hs0cgCuKEeinz4j6mhW9zQ">

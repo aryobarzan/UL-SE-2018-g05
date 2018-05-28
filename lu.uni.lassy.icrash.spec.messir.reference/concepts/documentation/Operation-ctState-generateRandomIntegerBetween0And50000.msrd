@@ -1,0 +1,16 @@
+/*
+@author aryobarzan
+@date Mon May 28 17:42:36 CEST 2018
+*/
+
+
+@@Operation
+icrash.concepts.primarytypes.classes.ctState.generateRandomIntegerBetween0And50000
+@description "Used by ctState to generate a random integer between 0 and 5000 (included) for usage in the first step of the symmetric login, where this number is sent to the authenticating actor in plaintext.
+ "
+//postFunctional descriptions
+@postF 
+"The generated number is returned. "
+@endPostF
+//example
+@example" "

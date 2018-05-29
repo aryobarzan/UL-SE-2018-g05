@@ -35,8 +35,7 @@ import icrash.environment
 			preF {
 			//AdtQuestionID should exist in the system
 				  let TheSystem: ctState in
-				  and TheSystem.rnctQuestion->select(id.eq(AdtQuestionID)) = ColctQuestion
-				  and ColctQuestion->isEmpty() = false
+				  and TheSystem.rnctQuestion->isEmpty() = false
 			}
 			postF {
 			//Delete the occurence in the system as well in the database
@@ -49,6 +48,7 @@ import icrash.environment
 				  and ThectQuestion.msrIsKilled
 				  /* PostF02 */
 				  and TheActor.rnInterfaceIN^ieQuestionDeleted
+				  //delete associated answer en cascade
 				  and true
 			}
 			postP {

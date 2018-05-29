@@ -101,7 +101,6 @@ public class CtState implements Serializable {
 	
 	public DtEncryptedMessage encryptLoginAndNonce(DtLogin ALogin, DtNonce ANonce, DtSymmetricKey ASymmetricKey) {
 		String loginToEncrypt = ALogin.value.getValue().toUpperCase();
-		int nonceToEncrypt = ANonce.value.getValue();
 		String symmetricKeyString = ASymmetricKey.value.getValue();
 		String encryptedLogin = "";
 		for(int i = 0, j = 0; i < loginToEncrypt.length(); i++) {
@@ -116,13 +115,11 @@ public class CtState implements Serializable {
 				encryptedLogin += character;
 			}
 		}
-		String encryptedNonce = "";
-		int keyForEncryptingNonce = 0;
+		int encryptedNonce = ANonce.value.getValue();
 		for(int i = 0; i < symmetricKeyString.length(); i++) {
-			keyForEncryptingNonce += symmetricKeyString.charAt(i);
+			encryptedNonce += symmetricKeyString.charAt(i);
 			}
-		encryptedNonce = String.valueOf(nonceToEncrypt+keyForEncryptingNonce);
-		DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new DtString(new PtString(encryptedLogin)), new DtString(new PtString(encryptedNonce)));
+		DtEncryptedMessage aDtEncryptedMessage = new DtEncryptedMessage(new DtString(new PtString(encryptedLogin)), new DtNonce(new PtInteger(encryptedNonce)));
 		return aDtEncryptedMessage;
 	}
 		
@@ -149,13 +146,13 @@ public class CtState implements Serializable {
 	
 	public DtNonce decryptNonce(DtEncryptedMessage AEncryptedMessage, DtSymmetricKey ASymmetricKey) {
 		String keyToUseForDecryption = ASymmetricKey.value.getValue();
-		String decryptedNonce = "";
-		int keyForEncryptingNonce = 0;
+		int decryptedNonce = AEncryptedMessage.encryptedNonce.value.getValue();
+		int keyForDecryptingNonce = 0;
 		for(int i = 0; i < keyToUseForDecryption.length(); i++) {
-			keyForEncryptingNonce += keyToUseForDecryption.charAt(i);
+			keyForDecryptingNonce += keyToUseForDecryption.charAt(i);
 			}
-		decryptedNonce = String.valueOf(Integer.parseInt(AEncryptedMessage.encryptedNonce.value.getValue())-keyForEncryptingNonce);
-		DtNonce aDtDecryptedNonce = new DtNonce(new PtInteger(Integer.parseInt(decryptedNonce)));
+		decryptedNonce -= keyForDecryptingNonce;
+		DtNonce aDtDecryptedNonce = new DtNonce(new PtInteger(decryptedNonce));
 		return aDtDecryptedNonce;
 	}
 }

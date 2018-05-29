@@ -1,0 +1,34 @@
+/*
+@author aryobarzan
+@date Mon May 28 17:39:10 CEST 2018
+*/
+
+
+@@Operation
+icrash.environment.actAuthenticated.outactAuthenticated.oeSendRandomNumberForSymmetricKeyExchange
+//parameters
+@parameter
+icrash.environment.actAuthenticated.outactAuthenticated.oeSendRandomNumberForSymmetricKeyExchange.AdtRandomX
+""
+@endParameters
+
+@description "
+ "
+//preProtocol descriptions
+@preP
+"The system (ctState) is started and the actAuthenticated is not logged in. "
+@endPreP
+//preFunctional descriptions
+@preF
+" "
+@endPreF
+//postFunctional descriptions
+@postF 
+"ctState generates a random integer between 0 and 5000 and sends this to the actAuthenticated. "
+@endPostF
+//postProtocol descriptions
+@postP 
+"The actAuthenticated's symmetric key attribute is considered not null, thus we assume the symmetric key has been calculated using the actAuthenticated and ctState's 2 nonces and now the actAuthenticated has a symmetric key to use for login. "
+@endPostP
+//example
+@example" "

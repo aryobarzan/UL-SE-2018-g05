@@ -677,6 +677,15 @@
     <semanticResources>concepts/documentation/PrimaryType-Datatype-dtNonce.msrd</semanticResources>
     <semanticResources>concepts/documentation/PrimaryType-Datatype-dtEncryptedMessage.msrd</semanticResources>
     <semanticResources>concepts/documentation/PrimaryType-Datatype-dtSymmetricKey.msrd</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAdministrator-outactAdministrator-oeDeleteQuestion.msrd</semanticResources>
+    <semanticResources>operations/environment/environment-actAdministrator-oeDeleteQuestion.msr</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSendLoginAndNonceAndReceiveEncryptedNonceAndSystemNameWithNewNonceForSymmetricLogin.msrd</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSendEncryptedLoginAndSystemNonceAndReceiveConfirmationMessageForSymmetricLogin.msrd</semanticResources>
+    <semanticResources>environment/documentation/Operation-actAuthenticated-outactAuthenticated-oeSendRandomNumberForSymmetricKeyExchange.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-generateRandomIntegerBetween0And50000.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-encryptLoginAndNonce.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-decryptNonce.msrd</semanticResources>
+    <semanticResources>concepts/documentation/Operation-ctState-decryptLogin.msrd</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_UmILAPWqEeSOM9Kfym77Zg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_Hs3f0CuKEeinz4j6mhW9zQ" name="EnvironmentView1" repPath="#_Hs0cgCuKEeinz4j6mhW9zQ">
@@ -2208,7 +2217,7 @@
         </ownedStyle>
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']/@ownedRepresentations[name='Messir%20Diagram']/@defaultLayer/@containerMappings[name='SimpleDatatype']/@subNodeMappings[name='SimpleDatatype_Attributes']"/>
       </ownedElements>
-      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_sGfvIlYaEeidHpBgdHRPjw" name="encryptedNonce : dtString">
+      <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_sGfvIlYaEeidHpBgdHRPjw" name="encryptedNonce : dtNonce">
         <target xmi:type="messir:Attribute" href="concepts/primarytypes-datatypes.msr#icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.encryptedNonce"/>
         <semanticElements xmi:type="messir:Attribute" href="concepts/primarytypes-datatypes.msr#icrash.concepts.primarytypes.datatypes.dtEncryptedMessage.encryptedNonce"/>
         <ownedStyle xmi:type="diagram:Square" xmi:id="_sGfvI1YaEeidHpBgdHRPjw" labelSize="14" iconPath="/lu.uni.lassy.excalibur.dsl.messir.ui/icons/attribute.png" labelAlignment="LEFT">

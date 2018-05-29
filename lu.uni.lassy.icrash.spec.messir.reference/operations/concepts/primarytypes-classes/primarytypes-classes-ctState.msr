@@ -43,15 +43,17 @@ prolog{"src/Operations/Concepts/PrimaryTypesClasses/PrimaryTypesClasses-ctState-
 	}
 	
 operation: icrash.concepts.primarytypes.classes.ctState.generateRandomIntegerBetween0And50000():dtInteger{
-		/* Post P01 */
+		/* Post F01 */
 		postF{
-			//Documented: result = a random integer between 0 and 50000 included is returned
+			let randomInteger:dtInteger in // a random integer between 0 and 50000 included is returned
+			and()
+			(result = randomInteger)
 		}
 		
 }
 	
 operation: icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce(ALogin:dtLogin, ANonce:dtNonce, ASymmetricKey:dtSymmetricKey):dtEncryptedMessage{
-/* Post P01 */
+/* Post F01 */
 postF{
   let encryptedMessage:dtEncryptedMessage in
   and ()//encryptedMessage contains both the login encrypted via the Vigenère cipher
@@ -61,7 +63,7 @@ postF{
 }
 
 operation: icrash.concepts.primarytypes.classes.ctState.decryptLogin(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtLogin{
-/* Post P01 */
+/* Post F01 */
 postF{
   let decryptedLogin:dtLogin in
   and ()//decryptedLogin obtained by decrypting the encryptedLogin attribute of the AEncryptedMessage using the ASymmetricKey with the Vigenère cipher
@@ -70,7 +72,7 @@ postF{
 }
 
 operation: icrash.concepts.primarytypes.classes.ctState.decryptNonce(AEncryptedMessage:dtEncryptedMessage, ASymmetricKey:dtSymmetricKey):dtNonce{
-/* Post P01 */
+/* Post F01 */
 postF{
   let decryptedNonce:dtNonce in
   and ()//decryptedNonce obtained by decrypting the encryptedNonce attribute of the AEncryptedMessage using the ASymmetricKey:

@@ -1,0 +1,25 @@
+/*
+@author aryobarzan
+@date Mon May 28 17:47:37 CEST 2018
+*/
+
+
+@@Operation
+icrash.concepts.primarytypes.classes.ctState.decryptLogin
+//parameters
+@parameter
+icrash.concepts.primarytypes.classes.ctState.decryptLogin.AEncryptedMessage
+""
+@parameter
+icrash.concepts.primarytypes.classes.ctState.decryptLogin.ASymmetricKey
+""
+@endParameters
+
+@description "Decrypts the parameter AEncryptedMessage's encryptedLogin using parameter ASymmetricKey by using the Vigenere Cipher.
+ "
+//postFunctional descriptions
+@postF 
+"The decrypted dtLogin is returned. "
+@endPostF
+//example
+@example" "

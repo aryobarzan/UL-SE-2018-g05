@@ -39,6 +39,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Tab;
@@ -170,6 +171,10 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 	/** The button that is utilized for sending encrypted system nonce and login used by the symmetric login to the icrash System. */
 	@FXML
 	private Button bttnAdminSymmetricLogin2;
+	
+	/** The label that indicates to the user to mouse over the encrypted login and nonce text entry fields for help. */
+	@FXML
+	private Label labelSymmetricHelp;
 	
 	/** The button that scans the biometric data. */
 	@FXML
@@ -306,6 +311,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		txtfldAdminSymmetricField3.setVisible(false);
 		txtfldAdminSymmetricField4.setVisible(false);
 	    bttnAdminSymmetricLogin2.setVisible(false);
+	    labelSymmetricHelp.setVisible(false);
 
 		bttnAdminSwitchToSymmetricLogin.setDisable(false);
 		bttnAdminSwitchToBiometricLogin.setDisable(true);
@@ -332,6 +338,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 		txtfldAdminSymmetricField3.setVisible(false);
 		txtfldAdminSymmetricField4.setVisible(false);
 	    bttnAdminSymmetricLogin2.setVisible(false);
+	    labelSymmetricHelp.setVisible(false);
 
 		bttnAdminSwitchToSymmetricLogin.setDisable(false);
 		bttnAdminSwitchToBiometricLogin.setDisable(false);
@@ -794,6 +801,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 					txtfldAdminSymmetricField3.setVisible(true);
 				    txtfldAdminSymmetricField4.setVisible(true);
 				    bttnAdminSymmetricLogin2.setVisible(true);
+				    labelSymmetricHelp.setVisible(true);
 					
 					txtfldAdminSymmetricField1.setVisible(false);
 				    txtfldAdminSymmetricField2.setVisible(false);
@@ -816,6 +824,7 @@ public class ICrashAdminGUIController extends AbstractAuthGUIController {
 					txtfldAdminSymmetricField3.setVisible(false);
 				    txtfldAdminSymmetricField4.setVisible(false);
 				    bttnAdminSymmetricLogin2.setVisible(false);
+				    labelSymmetricHelp.setVisible(false);
 				    
 				    txtfldAdminSymmetricField1.setVisible(true);
 				    txtfldAdminSymmetricField2.setVisible(true);

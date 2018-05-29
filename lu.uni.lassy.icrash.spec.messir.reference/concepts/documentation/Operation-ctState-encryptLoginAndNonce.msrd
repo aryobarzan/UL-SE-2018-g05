@@ -1,0 +1,28 @@
+/*
+@author aryobarzan
+@date Mon May 28 17:44:09 CEST 2018
+*/
+
+
+@@Operation
+icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce
+//parameters
+@parameter
+icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce.ALogin
+""
+@parameter
+icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce.ANonce
+""
+@parameter
+icrash.concepts.primarytypes.classes.ctState.encryptLoginAndNonce.ASymmetricKey
+""
+@endParameters
+
+@description "Creates an object of type dtEncryptedMessage, with the parameters ALogin and ANonce encrypted using the parameter ASymmetricKey stored in the 2 respective attributes of dtEncryptedMessage. The login encryption uses the Vigenere cipher, while the nonce is encrypted by adding the ASCII value of each character in the symmetric key to the nonce.
+ "
+//postFunctional descriptions
+@postF 
+"The dtEncryptedMessage is returned. "
+@endPostF
+//example
+@example" "

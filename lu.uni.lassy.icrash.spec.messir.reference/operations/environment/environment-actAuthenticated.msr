@@ -242,6 +242,8 @@ preP{
   and TheSystem.currentSymmetricKeyForAuthenticatingActor <> null
 /* PreP04 */
   and TheSystem.currentNonceForAuthenticatingActor <> null
+/* PreP05 */
+  and TheSystem.currentLoginForSymmetricLogin <> null
   
 }
 preF{

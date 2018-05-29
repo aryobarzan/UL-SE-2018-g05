@@ -24,6 +24,7 @@ import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtBi
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtCoordinatorID;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtLogin;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtPassword;
+import lu.uni.lassy.excalibur.examples.icrash.dev.java.system.types.primary.DtSymmetricKey;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtBoolean;
 import lu.uni.lassy.excalibur.examples.icrash.dev.java.types.stdlib.PtString;
 
@@ -52,11 +53,12 @@ public class DbCoordinators extends DbAbstract{
 				String id = aCtCoordinator.id.value.getValue();
 				String login =  aCtCoordinator.login.value.getValue();
 				String pwd =  aCtCoordinator.pwd.value.getValue();
+				String sym =  aCtCoordinator.symmetricKey.value.getValue();
 	
 				log.debug("[DATABASE]-Insert coordinator");
 				int val = st.executeUpdate("INSERT INTO "+ dbName+ ".coordinators" +
-											"(id,login,pwd)" + 
-											"VALUES("+"'"+id+"'"+",'"+login+"','"+pwd+"')");
+											"(id,login,pwd,sym)" + 
+											"VALUES("+"'"+id+"'"+",'"+login+"','"+pwd+"','"+sym+"')");
 				
 				log.debug(val + " row affected");
 			}
@@ -109,8 +111,11 @@ public class DbCoordinators extends DbAbstract{
 					DtPassword aPwd = new DtPassword(new PtString(res.getString("pwd")));
 					//coordinator's biometric data
 					DtBiometricData aBio = new DtBiometricData(new PtString(res.getString("bio")));
+					//coordinator's sym
+					DtSymmetricKey aSym = new DtSymmetricKey(new PtString(res.getString("sym")));
 
 					aCtCoordinator.init(aId, aLogin,aPwd, aBio);
+					aCtCoordinator.symmetricKey = aSym;
 					
 				}
 								
@@ -185,8 +190,9 @@ public class DbCoordinators extends DbAbstract{
 				String id = aCtCoordinator.id.value.getValue();
 				String login =  aCtCoordinator.login.value.getValue();
 				String pwd =  aCtCoordinator.pwd.value.getValue();
+				String sym =  aCtCoordinator.symmetricKey.value.getValue();
 				String statement = "UPDATE "+ dbName+ ".coordinators" +
-						" SET pwd='"+pwd+"',  login='"+ login+"' " +
+						" SET pwd='"+pwd+"',  login='"+ login+"', sym='"+sym+"' " +
 						"WHERE id='"+id+"'";
 				int val = st.executeUpdate(statement);
 				log.debug(val+" row updated");
@@ -236,8 +242,10 @@ public class DbCoordinators extends DbAbstract{
 					DtLogin aLogin = new DtLogin(new PtString(res.getString("login")));
 					DtPassword aPwd = new DtPassword(new PtString(res.getString("pwd")));
 					DtBiometricData aBio = new DtBiometricData(new PtString(res.getString("bio")));
+					DtSymmetricKey aSym = new DtSymmetricKey(new PtString(res.getString("sym")));
 					//init aCtAlert instance
 					aCtCoord.init(aId, aLogin, aPwd, aBio);
+					aCtCoord.symmetricKey = aSym;
 					
 					//add instance to the hash
 					cmpSystemCtCoord

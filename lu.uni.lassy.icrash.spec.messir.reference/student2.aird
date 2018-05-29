@@ -677,6 +677,16 @@
     <semanticResources>documentation/View-em-lv-06-biometric.msrd</semanticResources>
     <semanticResources>usecases/usecaseinstance-ugSecurelyUseSystemWithBiometricData-uciugSecurelyUseSystemWithBiometricData.msr</semanticResources>
     <semanticResources>documentation/View-uci-uciugSecurelyUseSystemWithBiometricData.msrd</semanticResources>
+    <semanticResources>documentation/View-cm-SymmetricLogin-ctState.msrd</semanticResources>
+    <semanticResources>documentation/View-cm-SymmetricLogin-ctAuthenticated.msrd</semanticResources>
+    <semanticResources>operations/environment/environment-actAdministrator-oeAddQuestion1.msr</semanticResources>
+    <semanticResources>documentation/View-cm-SymmetricLoginConcernedActorsAndTypes.msrd</semanticResources>
+    <semanticResources>usecases/usecaseinstance-ugSecurelyUseSystemWithSymmetricKey-uciugSecurelyUseSystemWithSymmetricKey.msr</semanticResources>
+    <semanticResources>operations/environment/environment-actAuthenticated-init.msr</semanticResources>
+    <semanticResources>documentation/View-uci-uciugSecurelyUseSystemWithSymmetricKey.msrd</semanticResources>
+    <semanticResources>concepts/documentation/PrimaryType-Datatype-dtNonce.msrd</semanticResources>
+    <semanticResources>concepts/documentation/PrimaryType-Datatype-dtEncryptedMessage.msrd</semanticResources>
+    <semanticResources>concepts/documentation/PrimaryType-Datatype-dtSymmetricKey.msrd</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_VxVZ4PWqEeSOM9Kfym77Zg">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/lu.uni.lassy.excalibur.ui.viewer/description/excalibur_models.odesign#//@ownedViewpoints[name='msr-viewpoint']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_RN1xpSxMEei5A-7hC1m_pg" name="em-lv-06-biometric" repPath="#_RN1xoCxMEei5A-7hC1m_pg">
